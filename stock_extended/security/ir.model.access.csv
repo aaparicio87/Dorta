@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_loading_guides,security_loading_guides,stock_extended.model_loading_guides,base.group_user,1,1,1,1
+access_product_list,security_product_list,stock_extended.model_product_list,base.group_user,1,1,1,1

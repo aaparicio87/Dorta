@@ -1,0 +1,396 @@
+<odoo>
+    <template id="report_loading_guides_layout_header">
+        <div class="article o_report_layout_standard">
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <div class="raw">
+                <div class="col-xs-12" style="border-top: 1px solid black;">
+                    <div class="text-muted pull-left">
+
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                    </div>
+                    <div class="text-muted pull-right">
+                        Page:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_loading_guides_external_layout">
+
+        <t t-call="stock_extended.report_loading_guides_layout_header">
+            <t t-raw="0"/>
+        </t>
+    </template>
+
+    <template id="report_loding_guides_document">
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+        <t t-call="stock_extended.report_loading_guides_external_layout">
+            <div class="html_container_header"
+                 style="padding-left:0;font-size:15px;border-bottom: 1px solid black;width:100%;">
+                <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+                <!--<div class="row" align="left">-->
+
+                <div class="row text-center">
+                    <div class="col-9">
+                        <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" class="float-left"
+                             alt="Logo" style="height:250px; width:220px"/>
+                    </div>
+                    <div class="col-3">
+                        <b>
+                            <span t-esc="res_company.name"/>
+                        </b>
+                        <BR/>
+                        <span t-esc="res_company.street"/>
+                        <BR/>
+                        <span t-esc="res_company.street2"/>
+                        <BR/>
+                        <span t-esc="res_company.city"/>
+                        <span t-esc="res_company.country_id.name"/>
+                        <BR/>
+                        <BR/>
+                        <span t-esc="res_company.phone"/>
+                        <span t-esc="res_company.email"/>
+                        <span t-esc="res_company.website"/>
+                        <BR/>
+                    </div>
+                </div>
+            </div>
+            <div class="page" style="">
+                 <style type='text/css'>
+
+                        #tab_produits tr td {border:1px solid black;text-align:center}
+                        #tab_produits tr:last-child td{
+
+
+                        }
+                        #tab_ref tr td {border:1px solid black;padding-left:5px;text-align:left}
+
+                        #tab_produits tr:first-child td{vertical-align:middle}
+                        #tab_produits {height:115mm;margin-top:30px; margin-bottom:5px;width:100%;}
+
+                        #tab_ref tr td {border:1px solid black;text-align:center;margin-bottom:0px;}
+                        #tab_doit tr td {border:1px solid black; padding-left:5px;text-align:left}
+                        #tab_totaux tr td {border:1px solid black;text-align:center; margin-top:0px !important}
+                        <!--#tab_totaux tr td {border:1px solid black;text-align:center; margin-top:10px !important}-->
+                        #tab_visas tr td {border:1px solid black;text-align:center}
+                        #tab_ml {margin-top:0px;}
+                 </style>
+
+                <div class="html_container_header" style="width:100%;">
+                    <!--<div class="row" align="left" style="font-family:Roboto;">-->
+                    <div class="row" style="margin-bottom:20px;">
+                        <div class="col-12"
+                             style="font-family:Roboto; font-size:30px;">
+                            <span>
+                                <b>Carga de Guías</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Producido por:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.partner_id.name"/>
+                            </span>
+
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Factura relacionada:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.related_invoice_id.name"/>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Orden de entrega:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.delivery_order_id.name"/>
+                            </span>
+
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Tablero:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.board"/>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Modelo:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.model"/>
+                            </span>
+
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Capacidad:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.capacity"/>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Marca:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.brand"/>
+                            </span>
+
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Ruta:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.route"/>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+<!--                          <div class="col-3"-->
+<!--                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">-->
+<!--                            <b>Conductor:</b>-->
+<!--                        </div>-->
+<!--                        <div class="col-3"-->
+<!--                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">-->
+<!--                            <span>-->
+<!--                                <span t-esc="o.driver"/>-->
+<!--                            </span>-->
+
+<!--                        </div>-->
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Asistencia:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.assistance"/>
+                            </span>
+
+                        </div>
+                         <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Zona para despachar:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.zone_dispatch"/>
+                            </span>
+
+                        </div>
+<!--                        <div class="col-6">-->
+
+<!--                        </div>-->
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    <div class="row" style="margin-top:30px;">
+                     <table class="table table-condensed"
+                               style="font-family:Roboto;width:100%;border-color:black;border-width: 1px solid black;">
+                            <thead>
+                                <tr style="font-weight:bold">
+                                    <td style="font-family:Roboto;width:10%; background: #EBEBEB;border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;">
+                                        Código
+                                    </td>
+                                    <td style="font-family:Roboto;width:20%;border-width: 1px solid black; background: #EBEBEB;border-color:black; text-align:left;border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-weight:bold">
+                                        Descripción/Producto
+                                    </td>
+                                    <td style="border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-family:Roboto;width:10%;background: #EBEBEB;text-align:center; font-weight:bold">
+                                        Cap
+                                    </td>
+                                    <td style="border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-family:Roboto;width:10%;background: #EBEBEB;text-align:center; font-weight:bold">
+                                        U*C
+                                    </td>
+                                    <td style="border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-family:Roboto;width:10%;background: #EBEBEB;text-align:center; font-weight:bold">
+                                        Cajas
+                                    </td>
+                                    <td style="border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-family:Roboto;width:10%;background: #EBEBEB;text-align:center; font-weight:bold">
+                                        Unidades
+                                    </td>
+                                    <td style="border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-family:Roboto;width:14%;background: #EBEBEB;text-align:center; font-weight:bold">
+                                        Kgs * Prod
+                                    </td>
+                                    <td style="border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-family:Roboto;width:14%;background: #EBEBEB;text-align:center; font-weight:bold">
+                                        Total Kgs
+                                    </td>
+                                    <td style="border-right:1px solid white;border-left:0px;border-top:0px;border-bottom:0px;font-family:Roboto;width:10%;background: #EBEBEB;text-align:center; font-weight:bold">
+                                        CPI
+                                    </td>
+
+                                </tr>
+                            </thead>
+                         <tbody>
+                             <tr t-foreach="o.product_list_id" t-as="l"
+                                    style="font-family:Roboto;font-size:15px !important;">
+                                 <td style="font-family:Roboto;text-align:left;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.code"/>
+                                    </td>
+                                 <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.discription"/>
+                                    </td>
+                                  <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.cap"/>
+                                    </td>
+                                 <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.uxc"/>
+                                    </td>
+                                 <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.box"/>
+                                    </td>
+                                  <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.unds"/>
+                                    </td>
+                                 <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.kgs_prod"/>
+                                    </td>
+                                 <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.total_kgs"/>
+                                    </td>
+                                 <td style="font-family:Roboto;border:1px solid black; text-align:left; padding-left:5px; vertical-align:top !important;">
+                                        <span t-field="l.cpi"/>
+                                    </td>
+
+                             </tr>
+                         </tbody>
+
+                     </table>
+                    </div>
+                    <br></br>
+                    <div class="row">
+                          <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Pre-enviado :</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+<!--                                <span t-esc="o.partner_id.name"/>-->
+                            </span>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Supervisor:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+<!--                                <span t-esc="o.partner_id.name"/>-->
+                            </span>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Despachador:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+<!--                                <span t-esc="o.partner_id.name"/>-->
+                            </span>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Conductor:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+                                <span t-esc="o.driver"/>
+                            </span>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;font-size:15px;background: #EBEBEB;text-align:left;margin-bottom:05px;">
+                            <b>Carga:</b>
+                        </div>
+                        <div class="col-3"
+                             style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                            <span>
+<!--                                <span t-esc="o.partner_id.name"/>-->
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+    <template id="report_loding_guides_new">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="stock_extended.report_loding_guides_document" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+    <record id="paperformat_loding_guides" model="report.paperformat">
+        <field name="name">Carga de Guías</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">13</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">10</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report
+            id="report_loading_guides"
+            string="Carga de Guías"
+            model="loading.guides"
+            report_type="qweb-pdf"
+            name="stock_extended.report_loding_guides_new"
+            file="stock_extended.report_loding_guides_new"
+            paperformat="stock_extended.paperformat_loding_guides"
+    />
+
+</odoo>

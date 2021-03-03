@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="liquor_custom_external_layout">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+        <t t-call="accounting_modification.header_liquor_book_report_template"/>
+        <t t-raw="0"/>
+        <t t-call="accounting_modification.footer_liquor_book_report_template"/>
+    </template>
+
+    <template id="footer_liquor_book_report_template">
+        <div class="footer">
+            <div class="row">
+                <!--                <span class="text-center">This is footer</span>-->
+            </div>
+        </div>
+    </template>
+
+    <template id="header_liquor_book_report_template">
+        <div class="header">
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <h5>
+                        <b>
+                            <span t-field="company.partner_id.name"/>
+                        </b>
+                    </h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <t t-if="user.lang == 'es_MX'">
+                                <div t-if="company.vat">RFC:
+                                    <span t-field="company.vat"/>
+                                </div>
+                            </t>
+                            <t t-if="user.lang != 'es_MX'">
+                                <div t-if="company.vat">VAT:
+                                    <span t-field="company.vat"/>
+                                </div>
+                            </t>
+
+                        </div>
+                        <div class="col-6">
+                            <t t-if="user.lang == 'es_MX'">
+                                <div t-if="company.nit">NIT:
+                                    <span t-field="company.nit"/>
+                                </div>
+                            </t>
+                            <t t-if="user.lang != 'es_MX'">
+                                <div t-if="company.nit">NIT:
+                                    <span t-field="company.nit"/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <t t-if="user.lang == 'es_MX'">
+                        <div t-if="company.license">Licencia:
+                            <span t-field="company.license"/>
+                        </div>
+                    </t>
+                    <t t-if="user.lang != 'es_MX'">
+                        <div t-if="company.license">License:
+                            <span t-field="company.license"/>
+                        </div>
+                    </t>
+                    <div t-field="company.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                </div>
+                <div class="col-6">
+                    <t t-if="user.lang == 'es_MX'">
+                        <h4 class="text-center">
+                            <b>REGISTRO DE INGRESOS Y EGRESOS DE BEBIDAS ALCOHOLICAS</b>
+                        </h4>
+                    </t>
+                    <t t-if="user.lang == 'en_US'">
+                        <h4 class="text-center">
+                            <b>RECORD OF INCOME AND EXPENSES OF ALCOHOLIC BEVERAGES</b>
+                        </h4>
+                    </t>
+                    <div class="row">
+                        <div style="position: absolute; bottom: 0px; left: 40%;">
+                            <t t-if="user.lang == 'es_MX'">
+                                <span>
+                                    <b>Página</b>
+                                </span>
+                                <span class="page"/>
+                                <b>de</b>
+                                <span class="topage"/>
+                            </t>
+                            <t t-if="user.lang != 'es_MX'">
+                                <span>
+                                    <b>Page</b>
+                                </span>
+                                <span class="page"/>
+                                <b>of</b>
+                                <span class="topage"/>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div style="border-bottom: 3px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="margin-top: 5px;">
+                    <div>
+                        <strong>
+                            <!--<span t-esc="datetime.datetime.strptime(date_start, '%Y-%m-%d').strftime('%A')"/>-->
+                            <t t-esc="date_start" t-options="{'widget': 'date'}"/>
+                            -
+                            <!--<span t-esc="datetime.datetime.strptime(date_stop, '%Y-%m-%d').strftime('%A')"/>-->
+                            <t t-esc="date_stop" t-options="{'widget': 'date'}"/>
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="liquor_book_report_template">
+        <t t-call="web.basic_layout">
+            <t t-call="accounting_modification.liquor_custom_external_layout">
+                <div class="page">
+                    <div class="container">
+                        <br/>
+                        <t t-set='start_d' t-value="date_start"/>
+                        <t t-set='stop_d' t-value="date_stop"/>
+                        <br/>
+                        <t t-set='stock_moves_in'
+                           t-value="docs.get_in_liquor_book_report(start_d,stop_d)"/>
+                        <t t-if="stock_moves_in">
+                            <div class="row">
+                                <div class="col-12">
+                                    <t t-if="user.lang == 'es_MX'">
+                                        <strong>Entradas:</strong>
+                                    </t>
+                                    <t t-if="user.lang != 'es_MX'">
+                                        <strong>Tickets:</strong>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-sm table-bordered">
+                                        <thead>
+                                            <t t-if="user.lang == 'es_MX'">
+                                                <tr>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Fecha
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Guía
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Remitente
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Procedencia
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Especie
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Alcohólico
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Litros
+                                                    </th>
+                                                </tr>
+                                            </t>
+                                            <t t-if="user.lang == 'en_US'">
+                                                <tr>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Date
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Guide
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Sender
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Origin
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Species
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Alcoholic
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Liters
+                                                    </th>
+                                                </tr>
+                                            </t>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach='stock_moves_in.sorted(key=lambda b: (b.picking_type_id.name, b.date))'
+                                               t-as='sm'>
+                                                <tr t-foreach='sm' t-as='rec'>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.date' t-esc="rec.date.strftime('%d/%m/%Y')"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.reference' t-esc="rec.reference"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.picking_partner_id'
+                                                           t-esc="rec.picking_partner_id.name"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.picking_partner_id.city'
+                                                           t-esc="rec.picking_partner_id.city"/>
+                                                        -
+                                                        <t t-if="rec.picking_partner_id.state_id"
+                                                           t-esc="rec.picking_partner_id.state_id.name"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.product_id.categ_id'
+                                                           t-esc="rec.product_id.categ_id.name"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.product_id'
+                                                           t-esc="rec.product_id.alcohol_grade"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.quantity_done' t-esc="rec.quantity_done"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                        <br/>
+                        <t t-set='stock_moves_out'
+                           t-value="docs.get_out_liquor_book_report(start_d,stop_d)"/>
+                        <t t-if="stock_moves_out">
+                            <div class="row">
+                                <div class="col-12">
+                                    <t t-if="user.lang == 'es_MX'">
+                                        <strong>Salidas:</strong>
+                                    </t>
+                                    <t t-if="user.lang == 'en_US'">
+                                        <strong>Departures:</strong>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-sm table-bordered">
+                                        <thead>
+                                            <t t-if="user.lang == 'es_MX'">
+                                                <tr>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Fecha
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Guía
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Destinatario
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Destino
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Especie
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Alcohólico
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Litros
+                                                    </th>
+                                                </tr>
+                                            </t>
+                                            <t t-if="user.lang == 'en_US'">
+                                                <tr>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Date
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Guide
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Receiver
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Destination
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Species
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Alcoholic
+                                                    </th>
+                                                    <th class="text-center align-middle"
+                                                        style="border:1px solid black;">
+                                                        Liters
+                                                    </th>
+                                                </tr>
+                                            </t>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach='stock_moves_out.sorted(key=lambda b: (b.picking_type_id.name, b.date))'
+                                               t-as='sm'>
+                                                <tr t-foreach='sm' t-as='rec'>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.date' t-esc="rec.date.strftime('%d/%m/%Y')"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.reference' t-esc="rec.reference"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.picking_partner_id'
+                                                           t-esc="rec.picking_partner_id.name"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.picking_partner_id.city'
+                                                           t-esc="rec.picking_partner_id.city"/>
+                                                        -
+                                                        <t t-if="rec.picking_partner_id.state_id"
+                                                           t-esc="rec.picking_partner_id.state_id.name"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.product_id.categ_id'
+                                                           t-esc="rec.product_id.categ_id.name"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.product_id'
+                                                           t-esc="rec.product_id.alcohol_grade"/>
+                                                    </td>
+                                                    <td align="center" style="border:1px solid black;">
+                                                        <t t-if='rec.quantity_done' t-esc="rec.quantity_done"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                        <br/>
+                        <t t-if="stock_moves_in">
+                            <div class="row">
+                                <div class="col-8"/>
+                                <div class="col-4 text-right">
+                                    <t t-if="user.lang == 'es_MX'">
+                                        <strong>Total Entradas:</strong>
+                                    </t>
+                                    <t t-if="user.lang == 'en_US'">
+                                        <strong>Total Entries:</strong>
+                                    </t>
+                                    <span t-esc="docs.get_total_entries(start_d,stop_d)"/>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-if="stock_moves_out">
+                            <div class="row">
+                                <div class="col-8"/>
+                                <div class="col-4 text-right">
+                                    <t t-if="user.lang == 'es_MX'">
+                                        <strong>Total Salidas:</strong>
+                                    </t>
+                                    <t t-if="user.lang == 'en_US'">
+                                        <strong>Total Departures:</strong>
+                                    </t>
+                                    <span t-esc="docs.get_total_departures(start_d,stop_d)"/>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="row">
+                            <div class="col-8"/>
+                            <div class="col-4 text-right">
+                                <t t-if="user.lang == 'en_US'">
+                                    <strong>Total Existence:</strong>
+                                </t>
+                                <t t-if="user.lang == 'es_MX'">
+                                    <strong>Total Existencia:</strong>
+                                </t>
+                                <span t-esc="docs.get_total_entries(start_d,stop_d) - docs.get_total_departures(start_d,stop_d)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

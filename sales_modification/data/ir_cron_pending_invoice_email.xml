@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record forcecreate="True" id="email_pending_invoice" model="ir.cron">
+            <field name="name">Mail: Pending Invoice Reminder</field>
+            <field name="model_id" ref="model_account_invoice"/>
+            <field name="state">code</field>
+            <field name="code">model.pending_invoice_reminder()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">24</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+    </data>
+</odoo>

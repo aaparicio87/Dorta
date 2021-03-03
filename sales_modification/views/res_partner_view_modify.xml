@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_filter_modify" model="ir.ui.view">
+        <field name="name">res.partner.inherit.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <filter name="salesperson" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </filter>
+            <xpath expr="." position="inside">
+               <field name="user_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_res_partner_form_extend" model="ir.ui.view">
+        <field name="name">res.partner.extend.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="attributes">
+                <attribute name="string">Vendedor</attribute>
+            </xpath>
+            <xpath expr="//field[@name='type']" position="before">
+                <field name="business_name" required="1" string="Razón Social"/>
+                <field name="trade_name" required="1" string="Nombre Comercial"/>
+            </xpath>
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
+                <field name="seller_code"/>
+                <field name="deadline_last_send" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='sales_purchases']//field[@name='industry_id']" position="after">
+                <field name="channel_id" required="1"/>
+            </xpath>
+             <xpath expr="//page[@name='sales_purchases']//field[@name='channel_id']" position="after">
+                <field name="sub_chanel_id" required="1"/>
+            </xpath>
+            <xpath expr="//page[@name='sales_purchases']//field[@name='industry_id']" position="attributes">
+                <attribute name="string">Canal</attribute>
+            </xpath>
+            <xpath expr="//div[@class='oe_title']//field[@name='parent_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//group//field[@name='vat']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="license" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='lang']" position="after">
+                <field name="responsible" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="string">RIF</attribute>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="base_vat.view_partner_form" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.vat.inherit</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        <field name="arch" type="xml">-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="res_partner_channel_form" model="ir.ui.view">
+        <field name="name">res.partner.channel.form</field>
+        <field name="model">res.partner.channel</field>
+        <field name="arch" type="xml">
+            <form string="Channels">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_partner_channel_tree" model="ir.ui.view">
+        <field name="name">res.partner.channel.tree</field>
+        <field name="model">res.partner.channel</field>
+        <field name="arch" type="xml">
+            <tree string="Channels">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

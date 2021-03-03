@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_wizard_popup" model="ir.ui.view">
+            <field name="name">sale.order.popup</field>
+            <field name="model">sale.order.popup</field>
+            <field name="arch" type="xml">
+                <form>
+                    <p>RIF Date is Expired</p>
+
+                    <footer>
+                        <button class="oe_highlight" name="popup_button" string="Confirm" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_sale_order_wizard_popup" model="ir.actions.act_window">
+            <field name="name">Popup Validation</field>
+            <field name="res_model">sale.order.popup</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+    <data>
+        <record id="quotation_send_popup_wizard" model="ir.ui.view">
+            <field name="name">wizard.quotation.Send.Popup</field>
+            <field name="model">quotation.send.popup</field>
+            <field name="arch" type="xml">
+                <form>
+                    <p>RIF Date is Expired</p>
+
+                    <footer>
+                        <button class="oe_highlight" name="action_quotation_send_popup" string="Send Email" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_quotation_send_popup_wizard" model="ir.actions.act_window">
+            <field name="name">Popup Quotation Validation</field>
+            <field name="res_model">quotation.send.popup</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+
+</odoo>

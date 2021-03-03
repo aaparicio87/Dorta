@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--        <menuitem action="account.action_invoice_out_refund"-->
+        <!--                  id="account.menu_action_invoice_out_refund"-->
+        <!--                  parent="account.menu_finance_receivables" string="Amending Invoice"-->
+        <!--                  sequence="1"/>-->
+
+        <!--        <record id="account.action_invoice_out_refund" model="ir.actions.act_window">-->
+        <!--            <field name="name">Amending Invoice</field>-->
+        <!--            <field name="res_model">account.invoice</field>-->
+        <!--            <field name="view_type">form</field>-->
+        <!--            <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>-->
+        <!--            <field eval="False" name="view_id"/>-->
+        <!--            <field name="domain">[('type','=','out_refund')]</field>-->
+        <!--            <field name="context">{'default_type': 'out_refund', 'type': 'out_refund', 'journal_type': 'sale'}</field>-->
+        <!--            <field name="search_view_id" ref="account.view_account_invoice_filter"/>-->
+        <!--            <field name="help" type="html">-->
+        <!--                <p class="o_view_nocontent_smiling_face">-->
+        <!--                    Create an amending invoice.-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                    Note that the easiest way to create a amending invoice is to do it directly-->
+        <!--                    from the customer invoice.-->
+        <!--                </p>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        <menuitem action="account.action_invoice_in_refund"-->
+        <!--                  id="account.menu_action_invoice_in_refund"-->
+        <!--                  string="Amending Invoice"-->
+        <!--                  parent="account.menu_finance_payables"-->
+        <!--                  sequence="5"/>-->
+
+        <!--        <record id="account.action_invoice_in_refund" model="ir.actions.act_window">-->
+        <!--            <field name="name">Amending Invoice</field>-->
+        <!--            <field name="res_model">account.invoice</field>-->
+        <!--            <field name="view_type">form</field>-->
+        <!--            <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>-->
+        <!--            <field eval="False" name="view_id"/>-->
+        <!--            <field name="domain">[('type','=','in_refund')]</field>-->
+        <!--            <field name="context">{'default_type': 'in_refund', 'type': 'in_refund', 'journal_type': 'purchase'}</field>-->
+        <!--            <field name="search_view_id" ref="account.view_account_invoice_filter"/>-->
+        <!--            <field name="help" type="html">-->
+        <!--                <p class="o_view_nocontent_smiling_face">-->
+        <!--                    Create a vendor amending invoice.-->
+        <!--                </p>-->
+        <!--                <p>-->
+        <!--                    Note that the easiest way to create a vendor amending invoice it to do it directly from the vendor-->
+        <!--                    bill.-->
+        <!--                </p>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!-- inherit account.invoice form view -->
+        <record id="invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='account_analytic_id']"
+                       position="attributes">
+                    <attribute name="groups">account.group_account_manager</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">Vendedor</attribute>
+                </xpath>
+                <xpath expr="//sheet//h1[hasclass('mt0')]//div[2]//label[1]" position="attributes">
+                    <attribute name="string">Credit Notes:</attribute>
+                </xpath>
+                <!--                <xpath expr="//sheet//h1[hasclass('mt0')]//div[1]//label[1]" position="attributes">-->
+                <!--                    <attribute name="string">Draft Amending Invoice</attribute>-->
+                <!--                </xpath>-->
+                <!--                <xpath expr="//sheet//h1[hasclass('mt0')]//div[1]//label[2]" position="attributes">-->
+                <!--                    <attribute name="string">Draft Amending Invoice</attribute>-->
+                <!--                </xpath>-->
+                <!--                <xpath expr="//header//button[7]" position="replace">-->
+                <!--                    <button name="%(account.action_account_invoice_refund)d" type='action' string='Add Amending Invoice'-->
+                <!--                            groups="account.group_account_invoice"-->
+                <!--                            attrs="{'invisible': ['|',('type', '=', 'out_refund'), ('state', 'not in', ('open','in_payment','paid'))]}"/>-->
+                <!--                </xpath>-->
+                <xpath expr="//page[@name='other_info']//field[@name='journal_id']" position="replace">
+                    <field name="journal_id" groups="account.group_account_user" invisible="1"
+                           options="{'no_create': True}" attrs="{'readonly':[('move_name','!=',False)]}"/>
+                </xpath>
+                <xpath expr="//sheet//field[@name='payment_term_id']" position="after">
+                    <field name="journal_id" groups="account.group_account_user" options="{'no_create': True}"
+                           attrs="{'readonly':[('move_name','!=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- inherit account.payment form view -->
+        <record id="inherit_view_account_payment_form_om" model="ir.ui.view">
+            <field name="name">inherit.view.account.payment.form.om</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_date" position="after">
+                    <field name="entry_date" string="Fecha de pago"/>
+                </field>
+                <field name="payment_date" position="attributes">
+                    <attribute name="string">Fecha de vigencia Bancaria</attribute>
+                </field>
+            </field>
+        </record>
+        <!--
+                <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+                    <field name="name">account.invoice.supplier.form.inherit</field>
+                    <field name="model">account.invoice</field>
+                    <field name="inherit_id" ref="account.invoice_supplier_form"/>
+                    <field name="arch" type="xml">
+                        <xpath expr="//sheet//div//span[3]" position="replace">
+                            <span class="o_form_label"
+                                  attrs="{'invisible': ['|',('state','!=','draft'), ('type','!=','in_refund')]}">Draft Amending
+                                Invoice
+                            </span>
+                        </xpath>
+                    </field>
+                </record>
+
+        -->
+    </data>
+</odoo>

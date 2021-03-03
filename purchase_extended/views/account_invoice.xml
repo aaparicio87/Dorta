@@ -1,0 +1,15 @@
+<odoo>
+      <record id="view_account_invoice_form_inherit" model="ir.ui.view">
+        <field name="name">Account Invoice form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+
+<!--            <field name="comment" attrs="{'invisible': [('type', 'in', ('out_invoice','out_refund','in_refund'))]}"/>-->
+             <field name="comment" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type', 'in', ('out_invoice','out_refund','in_refund'))]}</attribute>
+                </field>
+
+        </field>
+      </record>
+</odoo>

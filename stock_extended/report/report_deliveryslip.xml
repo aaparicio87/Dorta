@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_delivery_slip_document_inherit" inherit_id="stock.report_delivery_document">
+        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+
+        <xpath expr="//h2" position="after">
+            <div class="row">
+                <div class="col-3"
+                     style="font-family:Roboto;background: lightgray;text-align:left;margin-bottom:05px;">
+                    <b>Número de Orden:</b>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                    <span>
+                        <span t-esc="o.order_number"/>
+                    </span>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;background: lightgray;text-align:left;margin-bottom:05px;">
+                    <b>Tipo de Documento:</b>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                    <span>
+                        <span t-esc="o.document_type"/>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3"
+                     style="font-family:Roboto;background: lightgray;text-align:left;margin-bottom:05px;">
+                    <b>Socio:</b>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                    <span>
+                        <span t-esc="o.partner_id.name"/>
+                    </span>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;background: lightgray;text-align:left;margin-bottom:05px;">
+                    <b>Número de Documento:</b>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                    <span>
+                        <span t-esc="o.document"/>
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:20px;">
+                <div class="col-3"
+                     style="font-family:Roboto;background: lightgray;text-align:left;margin-bottom:05px;">
+                    <b>Tipo de Operación:</b>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                    <span>
+                        <span t-esc="o.picking_type_id.name"/>
+                    </span>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;background: lightgray;text-align:left;margin-bottom:05px;">
+                    <b>Compañía:</b>
+                </div>
+                <div class="col-3"
+                     style="font-family:Roboto;border-bottom:1px solid black;margin-bottom:18px;text-align:left;margin-bottom:05px;">
+                    <span>
+                        <span t-esc="o.company_id.name"/>
+                    </span>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm']//thead//tr" position="replace">
+            <tr style="background-color:lightgray;">
+                <th>
+                    <strong>No. Orden</strong>
+                </th>
+                <th>
+                    <strong>Fecha</strong>
+                </th>
+            </tr>
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm']//tbody//tr" position="replace">
+            <tr style="background-color:lightgray;">
+                <td>
+                    <span t-esc="o.order_number"/>
+                </td>
+                <td>
+                    <span t-esc="o.scheduled_date"/>
+                </td>
+            </tr>
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm mt48']//thead//tr" position="replace">
+            <tr style="background-color:lightgray;">
+                <th>
+                    <strong>Código</strong>
+                </th>
+                <th>
+                    <strong>Producto</strong>
+                </th>
+                <th>
+                    <strong>Código de Almacenamiento</strong>
+                </th>
+                <th>
+                    <strong>Lista/PVP</strong>
+                </th>
+                <th>
+                    <strong>Marca</strong>
+                </th>
+                <th>
+                    <strong>UxC</strong>
+                </th>
+                <th>
+                    <strong>Capp</strong>
+                </th>
+                <th>
+                    <strong>Cajas</strong>
+                </th>
+                <th>
+                    <strong>Unidad</strong>
+                </th>
+                <th>
+                    <strong>Total</strong>
+                </th>
+                <th>
+                    <strong>Demanda Inicial</strong>
+                </th>
+                <th>
+                    <strong>Hecho</strong>
+                </th>
+            </tr>
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm mt48']//tbody" position="replace">
+            <t t-set="lines" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty)"/>
+            <tr t-foreach="lines" t-as="move">
+                <td>
+                    <span t-field="move.code"/>
+                </td>
+                <td>
+                    <span t-field="move.product_id"/>
+                    <p t-if="o.picking_type_code == 'outgoing'">
+                        <span t-field="move.product_id.sudo().description_pickingout"/>
+                    </p>
+                    <p t-if="o.picking_type_code == 'incoming'">
+                        <span t-field="move.product_id.sudo().description_pickingin"/>
+                    </p>
+                </td>
+                <td>
+                    <span t-field="move.code_storage"/>
+                </td>
+                <td>
+                    <span t-field="move.list_pvp"/>
+                </td>
+                <td>
+                    <span t-field="move.marked"/>
+                </td>
+                <td>
+                    <span t-field="move.u_c"/>
+                </td>
+                <td>
+                    <span t-field="move.capp"/>
+                </td>
+                <td>
+                    <span t-field="move.boxes"/>
+                </td>
+                <td>
+                    <span t-field="move.unit"/>
+                </td>
+                <td>
+                    <span t-field="move.total"/>
+                </td>
+                <td>
+                    <span t-field="move.product_uom_qty"/>
+                    <span t-field="move.product_uom"/>
+                </td>
+                <td>
+                    <span t-field="move.quantity_done"/>
+                </td>
+            </tr>
+        </xpath>
+
+
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <br/>
+            <div class="row" style="">
+                <div class="col-3 text-left">
+                    <span>Conductor que Entrega</span>
+
+                    <!--                    <span>________________________</span>-->
+                </div>
+                <div class="col-3 text-left">
+                    <![CDATA[&nbsp;]]>
+                    <hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;"/>
+                </div>
+                <div class="col-2 text-left">
+                    <span style="text-align: left">Preparado por</span>
+
+
+                </div>
+                <div class="col-4 text-left">
+                    <![CDATA[&nbsp;]]>
+                    <span t-field="o.user_id.name"/>
+                    <hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;"/>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row" style="">
+                <div class="col-2 text-left">
+                    <span>Firma</span>
+                    <!--                    <span>________________________</span>-->
+                    <br/>
+                </div>
+                <div class="col-4 text-left">
+                    <![CDATA[&nbsp;]]>
+                    <hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;"/>
+                </div>
+                <div class="col-2 text-left">
+                    <span>Firma</span>
+                </div>
+                <div class="col-4 text-left">
+                    <![CDATA[&nbsp;]]>
+                    <hr style="border-color: black;margin-top: 0px;margin-bottom: 0px;"/>
+                </div>
+
+            </div>
+        </xpath>
+    </template>
+</odoo>

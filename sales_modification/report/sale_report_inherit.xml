@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+      <template id="report_saleorder_document_modify" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//t//t[2]//div[1]" position="before">
+                <br/>
+                <br/>
+                <br/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('page')]/h2/t[1]/span[2]" position="replace">
+                <span t-if="doc.state in ['draft','sent']">Quote # </span>
+            </xpath>
+       </template>
+</odoo>

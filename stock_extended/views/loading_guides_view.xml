@@ -1,0 +1,108 @@
+<odoo>
+    <!--    Loading Guides form view-->
+    <record id="view_loading_guides_inherit" model="ir.ui.view">
+        <field name="name">loading.guides.form</field>
+        <field name="model">loading.guides</field>
+        <field name="arch" type="xml">
+            <form>
+                 <header>
+                    <button string="Hecho" name="action_done"  type="object" attrs="{'invisible': [('states','=','done')]}"/>
+                    <button string="Borrador" name="action_eraser"  type="object" attrs="{'invisible': [('states','=','eraser')]}"/>
+                    <button string="En espera" name="action_on_hold"  type="object" attrs="{'invisible': [('states','=','on_hold')]}"/>
+                    <button string="Preparado" name="action_prepared"  type="object" attrs="{'invisible': [('states','=','prepared')]}"/>
+                    <field name="states" widget="statusbar" statusbar_visible="eraser,on_hold,prepared,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" string="Elaborado por"/>
+                        </group>
+                        <group string="Datos de transporte">
+
+                        </group>
+
+                    </group>
+                    <group col="8" colspan="2">
+                        <field name="related_invoice_id" string="Facturas relacionadas" domain="[('partner_id', '=', partner_id)]"/>
+                        <field name="board" string="Tablero"/>
+                        <field name="model" string="Modelo"/>
+
+                    </group>
+                    <group col="8" colspan="2">
+                        <field name="delivery_order_id" string="Orden de Entrega" domain="[('partner_id', '=', partner_id)]"/>
+                        <field name="capacity" string="Capacidad"/>
+                        <field name="brand" string="Marca"/>
+                    </group>
+                      <group col="8" colspan="2">
+                        <field name="guide" string="Número de Guía"/>
+                        <field name="driver"/>
+                        <field name="transport_plate" string="Placa de transporte"/>
+                    </group>
+                    <group col="4" colspan="2">
+                        <field name="user_id" string="Creado por"/>
+                        <field name="create_date" string="Fecha de creación"/>
+                    </group>
+<!--                    <group >-->
+<!--&lt;!&ndash;                        <field name="conductor"/>&ndash;&gt;-->
+<!--                        <field name="route" string="Route"/>-->
+<!--                    </group>-->
+                    <group col="4" colspan="2">
+                        <field name="route" string="Ruta"/>
+                        <field name="assistance" string="Asistente"/>
+                        <field name="zone_dispatch" string="Zona para despachar"/>
+                    </group>
+                    <notebook>
+                        <page string="Lista de Producto" name="product_list_id">
+                            <field name="product_list_id" widget="section_and_note_one2many" mode="tree">
+                                <tree string="Lista de Producto"
+                                      editable="bottom">
+                                    <field name="code" string="Código"/>
+                                    <field name="discription" string="Descripción/Producto"/>
+                                    <field name="cap" string="Capacidad"/>
+                                    <field name="uxc"/>
+                                    <field name="box" string="Cajas"/>
+                                    <field name="unds"/>
+                                    <field name="kgs_prod"/>
+                                    <field name="total_kgs"/>
+                                    <field name="cpi"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+
+    <!--    Loading Guides tree view-->`
+    <record id="view_custom_control_tree" model="ir.ui.view">
+        <field name="name">loading.guides.tree</field>
+        <field name="model">loading.guides</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="guide"/>
+                <field name="related_invoice_id"/>
+                <field name="driver"/>
+                <field name="transport_plate"/>
+                <field name="route"/>
+                <field name="create_date"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    Loading Guides action-->
+    <record model="ir.actions.act_window" id="action_loading_guides">
+        <field name="name">Carga de  Guías</field>
+        <field name="res_model">loading.guides</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_loading_guides" name="Carga de  Guías" parent="stock.menu_stock_root"
+              action="action_loading_guides"
+              sequence="110"/>
+</odoo>

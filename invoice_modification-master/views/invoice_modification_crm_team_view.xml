@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id="invoice_modification_crm_team_view_form" model="ir.ui.view" >
+        <field name="name">crm.team.form</field>
+        <field name="model">crm.team</field>
+        <field name="priority" eval="1"/>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='team_type']" position="after">
+                <field name="sales_team_user_id" string='sales_team_user_id'/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

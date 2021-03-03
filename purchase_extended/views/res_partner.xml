@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[3]//field[@name='supplier']" position="after">
+                <field name="dispatch_day_purchase" string="Dia de despacho" required="1"/>
+            </xpath>
+            <xpath expr="//notebook//page[3]//field[@name='user_id']" position="before">
+                <field name="dispatch_day_sale" string="Dia de despacho" required="1"/>
+            </xpath>
+            <xpath expr="//notebook//page[3]//field[@name='user_id']" position="attributes">
+                <attributr name="string">Comercial del Vendedor</attributr>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="rif_valid_date" string="Fecha Valida del Rif" required="1"/>
+                <field name="litrage_id" required="1" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='property_account_position_id']" position="after">
+                <field name="fiscal_address" string="Direccion Fiscal" required="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

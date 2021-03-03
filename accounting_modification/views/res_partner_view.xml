@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- inherit res.partner form view -->
+    <record id="inherit_view_partner_form_om_account" model="ir.ui.view">
+        <field name="name">inherit.view.partner.form.om.account</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='internal_notes']" position="inside">
+                <group>
+                    <field name="terms_conditions" required="1" nolabel="0" string="Términos y Condiciones"/>
+                </group>
+                <field name="note_for_invoice" nolabel="1" placeholder="Nota para Factura ..." required="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

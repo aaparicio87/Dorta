@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_quotations_modify" name="Sale Order report Modify" inherit_id="sale.portal_my_quotations">
+        <xpath expr="//tr[hasclass('active')]/th[1]" position="replace">
+            <th>Quote #</th>
+        </xpath>
+    </template>
+</odoo>

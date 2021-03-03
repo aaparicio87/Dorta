@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sale.onboarding_quotation_layout_step">
+            <t t-call="base.onboarding_step">
+                <t t-set="title">Diseño de cotización</t>
+                <t t-set="description">Personaliza el aspecto de tus cotizaciones.</t>
+                <t t-set="done_icon" t-value="'fa-star'"/>
+                <t t-set="done_text">¡Se ve muy bien!</t>
+                <t t-set="btn_text">Personalizar</t>
+                <t t-set="method" t-value="'action_open_sale_onboarding_quotation_layout'"/>
+                <t t-set="model" t-value="'res.company'"/>
+                <t t-set="state" t-value="state.get('account_onboarding_invoice_layout_state')"/>
+            </t>
+        </template>
+
+        <template id="sale.sale_onboarding_order_confirmation_step">
+            <t t-call="base.onboarding_step">
+                <t t-set="title">Confirmación &amp; Pago</t>
+                <t t-set="description">Elija cómo confirmar cotizaciones y recibir el pago.</t>
+                <t t-set="btn_text">Establecer pagos</t>
+                <t t-set="method" t-value="'action_open_sale_onboarding_payment_acquirer'"/>
+                <t t-set="model" t-value="'res.company'"/>
+                <t t-set="state" t-value="state.get('sale_onboarding_order_confirmation_state')"/>
+            </t>
+        </template>
+
+        <template id="sale.sale_onboarding_sample_quotation_step">
+            <t t-call="base.onboarding_step">
+                <t t-set="title">Cotizaciones de muestra</t>
+                <t t-set="description">Envíe cotizaciones para probar el portal de clientes.</t>
+                <t t-set="btn_text">Enviar muestra</t>
+                <t t-set="method" t-value="'action_open_sale_onboarding_sample_quotation'"/>
+                <t t-set="model" t-value="'res.company'"/>
+                <t t-set="state" t-value="state.get('sale_onboarding_sample_quotation_state')"/>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

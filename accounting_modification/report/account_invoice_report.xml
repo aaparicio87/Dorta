@@ -1,0 +1,10 @@
+<odoo>
+    <template id="report_account_invoice_extended" inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@name='note']" position="replace">
+            <p t-if="o.partner_id.note_for_invoice" name="note_for_invoice">
+                <!-- <span>Nota para factura:</span>-->
+                <span t-field="o.partner_id.note_for_invoice"/>
+            </p>
+        </xpath>
+    </template>
+</odoo>

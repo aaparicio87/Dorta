@@ -1,0 +1,84 @@
+<odoo>
+    <record id="view_document_document_attech_extended" model="ir.ui.view">
+        <field name="name">document.document.form</field>
+        <field name="model">document.document</field>
+        <field name="arch" type="xml">
+            <form string="Adjuntar Documento">
+                <sheet>
+                    <group>
+                        <field name="name" string="Nombre" required="1"/>
+                    </group>
+                    <group>
+                        <field name="type_id" string="Tipo" required="1"/>
+                        <field name="document" string="Contenido del Archivo"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--    custom control tree view-->
+    <record id="view_document_document_tree" model="ir.ui.view">
+        <field name="name">document.document.tree</field>
+        <field name="model">document.document</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="type_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="document_document_kanban_view">
+        <field name="name">Document Kanban</field>
+        <field name="model">document.document</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="document"/>
+                <templates>
+                    <t t-name="kanban-box">
+                         <div class="oe_kanban_global_area o_kanban_attachment oe_kanban_global_click">
+                                <div class="o_kanban_image">
+<!--                                    <div class="o_kanban_image_wrapper">-->
+<!--                                        <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)"/>-->
+<!--                                        <div t-if="record.type.raw_value == 'url'" class="o_url_image fa fa-link fa-3x text-muted"/>-->
+<!--                                        <img t-elif="webimage" t-attf-src="/web/image/#{record.id.raw_value}?field=thumbnail" width="100" height="100" alt="Document" class="o_attachment_image"/>-->
+<!--                                        <div t-else="!webimage" class="o_image o_image_thumbnail" t-att-data-mimetype="record.mimetype.value"/>-->
+<!--                                    </div>-->
+                                </div>
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>Nombre:
+                                        <field name="name"></field>
+                                    </li>
+                                    <li>Tipo:
+                                        <field name="type_id"></field>
+                                    </li>
+                                    <li class="codup_kanban_info">
+
+                                        <a t-if="record.criticality == 0" t-attf-title="#{record.criticality}" class="codup_attention_off"><span class="fa fa-exclamation-triangle"/></a>
+<!--                                        <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>-->
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_document_document_extended" model="ir.actions.act_window">
+        <field name="name">Adjuntar Documento</field>
+        <field name="res_model">document.document</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+<!--     <menuitem id="menu_document_document" name="Document" parent="purchase.menu_purchase_control"-->
+<!--              action="purchase_extended.action_document_document_extended" sequence="110"/>-->
+
+</odoo>

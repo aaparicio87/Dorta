@@ -1,0 +1,135 @@
+<odoo>
+    <record id="view_purchase_custom" model="ir.ui.view">
+        <field name="name">custom..purchaseform</field>
+        <field name="model">custom.purchase</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                        <button name="increase_change_listing" string="Calcular" type="object" class="oe_highlight"/>
+                    </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="price_list"/>
+                            <field name="code"/>
+                            <field name="barcode"/>
+                            <field name="category_id"/>
+                            <field name="gl"/>
+                            <field name="u_c"/>
+                        </group>
+                        <group>
+                            <field name="applies_date"/>
+                            <field name="note"/>
+                            <field name="box_barcode"/>
+                            <field name="product_id"/>
+                            <field name="cap"/>
+                            <field name="origin"/>
+                        </group>
+                    </group>
+                    <group string="Calculo">
+                        <group>
+                            <field name="bs_petro"/>
+                            <field name="bs_us_op_week"/>
+                            <field name="increase_per"/>
+                            <field name="trade_margin_sugested_price"/>
+                            <field name="q5_per" string="IVA"/>
+                            <field name="tax_rrp_bs" string="Impuestos PVP Bs."/>
+                            <field name="total_price_unit_bs"/>
+                        </group>
+                        <group>
+                            <field name="total" string="PRECIO TOTAL EN DOLARES $"/>
+                            <field name="in_change_list_price"/>
+                            <field name="total_price_list_bs"/>
+
+                            <field name="box_pvp_boxbs"/>
+
+                            <field name="value_marchandise_bs"/>
+                            <field name="iva_bs"/>
+                            <field name="pereception_vat_bs"/>
+                            <field name="total_transfer_national_tax"/>
+                            <field name="precio_total_caja_bs"/>
+                            <field name="pvp_imp_boxbs"/>
+                            <field name="base_pvp_bsunit"/>
+                            <field name="pvp_imp_box"/>
+                            <field name="pvp_imp_unit"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--    custom  purchase tree view-->
+    <record id="view_custom_purchase_tree" model="ir.ui.view">
+        <field name="name">custom.purchase.tree</field>
+        <field name="model">custom.purchase</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="price_list"/>
+                <field name="code"/>
+                <field name="category_id"/>
+                <field name="gl"/>
+                <field name="origin"/>
+                <field name="barcode"/>
+                <field name="note"/>
+                <field name="box_barcode"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_custom_purchase_pivot" model="ir.ui.view">
+        <field name="name">Compra personalizada</field>
+        <field name="model">custom.purchase</field>
+        <field name="arch" type="xml">
+            <pivot string="Compra Personalizada" disable_linking="True">
+
+                <field name="price_list"/>
+                <field name="code"/>
+                <field name="barcode"/>
+                <field name="category_id"/>
+                <field name="gl"/>
+                <field name="u_c"/>
+                <field name="applies_date"/>
+                <field name="note"/>
+                <field name="box_barcode"/>
+                <field name="product_id"/>
+                <field name="cap"/>
+                <field name="origin"/>
+                <field name="bs_petro"/>
+                <field name="bs_us_op_week"/>
+                <field name="increase_per"/>
+                <field name="trade_margin_sugested_price"/>
+                <field name="q5_per"/>
+                <field name="tax_rrp_bs"/>
+                <field name="total_price_unit_bs"/>
+                <field name="total"/>
+                <field name="in_change_list_price"/>
+                <field name="total_price_list_bs"/>
+                <field name="box_pvp_boxbs"/>
+                <field name="value_marchandise_bs"/>
+                <field name="iva_bs"/>
+                <field name="pereception_vat_bs"/>
+                <field name="total_transfer_national_tax"/>
+                <field name="precio_total_caja_bs"/>
+                <field name="pvp_imp_boxbs"/>
+                <field name="base_pvp_bsunit"/>
+                <field name="pvp_imp_box"/>
+                <field name="pvp_imp_unit"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!--    custom purchase action-->
+    <record model="ir.actions.act_window" id="action_custom_purchase">
+        <field name="name">Compra Personalizada</field>
+        <field name="res_model">custom.purchase</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,pivot,form</field>
+    </record>
+
+    <menuitem id="menu_custom_purchase" name="Compra Personalizada" action="action_custom_purchase"
+              parent="purchase.menu_purchase_root" sequence="110"/>
+
+</odoo>

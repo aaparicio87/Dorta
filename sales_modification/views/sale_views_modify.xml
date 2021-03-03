@@ -1,0 +1,92 @@
+<odoo>
+    <data>
+        <record id="sale_modification_action_quotations_with_onboarding" model="ir.actions.act_window">
+            <field name="name">Cotizaciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="context">{'search_default_my_quotation': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Cree una nueva cotización, ¡el primer paso de una nueva venta!
+                </p>
+                <p>
+                    Una vez que el cliente confirma la cotización, se convierte en una orden de venta.
+                    Podrás crear una factura y cobrar el pago.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="sale.menu_sale_quotations" string="Cotizaciones"
+                  action="sale_modification_action_quotations_with_onboarding"
+                  parent="sale.sale_order_menu"
+                  sequence="1" groups="sales_team.group_sale_salesman"/>
+
+        <record id="sale.sale_order_view_search_inherit_quotation" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.quotation</field>
+            <field name="model">sale.order</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_sale_orders_filter']" position="replace">
+                    <separator/>
+                    <filter string="Mis Cotizaciones" name="my_quotation" domain="[('user_id', '=', uid)]"/>
+                    <separator/>
+                    <filter string="Cotizaciones" name="draft" domain="[('state','in',('draft', 'sent'))]"/>
+                    <filter string="Sales Orders" name="sales" domain="[('state','in',('sale','done'))]"/>
+                    <separator/>
+                    <filter string="Order Date" name="filter_order_date" date="date_order"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_view_order_form_extend" model="ir.ui.view">
+            <field name="name">sale.view.order.form.extend</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                
+                <header>
+                    <button name="action_to_refuse"
+                            type="object"
+                            string="To Refuse"
+                            groups="sales_modification.grp_supervisor"
+                            attrs="{'invisible': [('state','not in',['draft','sent'])]}"/>
+                </header>
+                <xpath expr="//header" position="after">
+                
+                    <div class=" o_notification_box mb-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('repeat','!=',True)]}">
+                            Pedido repetido.
+                    </div>
+                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('expired_rif','!=',True)]}">
+                            RIF expirado.
+                    </div>
+
+                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('limit_credit','!=',True)]}">
+                            Límite de crédito.
+                    </div>
+                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('limit_credit','!=',True)]}">
+                           Inventario no disponible.
+                    </div>
+                </xpath>
+                
+                <field name="payment_term_id" position="after">
+                    <field name="exchange_rate" string="Exchange Rate"/>
+                    <field name="repeat" invisible="1"/>
+                    <field name="expired_rif" invisible="1"/>
+                    <field name="limit_credit" invisible="1"/>
+                    <field name="low_limit_credit" invisible="1"/>
+                    <field name="unavailable_stock" invisible="1"/>
+                    <field name="rate_of_day" readonly="1" string="Rate of Day"
+                           attrs="{'invisible':[('exchange_rate','!=','rate_of_day')]}"/>
+                    <field name="manual_rate" string="Manual Rate" attrs="{'invisible':[('exchange_rate','!=','manual_rate')]}"/>
+                </field>
+                <button name="action_cancel" position="before">
+                </button>
+            </field>
+        </record>
+    </data>
+</odoo>

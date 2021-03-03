@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="sale_bonuses_action" model="ir.actions.act_window">
+        <field name="name">Bonuses</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.bonuses</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="sale_bonuses_view_form" model="ir.ui.view">
+        <field name="name">sale.bonuses.view.form</field>
+        <field name="model">sale.bonuses</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bond_name"/>
+                        </group>
+                        <group>
+                            <field name="percentage_scope"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Definition" name="definition">
+                            <group>
+                                <field name="calculating_taxes"/>
+                                <field name="amount"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_bonuses_view_tree" model="ir.ui.view">
+        <field name="name">sale.bonuses.view.tree</field>
+        <field name="model">sale.bonuses</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bond_name"/>
+                <field name="amount"/>
+                <!--                <field name="active" widget="boolean_button"/>-->
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="sale_bonuses_submenu"
+              name="Bonos"
+              parent="sale.menu_sale_config"
+              action="sale_bonuses_action"
+              sequence="10"/>
+
+</odoo>

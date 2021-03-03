@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="liquor_book_report_action"
+                model="liquor.book.report.wizard"
+                string="Reporte de Libro de Licores"
+                report_type="qweb-pdf"
+                name="accounting_modification.liquor_book_report_template"
+                file="accounting_modification.liquor_book_report_template"
+        />
+
+        <record id="view_liquor_book_report_wizard" model="ir.ui.view">
+            <field name="name">view.liquor.book.report.wizard</field>
+            <field name="model">liquor.book.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Detalles de Ventas">
+                    <sheet>
+                        <group col="4">
+                            <field name="start_date" string="Fecha inicio"/>
+                            <field name="end_date" string="Fecha fin"/>
+                        </group>
+                        <footer>
+                            <button name="generate_report" string="Imprimir PDF" type="object" class="btn-primary"/>
+                            <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_liquor_book_report" model="ir.actions.act_window">
+            <field name="name">Reporte de Libro de Licores</field>
+            <field name="res_model">liquor.book.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="liquor_book_report_menu" action="action_liquor_book_report" name="Reporte de Libro de Licores"
+                  parent="accounting_pdf_reports.menu_finance_legal_statement"/>
+
+    </data>
+</odoo>

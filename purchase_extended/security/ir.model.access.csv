@@ -1,0 +1,13 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_custom_control,security_custom_control,purchase_extended.model_custom_control,base.group_user,1,1,1,1
+access_output_port,security_output_port,purchase_extended.model_output_port,base.group_user,1,1,1,1
+access_arrival_port,security_arrival_port,purchase_extended.model_arrival_port,base.group_user,1,1,1,1
+access_store_store,security_store_store,purchase_extended.model_store_store,base.group_user,1,1,1,1
+access_document_document,security_document_document,purchase_extended.model_document_document,base.group_user,1,1,1,1
+access_type_type,security_type_type,purchase_extended.model_type_type,base.group_user,1,1,1,1
+
+access_custom_purchase,security_custom_purchase,purchase_extended.model_custom_purchase,base.group_user,1,1,1,1
+access_shopping_program,security_shopping_program,purchase_extended.model_shopping_program,,1,1,1,1
+access_shopping_program_config,security_shopping_program_config,purchase_extended.model_shopping_program_config,,1,1,1,1
+access_payment_methods,security_payment_methods,purchase_extended.model_payment_methods,,1,1,1,1
+access_stock_extended_litrage,security_stock_extended_litrage,purchase_extended.model_stock_extended_litrage,,1,1,1,1

@@ -1,0 +1,83 @@
+<odoo>
+    <record id="view_product_template_form_inherit" model="ir.ui.view">
+        <field name="name">product template form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//notebook//page[1]//field[@name='barcode']" position="after">
+                <field name="product_nationality" string="Nacionalidad del Producto"/>
+            </xpath>
+
+            <xpath expr="//notebook//page[1]//field[@name='list_price']" position="after">
+                <field name="write_date" string="Fecha de la ultima entrada de mercancia"/>
+            </xpath>
+
+            <xpath expr="//notebook//page[1]//field[@name='company_id']" position="after">
+                <label for="perception_iva" string="Percepcion de IVA" attrs="{'invisible': [('product_nationality','=', 'national')]}"/>
+                <div>
+                    <field name="perception_iva" string="Percepcion de IVA" readonly="1"
+                           attrs="{'invisible': [('product_nationality','=', 'national')]}"/>
+                </div>
+
+                <label for="partial_tax_id" string="Impuestos parciales"/>
+                <div>
+                    <field name="partial_tax_id" string="Impuestos parciales"/>
+                </div>
+<!--                <label for="unit_measure_id" string="Unite Of Measure"/>-->
+<!--                <div>-->
+<!--                    <field name="unit_measure_id" required="1"/>-->
+<!--                </div>-->
+<!--                <label for="purchase_unit_measure_id" string="Purchase Unite Of Measure"/>-->
+<!--                <div>-->
+<!--                    <field name="purchase_unit_measure_id" required="1"/>-->
+<!--                </div>-->
+            </xpath>
+        </field>
+    </record>
+
+
+<!--    product tree view inherit-->
+
+    <record id="product_template_tree_view_inherit" model="ir.ui.view">
+	        <field name="name">product.template.product.tree_inherit</field>
+	        <field name="model">product.template</field>
+	      	<field name="inherit_id" ref="product.product_template_tree_view"/>
+	        <field name="arch" type="xml">
+	    		<field name="type" position="after">
+	                <field name="write_date"/>
+                    <field name="product_nationality" string="Nacionalidad del Producto"/>
+                    <field name="perception_iva" string="Perception IVA"
+                           attrs="{'invisible': [('product_nationality','=', 'national')]}"/>
+	    		</field>
+	        </field>
+	    </record>
+
+    <!--   product search group by-->
+    <record id="product_search_by_group_form_view" model="ir.ui.view">
+        <field name="name">group.search.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <filter name="services" position="after">
+                <filter string="Nacional" name="product_nationality" domain="[('product_nationality','=','national')]"
+                        />
+                <filter string="Importado" name="product_nationality" domain="[('product_nationality','=','imported')]"
+                        />
+                <filter string="Fecha de ultima entrada de mercancia" name="write_date"/>
+            </filter>
+            <field name="name" position="after">
+                <field name="product_nationality"/>
+                <filter string="Nacionalidad del Producto" name="product_nationality" domain="[]" context="{'group_by':'product_nationality'}"/>
+                <filter string="Nacionalidad" name="groupby_national" domain="[('product_nationality','=','national')]"
+                        context="{'group_by' : 'product_nationality'}"/>
+                <filter string="Importado" name="groupby_national" domain="[('product_nationality','=','imported')]"
+                        context="{'group_by' : 'product_nationality'}"/>
+                <filter string="Fecha de ultima entrada de mercancia" name="groupby_write_date"
+                        context="{'group_by' : 'write_date'}"/>
+                <separator/>
+            </field>
+        </field>
+    </record>/
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherit_crm_team_view_form" model="ir.ui.view">
+        <field name="name">inherit.crm.team.view.form</field>
+        <field name="model">crm.team</field>
+<!--        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>-->
+        <field name="arch" type="xml">
+            <form string="Hierarchical Level">
+                <sheet>
+                    <field name="image_medium" widget='image' class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" required="1"/></h1>
+                        <label for="email" class="oe_edit_only" string="Email Address"/>
+                        <h2>
+                            <field name="email"
+                                    placeholder="email@yourcompany.com" required="1"/>
+                        </h2>
+                        <label for="company_id" class="oe_edit_only"/>
+                        <field name="company_id" context="{'user_preference': 0}" required="1"/>
+                        <label for="cargo" class="oe_edit_only"/>
+                        <field name="cargo" required="1" style="width:25%"/>
+                    </div>
+                    <group>
+                        <field name="phone"/>
+                        <field name="mobile"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="inherit_crm_team_action" model="ir.actions.act_window">
+        <field name="name">Sales Teams</field>
+        <field name="res_model">crm.team</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="view_id" ref="inherit_crm_team_view_form"/>
+    </record>
+
+    <!-- inherit crm.team form view -->
+    <record id="inherit_crm_team_view_form_om" model="ir.ui.view">
+        <field name="name">inherit.crm.team.view.form.om</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Nombre</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="string">Vendedor</attribute>
+            </xpath>
+            <field name="user_id" position="after">
+<!--                <div><b>Hierarchical Level</b>-->
+<!--                <label string="Hierarchical Level"/>-->
+                <field name="hierarchical_level_id" string="Hierarchical Level" style="width:35%;"/>
+                <button name="%(inherit_crm_team_action)d" string="Create" type="action" class="oe_highlight"/>
+<!--            </div>-->
+            </field>
+        </field>
+    </record>
+
+</odoo>

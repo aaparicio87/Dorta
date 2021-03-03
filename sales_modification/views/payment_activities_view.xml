@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--   payment activities for account invoice-->
+        <record id="account_invoice_form_view_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.form.view.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_info']" position="after">
+                    <page string="Payment Activities" name="payment_activities">
+                          <field name="payment_activities_line_ids">
+                                <tree editable="bottom" string="Payment Activities">
+                                    <field name="sale_order" string="Sale Order"/>
+                                    <field name="account_invoice_id" invisible="1"/>
+                                    <field name="account_invoices" string="Invoice"/>
+                                    <field name="date" string="Date"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="price_subtotal" string="Amount"/>
+                                    <field name="state" string="State"/>
+                                </tree>
+                          </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

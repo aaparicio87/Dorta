@@ -1,0 +1,171 @@
+<odoo>
+    <!--    Custome Control form view-->
+    <record id="view_custom_control_inherit" model="ir.ui.view">
+        <field name="name">custom.control.form</field>
+        <field name="model">custom.control</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                  <button string="Validar" name="action_validate" type="object" attrs="{'invisible': [('state','!=',('draft'))]}"/>
+                  <button string="Cerrar" name="action_cerrar" type="object" attrs="{'invisible': [('state','!=',('open'))]}"/>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,open,closed"/>
+                </header>
+                <sheet>
+                     <div class="oe_button_box" name="button_box" position="left">
+                        <button class="oe_stat_button" name="%(purchase_extended.action_document_document_extended)d" type="action" icon="fa-file-text"
+                                >
+                            <field name="document_count" string="Documentos" widget="statinfo"/>
+                        </button>
+
+                    </div>
+                    <group>
+                        <group>
+                            <field name="purchase_order_id" string="Orden de Compra" required="1"/>
+                            <field name="issue_date" string="Fecha de Problema"/>
+
+                        </group>
+                        <group>
+                            <field name="partner_id" string="Proveedor" placeholder="Nombre,Tin,Email o Referencia" required="1" domain="[('supplier', '=', True)]"/>
+                            <field name="status_order" string="Estaus de la Orden"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Datos de la Orden">
+                            <form>
+                                <group col="8" colspan="2">
+                                    <field name="date_shipment"/>
+                                    <field name="confirmation_date" />
+                                    <field name="supplier_receipt_date" />
+
+                                </group>
+                                <group string="Pro-forma de Embarque">
+                                    <group>
+                                        <field name="proforma_date"/>
+                                        <field name="departure_date"/>
+                                        <field name="arrival_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="output_port_id"/>
+                                        <field name="arrival_port_id"/>
+                                        <field name="payment_condition" />
+                                    </group>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="shipping_name"/>
+                                        <field name="conform_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="steam_name"/>
+                                        <field name="final_date"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="Data de Facturacion">
+                            <form>
+                                <group col="8" colspan="2">
+                                    <field name="date_arrival"/>
+                                    <field name="courier_number"/>
+                                    <field name="invoice_n"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="invoice_currency_id"/>
+                                        <field name="exchange_rate"/>
+                                        <field name="customs_dollar"/>
+                                    </group>
+                                    <group>
+                                        <field name="invoice_date"/>
+                                        <field name="due_date"/>
+                                    </group>
+                                </group>
+                                <group string="Monto de Factura">
+                                    <group>
+                                        <field name="fob_value_currency"/>
+                                        <field name="fob_bs_currency"/>
+                                        <field name="currency_insurance"/>
+                                        <field name="bs_insurance"/>
+                                    </group>
+                                    <group>
+                                        <field name="freight_currency"/>
+                                        <field name="freight_bs"/>
+                                        <field name="cif_currency"/>
+                                        <field name="cif_bs"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </page>
+                        <page string="Doc/BL/Transferencia">
+                            <form>
+                                <group col="8" colspan="2">
+                                    <group col="2" string="Documentos" colspan="2">
+                                        <field name="invoice" string="Factura"/>
+                                        <field name="Bill_lading"/>
+                                    </group>
+                                    <group col="2" string="Certificados" colspan="2">
+                                        <field name="free_sale"/>
+                                        <field name="analysis"/>
+                                        <field name="age"/>
+                                        <field name="origin"/>
+                                        <field name="health"/>
+                                    </group>
+                                    <group col="2" string="Agente Personalizado" colspan="2">
+                                        <field name="date_sending_document"/>
+                                    </group>
+                                </group>
+                                <group col="6" colspan="2">
+                                    <field name="doc_arrival_date"/>
+                                    <field name="doc_courier_number" string="numero del Documento del Mensajero"/>
+                                    <field name="numbering_bLs" string="numeracion del BLS"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <field name="container_type"/>
+                                        <field name="number_container"/>
+                                        <field name="transfer_date_warehouse"/>
+                                        <field name="store_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="qty_container" string="Cantidad de Contenedores"/>
+                                        <field name="merchandise_arrival_date"/>
+                                        <field name="certificate_number" string="Numero de Certificados"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--    custom control tree view-->
+    <record id="view_custom_control_tree" model="ir.ui.view">
+        <field name="name">custom.control.tree</field>
+        <field name="model">custom.control</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="purchase_order_id"/>
+                <field name="partner_id"/>
+                <field name="issue_date"/>
+                <field name="status_order"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    custom control action-->
+    <record model="ir.actions.act_window" id="action_custom_control">
+        <field name="name">Control de Aduanas</field>
+        <field name="res_model">custom.control</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_customs_control" name="Custom Control" string="Control de Aduanas" parent="purchase.menu_purchase_control"
+              action="purchase_extended.action_custom_control" sequence="31"/>
+
+
+</odoo>

@@ -1,0 +1,52 @@
+<odoo>
+    <record id="view_stock_picking_form_inherit" model="ir.ui.view">
+        <field name="name">Stock Picking form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/header/button[@name='action_confirm']" position="after">
+                       <button class="oe_highlight" name="open_delivery_guide"
+                        string="Cargando Guías" type="object"/>
+                   </xpath>
+
+            <field name="origin" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="scheduled_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_done" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="partner_id" position="before">
+                <field name="order_number"/>
+                <field name="origin"/>
+                <field name="scheduled_date"/>
+                <field name="partner_id" string="Empresa Cliente"/>
+            </field>
+
+            <field name="date_done" position="before">
+                <field name="user_id" string="Responsable"/>
+                <field name="document_type" string="Tipo de Documento"/>
+                <field name="document" string="Número de Documento"/>
+                <field name="company_id" string="Compañía"/>
+            </field>
+            <xpath expr="//notebook/page/field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="before">
+                <field name="code" string="Code"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                <field name="code_storage" string="Código de Almacenamiento"/>
+                <field name="list_pvp" string="Lista/PVP"/>
+                <field name="marked" string="Marca"/>
+                <field name="u_c"/>
+                <field name="capp"/>
+                <field name="boxes" string="Cajas"/>
+                <field name="unit" string="Unidad"/>
+                <field name="total"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

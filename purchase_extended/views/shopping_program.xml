@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="shopping_program_form_boolean" model="ir.ui.view">
+        <field name="name">shopping.program.form.boolean</field>
+        <field name="model">shopping.program</field>
+        <field name="arch" type="xml">
+            <form string="Programa de compra">
+                <group>
+                    <field name="january" string="Enero"/>
+                    <field name="february" string="Febrero"/>
+                    <field name="march" string="Marzo"/>
+                    <field name="april" string="Abril"/>
+                    <field name="may" string="Mayo"/>
+                    <field name="june" string="Junio"/>
+                    <field name="july" string="Julio"/>
+                    <field name="august" string="Agosto"/>
+                    <field name="september" string="Septiembre"/>
+                    <field name="october" string="Octubre"/>
+                    <field name="november" string="Noviembre"/>
+                    <field name="december" string="Diciembre"/>
+                </group>
+                <footer>
+                    <button name="shopping_program_create" string="Crear" type="object" class="oe_highlight"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_shopping_program_boolean" model="ir.actions.act_window">
+        <field name="name">Programa de compra</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shopping.program</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="shopping_program_form_boolean"/>
+        <field name="target">new</field>
+    </record>
+    <record id="shopping_program_form" model="ir.ui.view">
+        <field name="name">shopping.program.form</field>
+        <field name="model">shopping.program</field>
+        <field name="arch" type="xml">
+            <form string="Programa de Compra">
+                <header>
+                    <button name="send_mail_shopping" string="Enviar Correo" type="object" class="oe_highlight"/>
+                    <button name="confirm_scheduled_purchase" string="Validar" type="object" class="oe_highlight" attrs="{'invisible': [('state','!=',('borrador'))]}"/>
+                    <button name="%(action_shopping_program_boolean)d" string="Ejecutar" type="action" class="oe_highlight"/>
+                    <button name="cancel_shopping_program" string="Cerrar" type="object" class="oe_highlight" attrs="{'invisible': [('state','==',('borrador','cerrado'))]}"/>/>
+                    <field name="state" widget="statusbar" statusbar_visible="borrador,abierto,cerradoo,cerrado" clickable="False"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="shopping_year" string="Ano de la Compra"/>
+                        <field name="order_date" string="Fecha de la Orden"/>
+                        <field name="responsible_id" string="Responsable"/>
+                    </group>
+
+                        <field name="shopping_config_ids" string="">
+                            <tree editable="1">
+                                <field name="reference_id" string="Orden de Compra"/>
+                                <field name="reference" string="Referencia"/>
+                                <field name="product_id" string="Producto"/>
+                                <field name="january" string="Enero"/>
+                                <field name="february" string="Febrero"/>
+                                <field name="march" string="Marzo"/>
+                                <field name="april" string="Abril"/>
+                                <field name="may" string="Mayo"/>
+                                <field name="june" string="Junio"/>
+                                <field name="july" string="Julio"/>
+                                <field name="august" string="Agosto"/>
+                                <field name="september" string="Septiembre"/>
+                                <field name="october" string="Octubre"/>
+                                <field name="november" string="Noviembre"/>
+                                <field name="december" string="Diciembre"/>
+                                <field name="shopping_program_id" invisible="1"/>
+                            </tree>
+                        </field>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="shopping_program_tree" model="ir.ui.view">
+        <field name="name">shopping.program.tree</field>
+        <field name="model">shopping.program</field>
+        <field name="arch" type="xml">
+            <tree string="Programa de Compra">
+                <field name="shopping_year" string="Ano de la Compra"/>
+                <field name="order_date" string="Fecha de la Orden"/>
+                <field name="responsible_id" string="Responsable"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="shopping_program_pivot" model="ir.ui.view">
+        <field name="name">shopping.program.pivot</field>
+        <field name="model">shopping.program</field>
+        <field name="arch" type="xml">
+            <pivot string="Programa de Compra">
+                <field name="shopping_year"/>
+                <field name="order_date"/>
+                <field name="responsible_id"/>
+                <field name="shopping_config_ids"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_shopping_program" model="ir.actions.act_window">
+        <field name="name">Programa de Compra</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shopping.program</field>
+        <field name="view_type">form</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_id" ref="shopping_program_tree"/>
+    </record>
+
+    <record id="shopping_program_config_form" model="ir.ui.view">
+        <field name="name">shopping.program.config.form</field>
+        <field name="model">shopping.program.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuracion de Programa de Compra">
+                <sheet>
+                    <group>
+                        <field name="reference_id"/>
+                        <field name="reference"/>
+                        <field name="product_id" />
+                        <field name="january" />
+                        <field name="february"/>
+                        <field name="march"/>
+                        <field name="april"/>
+                        <field name="may"/>
+                        <field name="june"/>
+                        <field name="july"/>
+                        <field name="august"/>
+                        <field name="september"/>
+                        <field name="october"/>
+                        <field name="november"/>
+                        <field name="december"/>
+                        <field name="shopping_program_id" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="shopping_program_config_tree" model="ir.ui.view">
+        <field name="name">shopping.program.config.tree</field>
+        <field name="model">shopping.program.config</field>
+        <field name="arch" type="xml">
+            <tree string="Shopping Program Config">
+                <field name="reference_id"/>
+                <field name="reference"/>
+                <field name="reference"/>
+                <field name="product_id" />
+                <field name="january" />
+                <field name="february"/>
+                <field name="march"/>
+                <field name="april"/>
+                <field name="may"/>
+                <field name="june"/>
+                <field name="july"/>
+                <field name="august"/>
+                <field name="september"/>
+                <field name="october"/>
+                <field name="november"/>
+                <field name="december"/>
+                <field name="shopping_program_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_shopping_program_config" model="ir.actions.act_window">
+        <field name="name">Shopping Program Config</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shopping.program.config</field>
+        <field name="view_type">tree</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="shopping_program_config_tree"/>
+    </record>
+
+    <report string="Programa de Compra Reporte"
+                model="shopping.program"
+                name="purchase_extended.shopping_report"
+                id="shopping_report_id"
+                file="purchase_extended.shopping_program_report"
+                report_type="qweb-pdf"/>
+
+    <menuitem
+            id="menu_shopping_program" name="Programa de compra" action="action_shopping_program"
+            parent="purchase.menu_purchase_root" sequence="111"/>
+
+</odoo>

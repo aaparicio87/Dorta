@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="salesperson_email_template" model="mail.template">
+            <field name="name">Salesperson: Check out Aged Partner Balance Report</field>
+            <field name="model_id" ref="model_account_invoice"/>
+            <field name="email_from">
+                <![CDATA["${user.name|safe}" <${(object.email or user.email)|safe}>]]>
+            </field>
+            <field name="email_to"><![CDATA[${object.user_id.partner_id.email|safe}]]></field>
+            <field name="subject"><![CDATA[Check Out Aged Partner Balance Report]]></field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                    <p> Dear Seller ${ctx['name']},<br/>
+                        <br/>
+                            In this email, you can find out status of Aging Partner Balance report. kindly ensure
+                            that they have been checked out as soon as possible.
+                            Please find attachment.
+                    </p>
+                    <p>Thank you very much</p>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

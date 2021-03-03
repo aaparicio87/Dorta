@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="shopping_report">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="html_container_header" style="width:100%;">
+                            <div class="row">
+                                <div class="col-10">
+                                    <center style="font-size:30px">
+                                        <b>Reporte de Programa de Compra</b>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-10">
+                                <b>Ano:</b>
+                                <span t-esc="doc.shopping_year"/>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-10">
+                                <b>Fecha de requerimiento de Orden:</b>
+                                <span t-esc="doc.order_date"/>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-10">
+                                <b>Responsable:</b>
+                                <span t-esc="doc.responsible_id.name"/>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <strong>Referencia</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Producto</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Enero</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Febrero</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Marzo</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Abril</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Mayo</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Junio</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Julio</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Agosto</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Septiembre</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Octubre</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Noviembre</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Diciembre</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-if="doc.shopping_config_ids">
+                                        <t t-set="counter" t-value="0"/>
+                                        <t t-set="january" t-value="0"/>
+                                        <t t-set="february" t-value="0"/>
+                                        <t t-set="march" t-value="0"/>
+                                        <t t-set="april" t-value="0"/>
+                                        <t t-set="may" t-value="0"/>
+                                        <t t-set="june" t-value="0"/>
+                                        <t t-set="july" t-value="0"/>
+                                        <t t-set="august" t-value="0"/>
+                                        <t t-set="september" t-value="0"/>
+                                        <t t-set="october" t-value="0"/>
+                                        <t t-set="november" t-value="0"/>
+                                        <t t-set="december" t-value="0"/>
+                                        <t t-set="total" t-value="0"/>
+                                        <t t-foreach="doc.shopping_config_ids" t-as="o">
+                                            <t t-foreach="o" t-as="a">
+                                                <t t-set="counter" t-value="counter + 1"/>
+                                                <t t-set="january" t-value="january + a.january"/>
+                                                <t t-set="february" t-value="february + a.february"/>
+                                                <t t-set="march" t-value="march + a.march"/>
+                                                <t t-set="april" t-value="april + a.april"/>
+                                                <t t-set="may" t-value="may + a.may"/>
+                                                <t t-set="june" t-value="june + a.june"/>
+                                                <t t-set="july" t-value="july + a.july"/>
+                                                <t t-set="august" t-value="august + a.august"/>
+                                                <t t-set="september" t-value="september + a.september"/>
+                                                <t t-set="october" t-value="october + a.october"/>
+                                                <t t-set="november" t-value="november + a.november"/>
+                                                <t t-set="december" t-value="december + a.december"/>
+                                                <t t-set="total" t-value="total + a.january + a.february + a.march + a.april + a.may + a.june + a.july + a.august + a.september + a.october + a.november + a.december"/>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="a.reference_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="a.product_id.default_code">
+                                                            [<span t-esc="a.product_id.default_code"/>]
+                                                        </t>
+                                                        <span t-esc="a.product_id.name"/>
+                                                        <span t-foreach="a.product_id.attribute_value_ids"
+                                                              t-as="attribute_value">
+                                                            <span t-if="attribute_value_first">-</span>
+                                                            <span t-if="not attribute_value_last"
+                                                                  t-esc="attribute_value.name+','"/>
+                                                            <span t-else="" t-esc="attribute_value.name"/>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.january"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.february"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.march"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.april"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.may"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.june"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.july"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.august"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.september"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.october"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.november"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="a.december"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <t>
+                                            <tr>
+                                                <td style="color:blue;">
+                                                    Total Registros:
+                                                    <t t-esc="counter"/>
+                                                </td>
+                                                <td></td>
+                                                <td style="color:blue;">
+                                                    Total Trimestre:
+                                                    <t t-esc="total"/>
+                                                </td>
+
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
