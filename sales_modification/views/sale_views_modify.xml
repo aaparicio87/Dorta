@@ -56,6 +56,10 @@
                             groups="sales_modification.grp_supervisor"
                             attrs="{'invisible': [('state','not in',['draft','sent'])]}"/>
                 </header>
+                <xpath expr="//form/header/button[@name='action_confirm']" position="attributes">
+                       <attribute name="groups">sales_modification.grp_supervisor</attribute>
+                </xpath>
+
                 <xpath expr="//header" position="after">
                 
                     <div class=" o_notification_box mb-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('repeat','!=',True)]}">
@@ -64,12 +68,17 @@
                     <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('expired_rif','!=',True)]}">
                             RIF expirado.
                     </div>
-
                     <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('limit_credit','!=',True)]}">
                             Límite de crédito.
                     </div>
-                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('limit_credit','!=',True)]}">
+                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('unavailable_stock','!=',True)]}">
                            Inventario no disponible.
+                    </div>
+                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('pending_invoice','!=',True)]}">
+                          Tiene facturas vencidas pendientes de pago.
+                    </div>
+                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('pending_so_payment','!=',True)]}">
+                           Tiene ordenes pendientes de pago.
                     </div>
                 </xpath>
                 
@@ -80,6 +89,8 @@
                     <field name="limit_credit" invisible="1"/>
                     <field name="low_limit_credit" invisible="1"/>
                     <field name="unavailable_stock" invisible="1"/>
+                    <field name="pending_invoice" invisible="1"/>
+                    <field name="pending_so_payment" invisible="1"/>
                     <field name="rate_of_day" readonly="1" string="Rate of Day"
                            attrs="{'invisible':[('exchange_rate','!=','rate_of_day')]}"/>
                     <field name="manual_rate" string="Manual Rate" attrs="{'invisible':[('exchange_rate','!=','manual_rate')]}"/>

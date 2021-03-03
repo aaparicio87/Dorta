@@ -43,6 +43,8 @@ class SaleIncentive(models.Model):
 
     month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
 
+    totals = fields.Float(string="Totals", compute='_compute_totals')
+
     def calculate_incentive(self):
         self.bonus_x_boxes_total = self.maximum_bonus * self.bonus_x_boxes / 100
         self.bonus_x_bs_total = self.maximum_bonus * self.bonus_x_bs / 100

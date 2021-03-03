@@ -7,7 +7,7 @@
             <xpath expr="//form/header/button[@name='action_confirm']" position="after">
                        <button class="oe_highlight" name="open_delivery_guide"
                         string="Cargando Guías" type="object"/>
-                   </xpath>
+            </xpath>
 
             <field name="origin" position="attributes">
                 <attribute name="invisible">1</attribute>

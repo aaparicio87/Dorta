@@ -38,7 +38,13 @@
                                 <field name="month"/>
                                 <field name="year"/>
                             </group>
-                            <group string="Calculation">
+                            <group>
+                                <group>
+                                    <label for="totals"/>
+                                    <div>
+                                    <field name="totals" class="oe_inline"/>    
+                                    </div>
+                                </group>
                                 <group>
                                     <field name="maximum_bonus"/>
                                     <field name="bonus_x_boxes"/>

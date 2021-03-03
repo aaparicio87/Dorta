@@ -100,8 +100,10 @@ class SaleOrderModify(models.Model):
     expired_rif = fields.Boolean(string='Expired RIF')
     limit_credit = fields.Boolean(string='Credit limit')
     low_limit_credit = fields.Boolean(string='Low credit limit')
-    unavailable_stock = fields.Boolean(string='Low credit limit')
-    
+    unavailable_stock = fields.Boolean(string='Unavailable Stock')
+    pending_invoice = fields.Boolean(string='Pendign Invoice')
+    pending_so_payment = fields.Boolean(string='Pending Sale Order Payment')
+
     @api.depends('exchange_rate')
     def _compute_rate_of_day(self):
         company_id = self.pricelist_id
@@ -206,6 +208,10 @@ class SaleOrderModify(models.Model):
         domain = [('partner_id', '=', record.partner_id.id)]
         orders = self.env['sale.order'].search(domain)
         partner = self.env['res.partner'].search([('id','=',record.partner_id.id)])
+        active_invoice = self.env['account.invoice'].search(
+                [('partner_id', '=', record.partner_id.id), ('state', 'in', ['draft', 'open'])])
+        pending_sale_ord = self.env['sale.order'].search(
+                [('partner_id', '=', record.partner_id.id), ('state', 'in', ['draft', 'sent'])])
         cont = 0
         cont_rif = 0
         for order in orders:
@@ -221,9 +227,15 @@ class SaleOrderModify(models.Model):
         if partner.credit_limit < record.amount_total:
             record.state = 'draft'
             record.limit_credit = True
-        if record.product_id.qty_available < record.order_line.product_uom_qty:
+        if record.order_line.product_id.qty_available < record.order_line.product_uom_qty:
             record.state = 'draft'
             record.unavailable_stock = True
+        if active_invoice:
+            record.state = 'draft'
+            record.pending_invoice = True
+        if pending_sale_ord:
+            record.state = 'draft'
+            record.pending_so_payment = True
         return record 
             
 

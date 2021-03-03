@@ -772,14 +772,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sales_modification.quotation_send_popup_wizard
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_order_wizard_popup
 msgid "RIF Date is Expired"
-msgstr ""
+msgstr "La fecha de RIF ha caducado"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order__rate_of_day
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
 #: selection:sale.order,exchange_rate:0
 msgid "Rate of Day"
-msgstr ""
+msgstr "Tasa del día"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.view_res_partner_form_extend

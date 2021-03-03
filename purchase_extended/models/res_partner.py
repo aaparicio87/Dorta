@@ -34,4 +34,4 @@ class Litrage(models.Model):
     litrage = fields.Float(string='Litrage', digits=(12, 2))
 
     partner_ids = fields.Many2many('res.partner', column1='litrage_id', column2='partner_id', string='Partners')
- 
+    

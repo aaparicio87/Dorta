@@ -7,3 +7,4 @@ access_brand_code,sale_incentive.brand_code,model_brand_code,,1,1,1,1
 access_region_incentive,sale_incentive.region_incentive,model_region_incentive,,1,1,1,1
 access_res_partner_channel,security_res_partner_channel,model_res_partner_channel,,1,1,1,1
 access_res_partner_subchannel,security_res_partner_subchannel,model_res_partner_subchannel,,1,1,1,1
+access_crm_team_hierarchical,security_crm_team_hierarchical,model_crm_team_hierarchical,,1,1,1,1
