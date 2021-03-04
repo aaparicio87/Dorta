@@ -28,15 +28,15 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="region" string="Region"/>
+                                <field name="region" string="Region" required="1"/>
 <!--                                <field name="total_region" widget="many2many_tags"/>-->
-                                <field name="bonuses_id"/>
+                                <field name="bonuses_id" required="1"/>
                             </group>
                              <group>
-                                <field name="supervisor"/>
-                                <field name="seller" string="Vendedor"/>
-                                <field name="month"/>
-                                <field name="year"/>
+                                <field name="supervisor" required="1"/>
+                                <field name="seller" string="Vendedor" required="1"/>
+                                <field name="month" required="1"/>
+                                <field name="year" required="1"/>
                              </group>
                              <div class="content-group o_setting_box o_group_col_12 mt-2">
                                     <div class="d-flex justify-content-center text-center">
@@ -97,7 +97,7 @@
                         </group>
                         <notebook>
                             <page string="Brand Lines with Objectives">
-                                <field name="brand_line_objectives_ids">
+                                <field name="brand_line_objectives_ids" required="1">
                                     <tree editable="bottom" string="Brand Lines with Objectives">
                                         <field name="brand"/>
                                         <field name="code"/>

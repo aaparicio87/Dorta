@@ -34,8 +34,8 @@ class SaleIncentive(models.Model):
 
     month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
 
-    maximum_bonus = fields.Float(string="Maximum Bonus")
     brands_objective = fields.Integer(string="N° Brands with Objectives")
+    maximum_bonus = fields.Float(string="Maximum Bonus")
     bonus_x_boxes = fields.Float(string="Bonus for Boxes")
     bonus_x_bs = fields.Float(string="Bonus for Bs")
     bonus_x_qualitative = fields.Float(string="Bonus for Qualitative")
@@ -61,6 +61,12 @@ class SaleIncentive(models.Model):
     incentive_x_box = fields.Float(string="Incentive by Box", compute='_compute_incentive_x_box')
     total_incentive = fields.Float(string="Total Incentive", compute='_compute_total_incentive')
 
+
+    @api.onchange('brand_line_objectives_ids')
+    def count(self):
+        bo = len(self.mapped('brand_line_objectives_ids'))
+        self.brands_objective = bo
+
     def calculate_incentive(self):
         self.bonus_x_boxes_total = self.maximum_bonus * self.bonus_x_boxes / 100
         self.bonus_x_bs_total = self.maximum_bonus * self.bonus_x_bs / 100
@@ -69,16 +75,49 @@ class SaleIncentive(models.Model):
 
     @api.depends('month','year')
     def _compute_month_year(self):
-        month = dict(self._fields['month'].selection).get(self.month)
-        year = self.year
+        for rec in self:
+            month_sel = dict(rec._fields['month'].selection).get(rec.month)
+            year_sel = rec.year
 
-        print("Mess: " + str(month) +" " +"Yearr: "+str(year))
-        if(month  and year ):
-            self.month_year =   f"{month} {year}"
-        elif(month):
-            self.month_year =   f"{month}"
-        else:
-            self.month_year = f"{year}"
+            if(month_sel  and year_sel):
+                rec.month_year = f"{month_sel} {year_sel}"
+            elif(month):
+                rec.month_year = f"{month_sel}"
+            else:
+                rec.month_year = f"{year_sel}"
+    
+    def _compute_maximum_bonus_total(self):
+        pass   
+    def _compute_bonus_x_boxes_total(self):
+        pass
+    def _compute_bonus_x_bs_total(self):
+        pass
+    def _compute_bonus_x_qualitative_total(self):
+        pass
+    def _compute_bonus_brand_boxes_total(self):
+        pass
+    def _compute_maximum_charge_total(self):
+        pass
+    def _compute_total_cupor_for_boxes(self):
+        pass
+    def _compute_total_space_in_bs(self):
+        pass
+    def _compute_total_sale_by_box(self):
+        pass
+    def _compute_total_sale_in_bs(self):
+        pass
+    def _compute_total_charged_by_box(self):
+        pass
+    def _compute_achievement_percent(self):
+        pass
+    def _compute_achievement_percent(self):
+        pass
+    def _compute_achievement_percent(self):
+        pass
+    def _compute_incentive_x_box(self):
+        pass
+    def _compute_total_incentive(self):
+        pass
 
 class BrandObjectives(models.Model):
     _name = "brand.objectives"
