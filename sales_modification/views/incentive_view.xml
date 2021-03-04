@@ -32,33 +32,62 @@
 <!--                                <field name="total_region" widget="many2many_tags"/>-->
                                 <field name="bonuses_id"/>
                             </group>
-                            <group>
+                             <group>
                                 <field name="supervisor"/>
                                 <field name="seller" string="Vendedor"/>
                                 <field name="month"/>
                                 <field name="year"/>
-                            </group>
-                            <group>
-                                <group>
-                                    <label for="totals"/>
-                                    <div>
-                                    <field name="totals" class="oe_inline"/>    
+                             </group>
+                             <div class="content-group o_setting_box o_group_col_12 mt-2">
+                                    <div class="d-flex justify-content-center text-center">
+                                        <!-- <div class="col">
+                                        <label for="maximum_bonus" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div> -->
+                                        <div class="col">
+                                            <label for="brands_objective" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="bonus_x_boxes" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="bonus_x_bs" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="bonus_x_qualitative" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div> 
+                                        <div class="col">
+                                            <label for="bonus_brand_boxes" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="maximum_charge" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div> 
                                     </div>
-                                </group>
-                                <group>
-                                    <field name="maximum_bonus"/>
-                                    <field name="bonus_x_boxes"/>
-                                    <field name="bonus_x_boxes_total"/>
-                                    <field name="bonus_x_bs"/>
-                                    <field name="bonus_x_bs_total"/>
-                                    <field name="bonus_x_qualitative"/>
-                                </group>
-                                <group>
-                                    <field name="brands_objective"/>
-                                    <field name="bonus_brand_boxes"/>
-                                    <field name="maximum_charge"/>
-                                </group>
-                            </group>
+                                    <div class="d-flex justify-content-center text-center mt-1">
+                                        <!-- <div class="col">
+                                        <field name="maximum_bonus"/>
+                                        </div> -->
+                                        <div class="col">
+                                            <field name="brands_objective"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="bonus_x_boxes"/>
+                                            <field name="bonus_x_boxes_total"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="bonus_x_bs"/>
+                                            <field name="bonus_x_bs_total"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="bonus_x_qualitative"/>
+                                        </div> 
+                                        <div class="col">
+                                            <field name="bonus_brand_boxes"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="maximum_charge"/>
+                                        </div> 
+                                    </div>
+                             </div>
                         </group>
                         <notebook>
                             <page string="Brand Lines with Objectives">

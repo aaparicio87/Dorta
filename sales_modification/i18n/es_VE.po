@@ -212,33 +212,23 @@ msgstr ""
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_boxes
-msgid "Bonus x Boxes"
-msgstr "Bonificación x cajas"
-
-#. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_boxes_total
-msgid "Bonus x Boxes Total"
-msgstr "Bono x Total de cajas"
+msgid "Bonus for Boxes"
+msgstr "Bono por cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_brand_boxes
-msgid "Bonus x Brands Boxes"
-msgstr "Bono x cajas de marcas"
+msgid "Bonus for Box Brands"
+msgstr "Bono por Marcas Cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_bs
-msgid "Bonus x Bs"
-msgstr "Bono x Bs"
-
-#. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_bs_total
-msgid "Bonus x Bs Total"
-msgstr "Bono x Bs Total"
+msgid "Bonus for Bs"
+msgstr "Bono por Bs"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_qualitative
-msgid "Bonus x Qualitative"
-msgstr "Bono x Cualitativo"
+msgid "Bonus for Qualitative"
+msgstr "Bono por Cualitativo"
 
 #. module: sales_modification
 #: model:ir.actions.act_window,name:sales_modification.sale_bonuses_action
@@ -442,8 +432,8 @@ msgstr "Febrero"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__amount
-msgid "Float"
-msgstr "Número flotante"
+msgid "Amount"
+msgstr "Importe"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_crm_team__hierarchical_level_id
@@ -635,8 +625,8 @@ msgstr "Bono máximo"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__maximum_charge
-msgid "Maximum% To Charge"
-msgstr "Máximo% a cargar"
+msgid "Maximum % To Charge"
+msgstr "Máximo % A Cobrar"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
@@ -677,7 +667,7 @@ msgstr "Noviembre"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__brands_objective
 msgid "N° Brands with Objectives"
-msgstr "N ° Marcas con Objetivos"
+msgstr "N° Marcas con Objetivos"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
@@ -749,7 +739,7 @@ msgstr "Cotización"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.portal_my_quotations_modify
-#: model_terms:ir.ui.view,arch_db:sales_modification.report_saleorder_document_modify
+#: model_terms:ir.ui.view,arch_db:sales_modification.report_saleorder_inherit
 msgid "Quote #"
 msgstr "Cotización #"
 
@@ -1013,3 +1003,8 @@ msgstr "Cotizaciones"
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
 msgid "Total Region"
 msgstr "Región total"
+
+#. module: sale
+#: model:ir.actions.report.xml,name:sale.report_sale_order
+msgid "Quotation / Order"
+msgstr "Cotizacion / Pedido"

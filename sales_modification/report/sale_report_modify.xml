@@ -2,13 +2,13 @@
 <odoo>
     <data>
         <report 
-            id="sale.action_report_saleorder"
-            string="Cotizacion"
-            model="sale.order" 
-            report_type="qweb-pdf"
-            file="sales_modification.report_saleorder_document_modify" 
-            name="sales_modification.report_saleorder_document_modify"
-            print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
-        />
+        id="sale.action_report_saleorder"
+        string="Quotation / Order"
+        model="sale.order" 
+        report_type="qweb-pdf"
+        file="report_saleorder_inherit" 
+        name="report_saleorder_inherit"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' %(object.name)"
+/>
     </data>
 </odoo>

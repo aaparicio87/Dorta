@@ -31,19 +31,24 @@ class SaleIncentive(models.Model):
          ('incentive_sent', 'Incentive Sent'),
          ('incentive_approved', 'Incentive Approved'),
          ], string='State', default='incentive_reg')
-    maximum_bonus = fields.Float(string="Maximum Bonus")
-    bonus_x_boxes = fields.Float(string="Bonus x Boxes")
-    bonus_x_boxes_total = fields.Float(string="Bonus x Boxes Total", compute='calculate_incentive')
-    bonus_x_bs = fields.Float(string="Bonus x Bs")
-    bonus_x_bs_total = fields.Float(string="Bonus x Bs Total", compute='calculate_incentive')
-    bonus_x_qualitative = fields.Float(string="Bonus x Qualitative")
-    brands_objective = fields.Float(string="N° Brands with Objectives")
-    bonus_brand_boxes = fields.Float(string="Bonus x Brands Boxes", compute='calculate_incentive')
-    maximum_charge = fields.Float(string="Maximum% To Charge")
 
     month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
 
-    totals = fields.Float(string="Totals", compute='_compute_totals')
+    maximum_bonus = fields.Float(string="Maximum Bonus")
+    brands_objective = fields.Integer(string="N° Brands with Objectives", compute='_compute_count_brands')
+    bonus_x_boxes = fields.Float(string="Bonus for Boxes")
+    bonus_x_bs = fields.Float(string="Bonus for Bs")
+    bonus_x_qualitative = fields.Float(string="Bonus for Qualitative")
+    bonus_brand_boxes = fields.Float(string="Bonus for Box Brands", compute='calculate_incentive')
+    maximum_charge = fields.Float(string="Maximum % To Charge")
+
+    
+    bonus_x_boxes_total = fields.Float(compute='_compute_bonus_x_boxes_total')
+    bonus_x_bs_total = fields.Float(compute='_compute_bonus_x_bs_total')
+    bonus_x_qualitative_total = fields.Float(compute='_compute_bonus_x_qualitative_total')
+    bonus_brand_boxes_total = fields.Float(compute='_compute_bonus_brand_boxes_total')
+    maximum_charge_total = fields.Float(compute='_compute_maximum_charge_total')
+
 
     def calculate_incentive(self):
         self.bonus_x_boxes_total = self.maximum_bonus * self.bonus_x_boxes / 100
