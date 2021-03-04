@@ -40,11 +40,11 @@
                              </group>
                              <div class="content-group o_setting_box o_group_col_12 mt-2">
                                     <div class="d-flex justify-content-center text-center">
-                                        <!-- <div class="col">
-                                        <label for="maximum_bonus" class="o_form_label" style="font-weight:bold; margin:0;"/>
-                                        </div> -->
-                                        <div class="col">
+                                         <div class="col">
                                             <label for="brands_objective" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                        <label for="maximum_bonus" class="o_form_label" style="font-weight:bold; margin:0;"/>
                                         </div>
                                         <div class="col">
                                             <label for="bonus_x_boxes" class="o_form_label" style="font-weight:bold; margin:0;"/>
@@ -63,11 +63,13 @@
                                         </div> 
                                     </div>
                                     <div class="d-flex justify-content-center text-center mt-1">
-                                        <!-- <div class="col">
-                                        <field name="maximum_bonus"/>
-                                        </div> -->
+                                        
                                         <div class="col">
                                             <field name="brands_objective"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="maximum_bonus"/>
+                                            <field name="maximum_bonus_total"/>
                                         </div>
                                         <div class="col">
                                             <field name="bonus_x_boxes"/>
@@ -79,15 +81,19 @@
                                         </div>
                                         <div class="col">
                                             <field name="bonus_x_qualitative"/>
+                                            <field name="bonus_x_qualitative_total"/>
                                         </div> 
                                         <div class="col">
                                             <field name="bonus_brand_boxes"/>
+                                            <field name="bonus_brand_boxes_total"/>
                                         </div>
                                         <div class="col">
                                             <field name="maximum_charge"/>
+                                            <field name="maximum_charge_total"/>
                                         </div> 
                                     </div>
                              </div>
+                           
                         </group>
                         <notebook>
                             <page string="Brand Lines with Objectives">
@@ -107,6 +113,55 @@
                                 </field>
                             </page>
                         </notebook>
+                         <div class="content-group o_setting_box o_group_col_12">
+                                    <div class="d-flex justify-content-center text-center">
+                                        <div class="col">
+                                            <label for="total_cupor_for_boxes" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="total_space_in_bs" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="total_sale_by_box" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                        <div class="col">
+                                            <label for="total_sale_in_bs" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div> 
+                                        <div class="col">
+                                            <label for="total_charged_by_box" class="o_form_label" style="font-weight:bold; margin:0;"/>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center text-center mt-1">
+                                        <div class="col">
+                                            <field name="total_cupor_for_boxes"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="total_space_in_bs"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="total_sale_by_box"/>
+                                        </div>
+                                        <div class="col">
+                                            <field name="total_sale_in_bs"/>
+                                        </div> 
+                                        <div class="col">
+                                            <field name="total_charged_by_box"/>
+                                        </div>
+                                    </div>
+                            </div>
+                             <group col="3">
+                                <group>
+                                    <field name="achievement_percent"/>
+                                    <field name="achievement_to_collect_percent"/>
+                                </group>
+                                <group>
+                                    <field name="incentive_bs"/>
+                                    <field name="incentive_x_box"/>
+                                </group>
+                                <group>
+                                    <field name="total_incentive"/>
+                                </group>
+                            </group> 
                     </sheet>
                 </form>
             </field>

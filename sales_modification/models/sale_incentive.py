@@ -35,20 +35,31 @@ class SaleIncentive(models.Model):
     month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
 
     maximum_bonus = fields.Float(string="Maximum Bonus")
-    brands_objective = fields.Integer(string="N° Brands with Objectives", compute='_compute_count_brands')
+    brands_objective = fields.Integer(string="N° Brands with Objectives")
     bonus_x_boxes = fields.Float(string="Bonus for Boxes")
     bonus_x_bs = fields.Float(string="Bonus for Bs")
     bonus_x_qualitative = fields.Float(string="Bonus for Qualitative")
-    bonus_brand_boxes = fields.Float(string="Bonus for Box Brands", compute='calculate_incentive')
+    bonus_brand_boxes = fields.Float(string="Bonus for Box Brands")
     maximum_charge = fields.Float(string="Maximum % To Charge")
 
-    
+    maximum_bonus_total = fields.Float(compute='_compute_maximum_bonus_total')
     bonus_x_boxes_total = fields.Float(compute='_compute_bonus_x_boxes_total')
     bonus_x_bs_total = fields.Float(compute='_compute_bonus_x_bs_total')
     bonus_x_qualitative_total = fields.Float(compute='_compute_bonus_x_qualitative_total')
     bonus_brand_boxes_total = fields.Float(compute='_compute_bonus_brand_boxes_total')
     maximum_charge_total = fields.Float(compute='_compute_maximum_charge_total')
 
+    total_cupor_for_boxes = fields.Float(string="Total Coupon for boxes", compute='_compute_total_cupor_for_boxes') # Total Cupor by box
+    total_space_in_bs = fields.Float(string="Total Coupon in Bs", compute='_compute_total_space_in_bs')  # Total Cupo in Bs
+    total_sale_by_box = fields.Float(string="Total Sale by Boxes", compute='_compute_total_space_in_bs')  # Total Sales by Box
+    total_sale_in_bs = fields.Float(string="Total Sale in Bs.", compute='_compute_total_sale_in_bs')  # Total Sales in BS
+    total_charged_by_box = fields.Float(string="Total Charge by Box.", compute='_compute_total_charged_by_box')  # Total Charge by Box
+
+    achievement_percent = fields.Float(string="% Achievement", compute='_compute_achievement_percent')
+    achievement_to_collect_percent = fields.Float(string="% Achievement to Collet", compute='_compute_achievement_percent')
+    incentive_bs = fields.Float(string="Incentive in BS", compute='_compute_achievement_percent')
+    incentive_x_box = fields.Float(string="Incentive by Box", compute='_compute_incentive_x_box')
+    total_incentive = fields.Float(string="Total Incentive", compute='_compute_total_incentive')
 
     def calculate_incentive(self):
         self.bonus_x_boxes_total = self.maximum_bonus * self.bonus_x_boxes / 100
