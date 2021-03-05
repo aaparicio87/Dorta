@@ -25,7 +25,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="bond_name"/>
+                            <field name="name"/>
                         </group>
                         <group>
                             <field name="percentage_scope"/>
@@ -49,9 +49,8 @@
         <field name="model">sale.bonuses</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="bond_name"/>
+                <field name="name"/>
                 <field name="amount"/>
-                <!--                <field name="active" widget="boolean_button"/>-->
                 <field name="active"/>
             </tree>
         </field>

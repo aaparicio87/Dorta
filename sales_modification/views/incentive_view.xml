@@ -29,14 +29,15 @@
                         <group>
                             <group>
                                 <field name="region" string="Region" required="1"/>
-<!--                                <field name="total_region" widget="many2many_tags"/>-->
                                 <field name="bonuses_id" required="1"/>
                             </group>
                              <group>
-                                <field name="supervisor" required="1"/>
-                                <field name="seller" string="Vendedor" required="1"/>
+                                <field name="supervisor" attrs="{'invisible': [('is_seller', '=', True)], 'required': [('is_seller', '!=', True)]}"/>
+                                <field name="seller" string="Vendedor" attrs="{'invisible': [('is_supervisor', '=', True)], 'required': [('is_supervisor', '!=', True)]}"/>
                                 <field name="month" required="1"/>
                                 <field name="year" required="1"/>
+                                <field name="is_supervisor" invisible="1"/>
+                                <field name="is_seller" invisible="1"/>
                              </group>
                              <div class="content-group o_setting_box o_group_col_12 mt-2">
                                     <div class="d-flex justify-content-center text-center">
@@ -65,31 +66,28 @@
                                     <div class="d-flex justify-content-center text-center mt-1">
                                         
                                         <div class="col">
-                                            <field name="brands_objective"/>
+                                            <field name="brands_objective" readonly="1"/>
                                         </div>
                                         <div class="col">
                                             <field name="maximum_bonus"/>
-                                            <field name="maximum_bonus_total"/>
                                         </div>
                                         <div class="col">
                                             <field name="bonus_x_boxes"/>
-                                            <field name="bonus_x_boxes_total"/>
+                                            <field name="bonus_x_boxes_total" readonly="1"/>
                                         </div>
                                         <div class="col">
                                             <field name="bonus_x_bs"/>
-                                            <field name="bonus_x_bs_total"/>
+                                            <field name="bonus_x_bs_total" readonly="1"/>
                                         </div>
                                         <div class="col">
                                             <field name="bonus_x_qualitative"/>
-                                            <field name="bonus_x_qualitative_total"/>
+                                            <field name="bonus_x_qualitative_total" readonly="1"/>
                                         </div> 
                                         <div class="col">
-                                            <field name="bonus_brand_boxes"/>
-                                            <field name="bonus_brand_boxes_total"/>
+                                            <field name="bonus_brand_boxes" readonly="1"/>
                                         </div>
                                         <div class="col">
                                             <field name="maximum_charge"/>
-                                            <field name="maximum_charge_total"/>
                                         </div> 
                                     </div>
                              </div>
@@ -133,33 +131,39 @@
                                     </div>
                                     <div class="d-flex justify-content-center text-center mt-1">
                                         <div class="col">
-                                            <field name="total_cupor_for_boxes"/>
+                                            <field name="total_cupor_for_boxes" readonly="1"/>
                                         </div>
                                         <div class="col">
-                                            <field name="total_space_in_bs"/>
+                                            <field name="total_space_in_bs" readonly="1"/>
                                         </div>
                                         <div class="col">
-                                            <field name="total_sale_by_box"/>
+                                            <field name="total_sale_by_box" readonly="1"/>
                                         </div>
                                         <div class="col">
-                                            <field name="total_sale_in_bs"/>
+                                            <field name="total_sale_in_bs" readonly="1"/>
                                         </div> 
                                         <div class="col">
-                                            <field name="total_charged_by_box"/>
+                                            <field name="total_charged_by_box" readonly="1"/>
                                         </div>
                                     </div>
                             </div>
                              <group col="3">
                                 <group>
-                                    <field name="achievement_percent"/>
-                                    <field name="achievement_to_collect_percent"/>
+                                    <label for="achievement_percent"/>
+                                    <div>       
+                                        <field name="achievement_percent" readonly="1" class="oe_inline" /> %
+                                    </div>
+                                     <label for="achievement_to_collect_percent"/>
+                                    <div> 
+                                        <field name="achievement_to_collect_percent" readonly="1" class="oe_inline"/> %
+                                    </div>
                                 </group>
                                 <group>
-                                    <field name="incentive_bs"/>
-                                    <field name="incentive_x_box"/>
+                                    <field name="incentive_bs" readonly="1"/>
+                                    <field name="incentive_x_box" readonly="1"/>
                                 </group>
                                 <group>
-                                    <field name="total_incentive"/>
+                                    <field name="total_incentive" readonly="1"/>
                                 </group>
                             </group> 
                     </sheet>

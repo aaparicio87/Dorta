@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-
+from odoo import exceptions
 
 def get_years():
     year_list = []
@@ -18,6 +18,8 @@ class SaleIncentive(models.Model):
     region = fields.Many2one('region.incentive', string="Region")
     seller = fields.Many2one('res.partner', string="Seller")
     supervisor = fields.Many2one('res.partner', string="Supervisor")
+    is_supervisor = fields.Boolean()
+    is_seller = fields.Boolean()
     total_region = fields.Many2many('res.country', string="Total region")
     month = fields.Selection([(1, 'January'), (2, 'February'), (3, 'March'), (4, 'April'),
                               (5, 'May'), (6, 'June'), (7, 'July'), (8, 'August'),
@@ -35,43 +37,44 @@ class SaleIncentive(models.Model):
     month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
 
     brands_objective = fields.Integer(string="N° Brands with Objectives")
-    maximum_bonus = fields.Float(string="Maximum Bonus")
-    bonus_x_boxes = fields.Float(string="Bonus for Boxes")
-    bonus_x_bs = fields.Float(string="Bonus for Bs")
-    bonus_x_qualitative = fields.Float(string="Bonus for Qualitative")
-    bonus_brand_boxes = fields.Float(string="Bonus for Box Brands")
-    maximum_charge = fields.Float(string="Maximum % To Charge")
+    maximum_bonus = fields.Float(string='Maximum Bonus', digits=(12, 6))
+    bonus_x_boxes = fields.Many2one('sale.bonuses', string='Bonus for Boxes')
+    bonus_x_bs = fields.Many2one('sale.bonuses', string='Bonus for Bs')
+    bonus_x_qualitative = fields.Many2one('sale.bonuses', string='Bonus for Qualitative')
+    bonus_brand_boxes = fields.Float(string='Bonus for Box Brands', digits=(12, 6))
+    maximum_charge = fields.Float(string='Maximum % To Charge',  digits=(12, 6))
 
-    maximum_bonus_total = fields.Float(compute='_compute_maximum_bonus_total')
-    bonus_x_boxes_total = fields.Float(compute='_compute_bonus_x_boxes_total')
-    bonus_x_bs_total = fields.Float(compute='_compute_bonus_x_bs_total')
-    bonus_x_qualitative_total = fields.Float(compute='_compute_bonus_x_qualitative_total')
-    bonus_brand_boxes_total = fields.Float(compute='_compute_bonus_brand_boxes_total')
-    maximum_charge_total = fields.Float(compute='_compute_maximum_charge_total')
+    bonus_x_boxes_total = fields.Float()
+    bonus_x_bs_total = fields.Float()
+    bonus_x_qualitative_total = fields.Float()
 
-    total_cupor_for_boxes = fields.Float(string="Total Coupon for boxes", compute='_compute_total_cupor_for_boxes') # Total Cupor by box
-    total_space_in_bs = fields.Float(string="Total Coupon in Bs", compute='_compute_total_space_in_bs')  # Total Cupo in Bs
-    total_sale_by_box = fields.Float(string="Total Sale by Boxes", compute='_compute_total_space_in_bs')  # Total Sales by Box
-    total_sale_in_bs = fields.Float(string="Total Sale in Bs.", compute='_compute_total_sale_in_bs')  # Total Sales in BS
-    total_charged_by_box = fields.Float(string="Total Charge by Box.", compute='_compute_total_charged_by_box')  # Total Charge by Box
+    total_cupor_for_boxes = fields.Float(string="Total Coupon for boxes") # Total Cupor by box
+    total_space_in_bs = fields.Float(string="Total Coupon in Bs")  # Total Cupo in Bs
+    total_sale_by_box = fields.Float(string="Total Sale by Boxes")  # Total Sales by Box
+    total_sale_in_bs = fields.Float(string="Total Sale in Bs.")  # Total Sales in BS
+    total_charged_by_box = fields.Float(string="Total Charge by Box.")  # Total Charge by Box
 
-    achievement_percent = fields.Float(string="% Achievement", compute='_compute_achievement_percent')
-    achievement_to_collect_percent = fields.Float(string="% Achievement to Collet", compute='_compute_achievement_percent')
-    incentive_bs = fields.Float(string="Incentive in BS", compute='_compute_achievement_percent')
-    incentive_x_box = fields.Float(string="Incentive by Box", compute='_compute_incentive_x_box')
-    total_incentive = fields.Float(string="Total Incentive", compute='_compute_total_incentive')
+    achievement_percent = fields.Float(string="% Achievement")
+    achievement_to_collect_percent = fields.Float(string="% Achievement to Collet")
+    incentive_bs = fields.Float(string="Incentive in BS")
+    incentive_x_box = fields.Float(string="Incentive by Box")
+    total_incentive = fields.Float(string="Total Incentive")
 
+    @api.onchange('supervisor')
+    def _is_supervisor(self):
+        print("aaaaaa"+str(self.supervisor.id))
+        if self.supervisor:
+            self.is_supervisor = True
+
+    @api.onchange('seller')
+    def _is_seller(self):
+        if self.seller:
+            self.is_seller = True
 
     @api.onchange('brand_line_objectives_ids')
     def count(self):
         bo = len(self.mapped('brand_line_objectives_ids'))
         self.brands_objective = bo
-
-    def calculate_incentive(self):
-        self.bonus_x_boxes_total = self.maximum_bonus * self.bonus_x_boxes / 100
-        self.bonus_x_bs_total = self.maximum_bonus * self.bonus_x_bs / 100
-        if self.bonus_x_boxes_total and self.brands_objective:
-            self.bonus_brand_boxes = self.bonus_x_boxes_total / self.brands_objective
 
     @api.depends('month','year')
     def _compute_month_year(self):
@@ -86,39 +89,76 @@ class SaleIncentive(models.Model):
             else:
                 rec.month_year = f"{year_sel}"
     
-    def _compute_maximum_bonus_total(self):
-        pass   
-    def _compute_bonus_x_boxes_total(self):
-        pass
-    def _compute_bonus_x_bs_total(self):
-        pass
-    def _compute_bonus_x_qualitative_total(self):
-        pass
-    def _compute_bonus_brand_boxes_total(self):
-        pass
-    def _compute_maximum_charge_total(self):
-        pass
-    def _compute_total_cupor_for_boxes(self):
-        pass
-    def _compute_total_space_in_bs(self):
-        pass
-    def _compute_total_sale_by_box(self):
-        pass
-    def _compute_total_sale_in_bs(self):
-        pass
-    def _compute_total_charged_by_box(self):
-        pass
-    def _compute_achievement_percent(self):
-        pass
-    def _compute_achievement_percent(self):
-        pass
-    def _compute_achievement_percent(self):
-        pass
-    def _compute_incentive_x_box(self):
-        pass
-    def _compute_total_incentive(self):
-        pass
+    @api.onchange('bonus_x_boxes')
+    def calc_bonus_x_boxes_total(self):
+        mb = self.maximum_bonus
+        amount = self.bonus_x_boxes.amount/100
 
+        if(mb == 0 and amount > 0):
+            return{
+                'warning':{
+                    'title':'Maximum Bonus not typed',
+                    'message':'Maximum Bonus must be typed'
+                }
+            }
+        else:
+            self.bonus_x_boxes_total = mb * amount
+    
+    @api.onchange('bonus_x_bs')
+    def calc_bonus_x_bs_total(self):
+        mb = self.maximum_bonus
+        amount = self.bonus_x_bs.amount/100
+
+        if(mb == 0 and amount > 0):
+            return{
+                'warning':{
+                    'title':'Maximum Bonus not typed',
+                    'message':'Maximum Bonus must be typed'
+                }
+            }
+        else:
+            self.bonus_x_bs_total = mb * amount
+
+    @api.onchange('bonus_x_qualitative')
+    def calc_bonus_x_qualitative_total(self):
+        mb = self.maximum_bonus
+        amount = self.bonus_x_qualitative.amount/100
+
+        if(mb == 0 and amount > 0):
+            return{
+                'warning':{
+                    'title':'Maximum Bonus not typed',
+                    'message':'Maximum Bonus must be typed'
+                }
+            }
+        else:
+            self.bonus_x_qualitative_total = mb * amount
+
+    @api.onchange('brand_line_objectives_ids')
+    def calc_bonus_brand_boxes(self):
+        if len(self.mapped('brand_line_objectives_ids')) > 0:
+            if self.brands_objective > 0:
+                self.bonus_brand_boxes = self.maximum_bonus/self.brands_objective
+                
+
+    @api.onchange('brand_line_objectives_ids')
+    def totals_lines_objectives(self):
+        if len(self.mapped('brand_line_objectives_ids')) > 0:
+            for rec in self.mapped('brand_line_objectives_ids'):
+                self.total_cupor_for_boxes = self.total_cupor_for_boxes + rec.cupor_for_boxes
+                self.total_space_in_bs = self.total_space_in_bs + rec.space_in_bs
+                self.total_sale_by_box = self.total_sale_by_box + rec.sale_by_box
+                self.total_sale_in_bs = self.total_sale_in_bs + rec.sale_in_bs
+                self.total_charged_by_box = self.total_charged_by_box + rec.charged_for_box
+
+                if self.total_space_in_bs > 0:
+                    self.achievement_percent = self.total_sale_in_bs/(self.total_space_in_bs * 100)
+                    self.achievement_to_collect_percent = self.achievement_percent
+
+                self.incentive_bs = self.achievement_to_collect_percent * self.bonus_x_bs_total
+                self.incentive_x_box = self.total_charged_by_box
+                self.total_incentive = self.incentive_bs + self.incentive_x_box
+            
 class BrandObjectives(models.Model):
     _name = "brand.objectives"
     _description = "Brand Objectives"
@@ -131,9 +171,9 @@ class BrandObjectives(models.Model):
     space_in_bs = fields.Float(string="Space in Bs")  # Cupo en Bs
     sale_by_box = fields.Float(string="Sale by Boxes")  # Venta por Cajas
     sale_in_bs = fields.Float(string="Sale in Bs.")  # Venta en Bs
-    achievement_in_box = fields.Float(string="Achievement in Boxes", compute='brand_calculation')  # logro en Cajas
-    tobe_charged_for_box = fields.Float(string="To be charged for boxes", compute='brand_calculation')  # A cobrar por cajas
-    charged_for_box = fields.Float(string="Charge for boxes", compute='brand_calculation')  # Cobra por cajas
+    achievement_in_box = fields.Float(string="Achievement in Boxes", compute='_compute_achievement_in_box')  # logro en Cajas
+    tobe_charged_for_box = fields.Float(string="To be charged for boxes", compute='_compute_tobe_charged_for_box')  # A cobrar por cajas
+    charged_for_box = fields.Float(string="Charge for boxes", compute='_compute_charged_for_box')  # Cobra por cajas
 
     @api.onchange('brand')
     def onchange_brand(self):
@@ -141,12 +181,22 @@ class BrandObjectives(models.Model):
             if rec.brand:
                 rec.code = rec.brand.code
 
-    def brand_calculation(self):
+    @api.depends('sale_by_box','cupor_for_boxes')
+    def _compute_achievement_in_box(self):
         for rec in self:
-            rec.achievement_in_box = rec.sale_by_box / rec.cupor_for_boxes
-            rec.tobe_charged_for_box = rec.sale_by_box / rec.cupor_for_boxes
-            rec.charged_for_box = rec.sale_incentive_id.bonus_brand_boxes * rec.tobe_charged_for_box
+            if rec.cupor_for_boxes > 0:
+                rec.achievement_in_box = rec.sale_by_box / rec.cupor_for_boxes
+           
 
+    @api.depends('achievement_in_box')
+    def _compute_tobe_charged_for_box(self):
+        for rec in self:
+            rec.tobe_charged_for_box = rec.achievement_in_box
+
+    @api.depends('sale_incentive_id','tobe_charged_for_box')
+    def _compute_charged_for_box(self):
+        for rec in self:
+            rec.charged_for_box = rec.tobe_charged_for_box * rec.sale_incentive_id.bonus_brand_boxes
 
 class BrandCode(models.Model):
     _name = "brand.code"

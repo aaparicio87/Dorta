@@ -6,9 +6,8 @@ from odoo import models, fields, api
 class SaleBonuses(models.Model):
     _name = 'sale.bonuses'
     _description = "Sale Bonuses"
-    _rec_name = "bond_name"
 
-    bond_name = fields.Char(string="Bond name")
+    name = fields.Char(string="Bond name")
     percentage_scope = fields.Selection([('sale', 'Sales'),
                                          ('purchases', 'Purchases'),
                                          ('incentive', 'Incentive'),
