@@ -1,26 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* sales_modification
+#	* sales_modification
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-23 04:20+0000\n"
-"PO-Revision-Date: 2021-02-23 16:13-0500\n"
+"POT-Creation-Date: 2021-03-08 15:07+0000\n"
+"PO-Revision-Date: 2021-03-08 15:07+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: es_VE\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #. module: sales_modification
 #: model:mail.template,body_html:sales_modification.salesperson_email_template
-msgid ""
-"\n"
+msgid "\n"
 "                \n"
 "                    <p> Dear Seller ${ctx['name']},<br/>\n"
 "                        <br/>\n"
@@ -35,123 +32,127 @@ msgstr ""
 
 #. module: sales_modification
 #: model:ir.model.fields,help:sales_modification.field_account_invoice__state
-msgid ""
-" * The 'Draft' status is used when a user is encoding a new and unconfirmed Invoice.\n"
+msgid " * The 'Draft' status is used when a user is encoding a new and unconfirmed Invoice.\n"
 " * The 'Open' status is used when user creates invoice, an invoice number is generated. It stays in the open status till the user pays the invoice.\n"
 " * The 'In Payment' status is used when payments have been registered for the entirety of the invoice in a journal configured to post entries at bank reconciliation only, and some of them haven't been reconciled with a bank statement line yet.\n"
 " * The 'Paid' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled.\n"
 " * The 'Cancelled' status is used when user cancel invoice."
 msgstr ""
-"*El estado \"Borrador\" se usa cuando un usuario está codificando una factura nueva no confirmada aún. \n"
-"*El estado 'Abierto' se usa cuando el usuario crea la factura, y luego se genera un número de factura. La factura permanece en estado abierto hasta que se paga.\n"
-"*El estado 'En proceso de pago' se usa cuando los pagos se han registrado para el importe total de la factura en un diario configurado para contabilizar entradas, sólo con la conciliación bancaria. El estado se refiere a los pagos que aún no se han conciliado con una línea de extracto bancario.\n"
-"*El estado 'Pagado' se establece automáticamente cuando se paga la factura. Sus entradas de diario relacionadas puede que no han sido reconciliadas.\n"
-"*El estado 'Cancelado' se usa cuando el usuario cancela la factura."
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__achievement_percent
+msgid "% Achievement"
+msgstr "% Logro"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__achievement_to_collect_percent
+msgid "% Achievement to Collet"
+msgstr "Logro para coleccionar"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2016"
-msgstr ""
+msgstr "2016"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2017"
-msgstr ""
+msgstr "2017"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2018"
-msgstr ""
+msgstr "2018"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2019"
-msgstr ""
+msgstr "2019"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2020"
-msgstr ""
+msgstr "2020"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2021"
-msgstr ""
+msgstr "2021"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2022"
-msgstr ""
+msgstr "2022"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2023"
-msgstr ""
+msgstr "2023"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2024"
-msgstr ""
+msgstr "2024"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2025"
-msgstr ""
+msgstr "2025"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2026"
-msgstr ""
+msgstr "2026"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2027"
-msgstr ""
+msgstr "2027"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2028"
-msgstr ""
+msgstr "2028"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2029"
-msgstr ""
+msgstr "2029"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2030"
-msgstr ""
+msgstr "2030"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2031"
-msgstr ""
+msgstr "2031"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2032"
-msgstr ""
+msgstr "2032"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2033"
-msgstr ""
+msgstr "2033"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2034"
-msgstr ""
+msgstr "2034"
 
 #. module: sales_modification
 #: selection:sale.incentive,year:0
 msgid "2035"
-msgstr ""
+msgstr "2035"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_kanban
 msgid "<b>Seller:</b>"
-msgstr "Vendedor"
+msgstr "<b>Vendedor:</b>"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_kanban
@@ -166,8 +167,7 @@ msgstr "<b>Año:</b>"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__achievement_in_box
 msgid "Achievement in Boxes"
-msgstr "
-Logro en cajas"
+msgstr "Logro en cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__active
@@ -181,12 +181,13 @@ msgstr "Ajuste"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__price_subtotal
+#: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__amount
 #: model_terms:ir.ui.view,arch_db:sales_modification.account_invoice_form_view_inherit
 msgid "Amount"
-msgstr "Importe"
+msgstr "Cantidad"
 
 #. module: sales_modification
-#: selection:crm.team,cargo:0
+#: selection:crm.team.hierarchical,cargo:0
 msgid "Analyst"
 msgstr "Analista"
 
@@ -201,24 +202,39 @@ msgid "August"
 msgstr "Agosto"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__bond_name
+#: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__name
 msgid "Bond name"
-msgstr "Nombre del Bono"
+msgstr "Nombre del bono"
 
 #. module: sales_modification
 #: model:ir.ui.menu,name:sales_modification.sale_bonuses_submenu
 msgid "Bonos"
-msgstr ""
+msgstr "Bonos"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_boxes_total
+msgid "Bonus X Boxes Total"
+msgstr "Toltal bono por caja "
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_bs_total
+msgid "Bonus X Bs Total"
+msgstr "Total bono por Bs"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_qualitative_total
+msgid "Bonus X Qualitative Total"
+msgstr "Total Bono por Cualitativo"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_brand_boxes
+msgid "Bonus for Box Brands"
+msgstr "Bonospor marcas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_boxes
 msgid "Bonus for Boxes"
 msgstr "Bono por cajas"
-
-#. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_brand_boxes
-msgid "Bonus for Box Brands"
-msgstr "Bono por Marcas Cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_bs
@@ -228,12 +244,12 @@ msgstr "Bono por Bs"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_qualitative
 msgid "Bonus for Qualitative"
-msgstr "Bono por Cualitativo"
+msgstr "Bono por cualitativo"
 
 #. module: sales_modification
 #: model:ir.actions.act_window,name:sales_modification.sale_bonuses_action
 msgid "Bonuses"
-msgstr "Bonificaciones"
+msgstr "Bonos"
 
 #. module: sales_modification
 #: model:ir.actions.act_window,name:sales_modification.brand_code_action
@@ -264,12 +280,7 @@ msgstr "Nombre del Negocio"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__calculating_taxes
 msgid "Calculating taxes"
-msgstr "Cálculo del bono"
-
-#. module: sales_modification
-#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_form
-msgid "Calculation"
-msgstr "Cálculo"
+msgstr "Calcular impuestos"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.view_res_partner_form_extend
@@ -277,23 +288,32 @@ msgid "Canal"
 msgstr ""
 
 #. module: sales_modification
-#: selection:account.invoice,state:0 selection:sale.order,state:0
-msgid "Cancelled"
-msgstr "Cancelada"
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_form
+msgid "Cancel"
+msgstr "cancelar"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_crm_team__cargo
+#: selection:account.invoice,state:0
+#: selection:sale.order,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__cargo
 msgid "Cargo"
 msgstr ""
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels__name
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner__channel_id
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__name
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__channel_id
+#: model:ir.model.fields,field_description:sales_modification.field_res_users__channel_id
 msgid "Channel"
 msgstr "Canal"
 
 #. module: sales_modification
-#: model_terms:ir.ui.view,arch_db:sales_modification.res_partner_channels_form
-#: model_terms:ir.ui.view,arch_db:sales_modification.res_partner_channels_tree
+#: model_terms:ir.ui.view,arch_db:sales_modification.res_partner_channel_form
+#: model_terms:ir.ui.view,arch_db:sales_modification.res_partner_channel_tree
 msgid "Channels"
 msgstr "Canales"
 
@@ -314,7 +334,13 @@ msgid "Code"
 msgstr "Código"
 
 #. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_order_wizard_popup
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_form
 msgid "Confirm"
 msgstr "Confirmar"
 
@@ -324,6 +350,11 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: sales_modification
+#: model:ir.actions.act_window,name:sales_modification.sale_modification_action_quotations_with_onboarding
+msgid "Cotizaciones"
+msgstr "Cotizaciones"
+
+#. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form_om
 msgid "Create"
 msgstr "Crear"
@@ -331,10 +362,12 @@ msgstr "Crear"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_code__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__create_uid
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_quotation_send_popup__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_region_incentive__create_uid
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels__create_uid
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__create_uid
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__create_uid
@@ -344,25 +377,32 @@ msgstr "Creado por"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_code__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__create_date
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_quotation_send_popup__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_region_incentive__create_date
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels__create_date
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__create_date
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__create_date
 msgid "Created on"
-msgstr "Creado en"
+msgstr "Creando en"
 
 #. module: sales_modification
-#: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form_om
-msgid "Cuadrante"
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__limit_credit
+msgid "Credit limit"
+msgstr "Límite de crédito"
+
+#. module: sales_modification
+#: model_terms:ir.actions.act_window,help:sales_modification.sale_modification_action_quotations_with_onboarding
+msgid "Cree una nueva cotización, ¡el primer paso de una nueva venta!"
 msgstr ""
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__cupor_for_boxes
 msgid "Cupor for boxes"
-msgstr "Cupor por cajas"
+msgstr "Cupor para cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__currency_id
@@ -393,20 +433,22 @@ msgstr "Descripción"
 #. module: sales_modification
 #: selection:account.invoice,state:0
 msgid "Dispatched"
-msgstr "Enviada"
+msgstr "Despachado"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_code__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__display_name
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_quotation_send_popup__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_region_incentive__display_name
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels__display_name
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__display_name
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__display_name
 msgid "Display Name"
-msgstr "Mostrar nombre"
+msgstr "Nombre para mostrar"
 
 #. module: sales_modification
 #: selection:account.invoice,state:0
@@ -414,10 +456,10 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_crm_team__email
-#: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__email
+#: model_terms:ir.ui.view,arch_db:sales_modification.crm_team_hierarchical_view_form
 msgid "Email Address"
-msgstr "Dirección de Email"
+msgstr "Dirección de correo electrónico"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order__exchange_rate
@@ -426,18 +468,19 @@ msgid "Exchange Rate"
 msgstr "Tipo de cambio"
 
 #. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__expired_rif
+msgid "Expired RIF"
+msgstr "RIF caducado"
+
+#. module: sales_modification
 #: selection:sale.incentive,month:0
 msgid "February"
 msgstr "Febrero"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__amount
-msgid "Amount"
-msgstr "Importe"
-
-#. module: sales_modification
+#: model:ir.model,name:sales_modification.model_crm_team_hierarchical
 #: model:ir.model.fields,field_description:sales_modification.field_crm_team__hierarchical_level_id
-#: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form
+#: model_terms:ir.ui.view,arch_db:sales_modification.crm_team_hierarchical_view_form
 #: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form_om
 msgid "Hierarchical Level"
 msgstr "Nivel jerárquico"
@@ -445,15 +488,17 @@ msgstr "Nivel jerárquico"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_code__id
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__id
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__id
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__id
 #: model:ir.model.fields,field_description:sales_modification.field_quotation_send_popup__id
 #: model:ir.model.fields,field_description:sales_modification.field_region_incentive__id
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels__id
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__id
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__id
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__id
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__id
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: sales_modification
 #: model:ir.model.fields,help:sales_modification.field_sale_bonuses__active
@@ -461,34 +506,34 @@ msgid "If unchecked, it will allow you to disable bonus."
 msgstr "Si no está marcado, le permitirá deshabilitar la bonificación."
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_crm_team__image_medium
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__image_medium
 msgid "Image"
 msgstr "Imagen"
 
 #. module: sales_modification
 #: selection:account.invoice,state:0
 msgid "In Payment"
-msgstr "En proceso de pago"
+msgstr "En pago"
 
 #. module: sales_modification
 #: selection:sale.bonuses,percentage_scope:0
 msgid "Incentive"
-msgstr "Incentivo"
+msgstr "Inentivo"
 
 #. module: sales_modification
 #: selection:sale.incentive,state:0
 msgid "Incentive Approved"
-msgstr "Incentivo Aprobado"
+msgstr "Incentivo aprobado"
 
 #. module: sales_modification
 #: selection:sale.incentive,state:0
 msgid "Incentive Registration"
-msgstr "Registro de Incentivo"
+msgstr "Registro de incentivos"
 
 #. module: sales_modification
 #: selection:sale.incentive,state:0
 msgid "Incentive Sent"
-msgstr "Incentivo Enviado"
+msgstr "Incentivo enviado"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.view_incentive_graph
@@ -497,11 +542,26 @@ msgid "Incentive System"
 msgstr "Sistema incentivador"
 
 #. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__incentive_x_box
+msgid "Incentive by Box"
+msgstr "Incentivo por caja"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__incentive_bs
+msgid "Incentive in BS"
+msgstr "Incentivo en BS"
+
+#. module: sales_modification
 #: model:ir.actions.act_window,name:sales_modification.sale_incentive_action
 #: model:ir.ui.menu,name:sales_modification.menu_report_incentive
 #: model:ir.ui.menu,name:sales_modification.sale_incentive_menu
 #: model:ir.ui.menu,name:sales_modification.sale_incentive_submenu
 msgid "Incentivos"
+msgstr "Incentivos"
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
+msgid "Inventario no disponible."
 msgstr ""
 
 #. module: sales_modification
@@ -514,7 +574,17 @@ msgstr "Factura"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__account_invoice_id
 msgid "Invoice Reference"
-msgstr "Referencia factura"
+msgstr "Referencia de la factura"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__is_seller
+msgid "Is Seller"
+msgstr "Es el vendedo"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__is_supervisor
+msgid "Is Supervisor"
+msgstr "Es supervisor"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
@@ -534,47 +604,53 @@ msgstr "Junio"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_code____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives____last_update
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_quotation_send_popup____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_region_incentive____last_update
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels____last_update
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel____last_update
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup____last_update
 msgid "Last Modified on"
-msgstr "Modificada por última vez"
+msgstr "Última modificación el"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_code__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__write_uid
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_quotation_send_popup__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_region_incentive__write_uid
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels__write_uid
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__write_uid
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__write_uid
 msgid "Last Updated by"
-msgstr "Última actualización realizada por"
+msgstr "Actualizado por última vez por"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_code__write_date
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__write_date
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__write_date
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__write_date
 #: model:ir.model.fields,field_description:sales_modification.field_quotation_send_popup__write_date
 #: model:ir.model.fields,field_description:sales_modification.field_region_incentive__write_date
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channels__write_date
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__write_date
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__write_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__write_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__write_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__write_date
 msgid "Last Updated on"
-msgstr "Ultima actualizacion en"
+msgstr "Ultima actualización en"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_res_partner__deadline_last_send
 #: model:ir.model.fields,field_description:sales_modification.field_res_users__deadline_last_send
 msgid "Last email send Date"
-msgstr "Fecha de último envío de correo electrónico"
+msgstr "Fecha de envío del último correo electrónico"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_res_partner__license
@@ -594,16 +670,26 @@ msgid "Locked"
 msgstr "Bloqueado"
 
 #. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__low_limit_credit
+msgid "Low credit limit"
+msgstr "Límite de crédito bajo"
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
+msgid "Límite de crédito."
+msgstr ""
+
+#. module: sales_modification
 #: model:ir.actions.server,name:sales_modification.email_pending_invoice_ir_actions_server
 #: model:ir.cron,cron_name:sales_modification.email_pending_invoice
 #: model:ir.cron,name:sales_modification.email_pending_invoice
 msgid "Mail: Pending Invoice Reminder"
-msgstr ""
+msgstr "Correo: recordatorio de factura pendiente"
 
 #. module: sales_modification
-#: selection:crm.team,cargo:0
+#: selection:crm.team.hierarchical,cargo:0
 msgid "Manager"
-msgstr "Responsable"
+msgstr "Gerente"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order__manual_rate
@@ -618,23 +704,22 @@ msgid "March"
 msgstr "Marzo"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonuses_id
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__maximum_charge
+msgid "Maximum % To Charge"
+msgstr "Máximo % a cobrar"
+
+#. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__maximum_bonus
 msgid "Maximum Bonus"
 msgstr "Bono máximo"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__maximum_charge
-msgid "Maximum % To Charge"
-msgstr "Máximo % A Cobrar"
-
-#. module: sales_modification
 #: selection:sale.incentive,month:0
 msgid "May"
-msgstr "Mayo"
+msgstr "mayo"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_crm_team__mobile
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__mobile
 msgid "Mobile"
 msgstr "Móvil"
 
@@ -648,6 +733,16 @@ msgstr "Mes"
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__month_year
 msgid "Month/Year"
 msgstr "Mes/Año"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form_om
+msgid "Nombre"
+msgstr ""
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.view_res_partner_form_extend
@@ -667,12 +762,12 @@ msgstr "Noviembre"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__brands_objective
 msgid "N° Brands with Objectives"
-msgstr "N° Marcas con Objetivos"
+msgstr "N ° Marcas con Objetivos"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
 msgid "October"
-msgstr "Octubre"
+msgstr "octubre"
 
 #. module: sales_modification
 #: selection:account.invoice,state:0
@@ -691,15 +786,25 @@ msgid "Payment Activities Lines"
 msgstr "Líneas de actividades de pago"
 
 #. module: sales_modification
-#: model_terms:ir.ui.view,arch_db:sales_modification.view_res_partner_form_extend
-msgid "Payment Deadline"
-msgstr "Tiempo límite de pago"
-
-#. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_res_partner__payment_deadline
 #: model:ir.model.fields,field_description:sales_modification.field_res_users__payment_deadline
 msgid "Payment deadline"
 msgstr "Tiempo límite de pago"
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
+msgid "Pedido repetido."
+msgstr ""
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__pending_invoice
+msgid "Pendign Invoice"
+msgstr "Factura pendiente"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__pending_so_payment
+msgid "Pending Sale Order Payment"
+msgstr "Pago de orden de venta pendiente"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__percentage_scope
@@ -713,7 +818,7 @@ msgid "Periods in days, to send email to Salesperson for reminder of pending inv
 msgstr "Períodos en días, para enviar un correo electrónico al vendedor para recordarle las facturas pendientes."
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_crm_team__phone
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__phone
 msgid "Phone"
 msgstr "Teléfono"
 
@@ -728,20 +833,35 @@ msgid "Popup Validation"
 msgstr "Validación emergente"
 
 #. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_form
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: sales_modification
 #: selection:sale.bonuses,percentage_scope:0
 msgid "Purchases"
 msgstr "Compras"
 
 #. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.report_saleorder_inherit
+msgid "Quotation #"
+msgstr "Cotización #"
+
+#. module: sales_modification
+#: model:ir.actions.report,name:sales_modification.action_report_saleorders
+msgid "Quotation / Order"
+msgstr "Cotización / Pedido"
+
+#. module: sales_modification
 #: selection:sale.order,state:0
 msgid "Quote"
-msgstr "Cotización"
+msgstr "Cotizar"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.portal_my_quotations_modify
-#: model_terms:ir.ui.view,arch_db:sales_modification.report_saleorder_inherit
 msgid "Quote #"
-msgstr "Cotización #"
+msgstr "Cotizar #"
 
 #. module: sales_modification
 #: selection:sale.order,state:0
@@ -756,13 +876,18 @@ msgstr "Plantilla de cotización"
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.view_res_partner_form_extend
 msgid "RIF"
-msgstr ""
+msgstr "RIF"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.quotation_send_popup_wizard
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_order_wizard_popup
 msgid "RIF Date is Expired"
-msgstr "La fecha de RIF ha caducado"
+msgstr "La fecha de RIF caducó"
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
+msgid "RIF expirado."
+msgstr "RIF expirado."
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order__rate_of_day
@@ -784,10 +909,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_form
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_kanban
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
-#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_tree
 #: model_terms:ir.ui.view,arch_db:sales_modification.view_incentive_pivot
 msgid "Region"
 msgstr "Región"
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_tree
+msgid "Región"
+msgstr "Región"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__repeat
+msgid "Repeat"
+msgstr "Repetir"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_res_partner__responsible
@@ -798,7 +932,7 @@ msgstr "Responsable"
 #. module: sales_modification
 #: model:ir.model,name:sales_modification.model_sale_bonuses
 msgid "Sale Bonuses"
-msgstr "Bonos de Venta"
+msgstr "Bonos de venta"
 
 #. module: sales_modification
 #: model:ir.model,name:sales_modification.model_sale_incentive
@@ -808,15 +942,15 @@ msgstr "Incentivo de venta"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
-msgid "Sale Incentive System"
-msgstr "Sistema de incentivos de venta"
+msgid "SSistema de incentivos de ventaale Incentive System"
+msgstr ""
 
 #. module: sales_modification
 #: model:ir.model,name:sales_modification.model_sale_order
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__sale_order
 #: model_terms:ir.ui.view,arch_db:sales_modification.account_invoice_form_view_inherit
 msgid "Sale Order"
-msgstr "Pedido de venta"
+msgstr "orden de venta"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__sale_by_box
@@ -836,12 +970,12 @@ msgstr "Ventas"
 #. module: sales_modification
 #: selection:sale.order,state:0
 msgid "Sales Order"
-msgstr "Pedido de venta"
+msgstr "Órdenes de venta"
 
 #. module: sales_modification
 #: model:ir.model,name:sales_modification.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Línea pedido de venta"
+msgstr "Línea de orden de venta"
 
 #. module: sales_modification
 #: model:ir.model,name:sales_modification.model_crm_team
@@ -857,7 +991,6 @@ msgstr "Equipos de ventas"
 #: model:ir.model.fields,field_description:sales_modification.field_res_partner__user_id
 #: model:ir.model.fields,field_description:sales_modification.field_res_users__user_id
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__seller
-#: model_terms:ir.ui.view,arch_db:sales_modification.view_res_partner_filter_modify
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
 msgid "Seller"
 msgstr "Vendedor"
@@ -874,6 +1007,11 @@ msgid "Send Email"
 msgstr "Enviar correo electrónico"
 
 #. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_form
+msgid "Send by Email"
+msgstr "Enviar por correo electrónico"
+
+#. module: sales_modification
 #: selection:sale.incentive,month:0
 msgid "September"
 msgstr "Septiembre"
@@ -881,14 +1019,14 @@ msgstr "Septiembre"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__space_in_bs
 msgid "Space in Bs"
-msgstr "Cupo en Bs"
+msgstr "Espacio en Bs"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__state
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__state
 #: model_terms:ir.ui.view,arch_db:sales_modification.account_invoice_form_view_inherit
 msgid "State"
-msgstr "Provincia"
+msgstr "Expresar"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_account_invoice__state
@@ -897,22 +1035,38 @@ msgid "Status"
 msgstr "Estado"
 
 #. module: sales_modification
-#: model:ir.model.fields,field_description:sales_modification.field_res_partner__channels_id
-#: model:ir.model.fields,field_description:sales_modification.field_res_users__channels_id
-msgid "Sub canales"
-msgstr ""
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner__sub_chanel_id
+#: model:ir.model.fields,field_description:sales_modification.field_res_users__sub_chanel_id
+msgid "SubChannel"
+msgstr "Subcanal"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_channel__sub_channel_ids
+#: model:ir.model.fields,field_description:sales_modification.field_res_partner_subchannel__name
+msgid "Subchannel"
+msgstr "Subcanal"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__supervisor
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
 msgid "Supervisor"
-msgstr ""
+msgstr "Supervisor"
 
 #. module: sales_modification
 #: model:ir.model.fields,help:sales_modification.field_res_partner__user_id
 #: model:ir.model.fields,help:sales_modification.field_res_users__user_id
 msgid "The internal user in charge of this contact."
 msgstr "El usuario interno a cargo de este contacto."
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
+msgid "Tiene facturas vencidas pendientes de pago."
+msgstr ""
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
+msgid "Tiene ordenes pendientes de pago."
+msgstr ""
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
@@ -926,15 +1080,61 @@ msgid "To be charged for boxes"
 msgstr "A cobrar por cajas"
 
 #. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__total_charged_by_box
+msgid "Total Charge by Box."
+msgstr "Total a cobrar por caja"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__total_cupor_for_boxes
+msgid "Total Coupon for boxes"
+msgstr "Cupón total por cajas"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__total_space_in_bs
+msgid "Total Coupon in Bs"
+msgstr "Cupón total en Bs"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__total_incentive
+msgid "Total Incentive"
+msgstr "Incentivo total"
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
+msgid "Total Region"
+msgstr "Total región"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__total_sale_by_box
+msgid "Total Sale by Boxes"
+msgstr "Venta total por cajas"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__total_sale_in_bs
+msgid "Total Sale in Bs."
+msgstr "Venta total en Bs"
+
+#. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__total_region
 msgid "Total region"
-msgstr "Región total"
+msgstr "Total región"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_res_partner__trade_name
 #: model:ir.model.fields,field_description:sales_modification.field_res_users__trade_name
 msgid "Trade Name"
 msgstr "Nombre comercial"
+
+#. module: sales_modification
+#: model_terms:ir.actions.act_window,help:sales_modification.sale_modification_action_quotations_with_onboarding
+msgid "Una vez que el cliente confirma la cotización, se convierte en una orden de venta.\n"
+"                    Podrás crear una factura y cobrar el pago."
+msgstr ""
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__unavailable_stock
+msgid "Unavailable Stock"
+msgstr "Stock no disponible"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form_om
@@ -957,10 +1157,10 @@ msgstr ""
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__code
 msgid "code"
-msgstr "Código"
+msgstr "código"
 
 #. module: sales_modification
-#: model_terms:ir.ui.view,arch_db:sales_modification.inherit_crm_team_view_form
+#: model_terms:ir.ui.view,arch_db:sales_modification.crm_team_hierarchical_view_form
 msgid "email@yourcompany.com"
 msgstr ""
 
@@ -985,8 +1185,13 @@ msgid "report.accounting_pdf_reports.report_agedpartnerbalance"
 msgstr ""
 
 #. module: sales_modification
-#: model:ir.model,name:sales_modification.model_res_partner_channels
-msgid "res.partner.channels"
+#: model:ir.model,name:sales_modification.model_res_partner_channel
+msgid "res.partner.channel"
+msgstr ""
+
+#. module: sales_modification
+#: model:ir.model,name:sales_modification.model_res_partner_subchannel
+msgid "res.partner.subchannel"
 msgstr ""
 
 #. module: sales_modification
@@ -999,12 +1204,17 @@ msgstr ""
 msgid "Quotations"
 msgstr "Cotizaciones"
 
-#. module: sales_modification
-#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
-msgid "Total Region"
-msgstr "Región total"
+#. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
+msgid "Quotation #"
+msgstr "Cotización # "
 
 #. module: sale
-#: model:ir.actions.report.xml,name:sale.report_sale_order
+#: model:ir.actions.report,name:sale.action_report_saleorder
 msgid "Quotation / Order"
-msgstr "Cotizacion / Pedido"
+msgstr "Cotización / Pedido"
+
+#. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.view_quotation_tree
+msgid "Quotation Date"
+msgstr "Fecha de cotización"

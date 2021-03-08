@@ -210,7 +210,15 @@ class SaleOrderModify(models.Model):
             if self.env['ir.config_parameter'].sudo().get_param('sale.auto_done_setting'):
                 self.action_done()
         return True
-    
+
+    def _get_duration(self, start, stop):
+        """ Get the duration value between the 2 given dates. """
+        if start and stop:
+            diff = fields.Datetime.from_string(stop) - fields.Datetime.from_string(start)
+            if diff:
+                duration = float(diff.days) * 24 + (float(diff.seconds) / 3600)
+                return round(duration, 2)
+            return 0.0
 
     @api.model
     def create(self, values):
@@ -223,14 +231,27 @@ class SaleOrderModify(models.Model):
         partner = self.env['res.partner'].search([('id','=',record.partner_id.id)])
         active_invoice = self.env['account.invoice'].search(
                 [('partner_id', '=', record.partner_id.id), ('state', 'in', ['draft', 'open'])])
-        pending_sale_ord = self.env['sale.order'].search(
-                [('partner_id', '=', record.partner_id.id), ('state', 'in', ['draft', 'sent'])])
+
         cont = 0
         cont_rif = 0
+        cont_diff = 0
         for order in orders:
+           
+            diff = self._get_duration(order.date_order, datetime.now())
+            diff_int = int(diff)
+            term_days = order.payment_term_id.line_ids.days
+
+            print("Terminos de diassss"+str(term_days))
+            print("Diferenciaaaaa"+str(diff_int))    
+
             date_of_order = str(order.date_order.date())
+
             if date_of_order == current_date:
                 cont = cont + 1
+                
+            if diff_int > term_days:
+                cont_diff = cont_diff + 1
+
         if cont > 1:
             record.state = 'draft'
             record.repeat = True
@@ -246,7 +267,8 @@ class SaleOrderModify(models.Model):
         if active_invoice:
             record.state = 'draft'
             record.pending_invoice = True
-        if pending_sale_ord:
+        if  cont_diff > 1:
+            print("Orden")
             record.state = 'draft'
             record.pending_so_payment = True
         return record       
