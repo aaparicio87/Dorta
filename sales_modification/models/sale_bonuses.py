@@ -17,3 +17,10 @@ class SaleBonuses(models.Model):
     amount = fields.Float(string='Amount', digits=(12, 2))
     active = fields.Boolean('Active', default=True,
                             help="If unchecked, it will allow you to disable bonus.")
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for rec in self:
+            result.append((rec.id, "%s %s" % (rec.name, str(rec.amount) + ' %')))
+        return result

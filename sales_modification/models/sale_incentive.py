@@ -25,7 +25,7 @@ class SaleIncentive(models.Model):
                               (5, 'May'), (6, 'June'), (7, 'July'), (8, 'August'),
                               (9, 'September'), (10, 'October'), (11, 'November'), (12, 'December')], string='Month')
     year = fields.Selection(get_years(), string='Year')
-    bonuses_id = fields.Many2one('sale.bonuses', string="Maximum Bonus")  # Bono Maximo
+    maximum_bonus = fields.Many2one('sale.bonuses', string="Maximum Bonus")  # Bono Maximo
     brand_line_objectives_ids = fields.One2many('brand.objectives', "sale_incentive_id",
                                                 string="Brand Lines with Objectives")
     state = fields.Selection(
@@ -37,7 +37,6 @@ class SaleIncentive(models.Model):
     month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
 
     brands_objective = fields.Integer(string="N° Brands with Objectives")
-    maximum_bonus = fields.Float(string='Maximum Bonus', digits=(12, 6))
     bonus_x_boxes = fields.Many2one('sale.bonuses', string='Bonus for Boxes')
     bonus_x_bs = fields.Many2one('sale.bonuses', string='Bonus for Bs')
     bonus_x_qualitative = fields.Many2one('sale.bonuses', string='Bonus for Qualitative')
@@ -62,7 +61,6 @@ class SaleIncentive(models.Model):
 
     @api.onchange('supervisor')
     def _is_supervisor(self):
-        print("aaaaaa"+str(self.supervisor.id))
         if self.supervisor:
             self.is_supervisor = True
 
@@ -91,7 +89,7 @@ class SaleIncentive(models.Model):
     
     @api.onchange('bonus_x_boxes')
     def calc_bonus_x_boxes_total(self):
-        mb = self.maximum_bonus
+        mb = self.maximum_bonus.amount
         amount = self.bonus_x_boxes.amount/100
 
         if(mb == 0 and amount > 0):
@@ -106,7 +104,7 @@ class SaleIncentive(models.Model):
     
     @api.onchange('bonus_x_bs')
     def calc_bonus_x_bs_total(self):
-        mb = self.maximum_bonus
+        mb = self.maximum_bonus.amount
         amount = self.bonus_x_bs.amount/100
 
         if(mb == 0 and amount > 0):
@@ -121,7 +119,7 @@ class SaleIncentive(models.Model):
 
     @api.onchange('bonus_x_qualitative')
     def calc_bonus_x_qualitative_total(self):
-        mb = self.maximum_bonus
+        mb = self.maximum_bonus.amount
         amount = self.bonus_x_qualitative.amount/100
 
         if(mb == 0 and amount > 0):
@@ -138,7 +136,7 @@ class SaleIncentive(models.Model):
     def calc_bonus_brand_boxes(self):
         if len(self.mapped('brand_line_objectives_ids')) > 0:
             if self.brands_objective > 0:
-                self.bonus_brand_boxes = self.maximum_bonus/self.brands_objective
+                self.bonus_brand_boxes = self.maximum_bonus.amount/self.brands_objective
                 
 
     @api.onchange('brand_line_objectives_ids')
@@ -158,6 +156,22 @@ class SaleIncentive(models.Model):
                 self.incentive_bs = self.achievement_to_collect_percent * self.bonus_x_bs_total
                 self.incentive_x_box = self.total_charged_by_box
                 self.total_incentive = self.incentive_bs + self.incentive_x_box
+
+    @api.multi
+    def action_cancel(self):
+        return self.write({'state': 'cancel'})
+    
+    @api.multi
+    def action_confirm(self):
+        return self.write({'state': 'cancel'})
+
+    @api.multi
+    def print_incentive(self):
+        return self.write({'state': 'cancel'})
+
+    @api.multi
+    def action_incentive_send(self):
+        return self.write({'state': 'cancel'})
             
 class BrandObjectives(models.Model):
     _name = "brand.objectives"

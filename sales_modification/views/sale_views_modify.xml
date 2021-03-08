@@ -50,6 +50,7 @@
             <field name="arch" type="xml">
                 
                 <header>
+
                     <button name="action_to_refuse"
                             type="object"
                             string="To Refuse"
@@ -59,7 +60,12 @@
                 <xpath expr="//form/header/button[@name='action_confirm']" position="attributes">
                        <attribute name="groups">sales_modification.grp_supervisor</attribute>
                 </xpath>
-
+                <xpath expr="//form/header/button[@name='print_quotation']" position="replace">
+                       <button name="print_quotations" string="Print" type="object" states="draft" class="o_sale_print"/>
+                </xpath>
+                 <xpath expr="//form/header/button[@states='sent,sale']" position="replace">
+                       <button name="print_quotations" string="Print" type="object" states="sent,sale" class="o_sale_print"/>
+                </xpath>
                 <xpath expr="//header" position="after">
                 
                     <div class=" o_notification_box mb-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('repeat','!=',True)]}">

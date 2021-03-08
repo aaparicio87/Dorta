@@ -21,7 +21,7 @@
 
     # any module necessary for this one to work correctly
     #'depends': ['sale','sale_management','','base_vat'],
-    'depends': ['sale', 'sales_team', 'account', 'base_vat', 'accounting_pdf_reports', 'sale_management'],
+    'depends': ['sale', 'sales_team', 'account', 'base_vat', 'accounting_pdf_reports', 'sale_management', 'purchase'],
     # always loaded
     'data': [
         'security/security_group.xml',

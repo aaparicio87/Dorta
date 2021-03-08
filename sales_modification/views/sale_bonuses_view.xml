@@ -25,17 +25,17 @@
                     </div>
                     <group>
                         <group>
-                            <field name="name"/>
+                            <field name="name" required="1"/>
                         </group>
                         <group>
-                            <field name="percentage_scope"/>
+                            <field name="percentage_scope" required="1"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Definition" name="definition">
                             <group>
-                                <field name="calculating_taxes"/>
-                                <field name="amount"/>
+                                <field name="calculating_taxes" required="1"/>
+                                <field name="amount" required="1"/>
                             </group>
                         </page>
                     </notebook>

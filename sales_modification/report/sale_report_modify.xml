@@ -2,12 +2,13 @@
 <odoo>
     <data>
         <report 
-        id="sale.action_report_saleorder"
+        id="sales_modification.action_report_saleorders"
         string="Quotation / Order"
         model="sale.order" 
         report_type="qweb-pdf"
-        file="report_saleorder_inherit" 
-        name="report_saleorder_inherit"
+        file="sales_modification.report_saleorder_inherit" 
+        name="sales_modification.report_saleorder_inherit"
+        menu="False"
         print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' %(object.name)"
 />
     </data>

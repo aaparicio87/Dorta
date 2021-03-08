@@ -23,13 +23,18 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <field name="state" widget="statusbar" statusbar_visible="incentive_reg,incentive_sent,incentive_approved" clickable="True"/>
+                        <button name="action_incentive_send" string="Send by Email" type="object" states="incentive_reg" class="btn-primary"/>
+                        <button name="print_incentive" string="Print" type="object" states="incentive_reg" class="btn-primary o_sale_print"/>
+                        <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['incentive_sent'])]}"/>
+                        <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['incentive_reg'])]}"/>
+                        <button name="action_cancel" states="incentive_reg,incentive_sent,sale" type="object" string="Cancel"/>
+                        <field name="state" widget="statusbar" statusbar_visible="incentive_reg,incentive_sent,incentive_approved"/>
                     </header>
                     <sheet>
                         <group>
                             <group>
                                 <field name="region" string="Region" required="1"/>
-                                <field name="bonuses_id" required="1"/>
+                                <field name="maximum_bonus" required="1"/>
                             </group>
                              <group>
                                 <field name="supervisor" attrs="{'invisible': [('is_seller', '=', True)], 'required': [('is_seller', '!=', True)]}"/>
@@ -43,9 +48,6 @@
                                     <div class="d-flex justify-content-center text-center">
                                          <div class="col">
                                             <label for="brands_objective" class="o_form_label" style="font-weight:bold; margin:0;"/>
-                                        </div>
-                                        <div class="col">
-                                        <label for="maximum_bonus" class="o_form_label" style="font-weight:bold; margin:0;"/>
                                         </div>
                                         <div class="col">
                                             <label for="bonus_x_boxes" class="o_form_label" style="font-weight:bold; margin:0;"/>
@@ -67,9 +69,6 @@
                                         
                                         <div class="col">
                                             <field name="brands_objective" readonly="1"/>
-                                        </div>
-                                        <div class="col">
-                                            <field name="maximum_bonus"/>
                                         </div>
                                         <div class="col">
                                             <field name="bonus_x_boxes"/>
@@ -250,7 +249,7 @@
             <field name="model">sale.incentive</field>
             <field name="arch" type="xml">
                 <kanban>
-                    <field name="bonuses_id"/>
+                    <field name="maximum_bonus"/>
                     <field name="region" string="Region"/>
                     <field name="month_year"/>
                     <field name="supervisor"/>
@@ -261,7 +260,7 @@
                             <div class="oe_kanban_global_click">
                                 <div class="oe_kanban_details">
                                     <strong class="o_kanban_record_title" style="text-right">
-                                        <field name="bonuses_id"/>
+                                        <field name="maximum_bonus"/>
                                     </strong>
                                     <div>
                                         <div><b>Seller:</b>
@@ -288,7 +287,6 @@
             <field name="arch" type="xml">
                 <search string="Sale Incentive System">
                     <field name="region"/>
-                    <field name="bonuses_id"/>
                     <field name="seller"/>
                     <field name="supervisor"/>
                     <field name="month"/>
@@ -319,8 +317,6 @@
             <field name="arch" type="xml">
                 <pivot string="Incentive System">
                     <field name="region" string="Region"/>
-<!--                    <field name="total_region" widget="many2many_tags"/>-->
-                    <field name="bonuses_id"/>
                     <field name="seller"/>
                     <field name="supervisor"/>
                     <field name="month"/>

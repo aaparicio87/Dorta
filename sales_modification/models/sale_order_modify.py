@@ -94,7 +94,7 @@ class SaleOrderModify(models.Model):
         default='draft')
     exchange_rate = fields.Selection([('rate_of_day', 'Rate of Day'), ('manual_rate', 'Manual Rate')],
                                      string="Exchange Rate", default="rate_of_day")
-    rate_of_day = fields.Float(string="Rate of Day", compute="_compute_rate_of_day")
+    rate_of_day = fields.Float(string="Rate of Day")
     manual_rate = fields.Float(string="Manual Rate")
     repeat = fields.Boolean(string='Repeat')
     expired_rif = fields.Boolean(string='Expired RIF')
@@ -104,13 +104,25 @@ class SaleOrderModify(models.Model):
     pending_invoice = fields.Boolean(string='Pendign Invoice')
     pending_so_payment = fields.Boolean(string='Pending Sale Order Payment')
 
-    @api.depends('exchange_rate')
-    def _compute_rate_of_day(self):
+    def print_quotations(self):
+        self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
+
+        return self.env.ref('sales_modification.action_report_saleorders')\
+            .with_context(discard_logo_check=True).report_action(self)
+
+
+    @api.onchange('pricelist_id')
+    def get_rate_of_day(self):
         company_id = self.pricelist_id
         if company_id:
             # rate = company_id.currency_id._get_rates(company_id, fields.Date.today())
             # self.rate_of_day = rate.get(company_id.currency_id.id)
             self.rate_of_day = company_id.currency_id.rate
+
+    @api.onchange('exchange_rate')
+    def set_manual_rate(self):
+        if self.exchange_rate == 'manual_rate':
+            self.manual_rate = self.rate_of_day
 
     @api.model_create_multi
     def action_to_refuse(self):
@@ -198,6 +210,7 @@ class SaleOrderModify(models.Model):
             if self.env['ir.config_parameter'].sudo().get_param('sale.auto_done_setting'):
                 self.action_done()
         return True
+    
 
     @api.model
     def create(self, values):
@@ -227,7 +240,7 @@ class SaleOrderModify(models.Model):
         if partner.credit_limit < record.amount_total:
             record.state = 'draft'
             record.limit_credit = True
-        if record.order_line.product_id.qty_available < record.order_line.product_uom_qty:
+        if record.order_line.product_id.qty_available < record.order_line.product_uom_qty or record.order_line.product_id.qty_available <= 0.0 : 
             record.state = 'draft'
             record.unavailable_stock = True
         if active_invoice:
@@ -236,8 +249,7 @@ class SaleOrderModify(models.Model):
         if pending_sale_ord:
             record.state = 'draft'
             record.pending_so_payment = True
-        return record 
-            
+        return record       
 
 class SaleOrderLineModify(models.Model):
     _inherit = 'sale.order.line'
@@ -261,3 +273,11 @@ class SaleOrderLineModify(models.Model):
                     'price_unit': price
                 })
             return res
+    
+    @api.onchange('product_id')
+    def unit_price(self):
+        if self.product_id:
+            if self.order_id.exchange_rate == 'rate_of_day':
+                self.price_unit = self.product_id.list_price * self.order_id.rate_of_day
+            else:
+                self.price_unit = self.product_id.list_price * self.order_id.manual_rate
