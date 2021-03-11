@@ -61,7 +61,7 @@
                        <attribute name="groups">sales_modification.grp_supervisor</attribute>
                 </xpath>
                 <xpath expr="//form/header/button[@name='print_quotation']" position="replace">
-                       <button name="print_quotations" string="Print" type="object" states="draft" class="o_sale_print"/>
+                       <button name="print_quotations" string="Print" type="object" states="draft" class="btn-primary o_sale_print"/>
                 </xpath>
                  <xpath expr="//form/header/button[@states='sent,sale']" position="replace">
                        <button name="print_quotations" string="Print" type="object" states="sent,sale" class="o_sale_print"/>

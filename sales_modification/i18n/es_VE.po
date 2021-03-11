@@ -1203,18 +1203,3 @@ msgstr ""
 #: model:ir.ui.menu,name:sale.menu_sale_quotations
 msgid "Quotations"
 msgstr "Cotizaciones"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "Quotation #"
-msgstr "Cotización # "
-
-#. module: sale
-#: model:ir.actions.report,name:sale.action_report_saleorder
-msgid "Quotation / Order"
-msgstr "Cotización / Pedido"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.view_quotation_tree
-msgid "Quotation Date"
-msgstr "Fecha de cotización"

@@ -96,16 +96,16 @@ class SaleOrderModify(models.Model):
                                      string="Exchange Rate", default="rate_of_day")
     rate_of_day = fields.Float(string="Rate of Day")
     manual_rate = fields.Float(string="Manual Rate")
-    repeat = fields.Boolean(string='Repeat')
-    expired_rif = fields.Boolean(string='Expired RIF')
-    limit_credit = fields.Boolean(string='Credit limit')
-    low_limit_credit = fields.Boolean(string='Low credit limit')
-    unavailable_stock = fields.Boolean(string='Unavailable Stock')
-    pending_invoice = fields.Boolean(string='Pendign Invoice')
-    pending_so_payment = fields.Boolean(string='Pending Sale Order Payment')
+    repeat = fields.Boolean(string="Repeat")
+    expired_rif = fields.Boolean(string="Expired RIF")
+    limit_credit = fields.Boolean(string="Credit limit")
+    low_limit_credit = fields.Boolean(string="Low credit limit")
+    unavailable_stock = fields.Boolean(string="Unavailable Stock")
+    pending_invoice = fields.Boolean(string="Pendign Invoice")
+    pending_so_payment = fields.Boolean(string="Pending Sale Order Payment")
 
     def print_quotations(self):
-        self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
+        #self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
 
         return self.env.ref('sales_modification.action_report_saleorders')\
             .with_context(discard_logo_check=True).report_action(self)
@@ -268,7 +268,6 @@ class SaleOrderModify(models.Model):
             record.state = 'draft'
             record.pending_invoice = True
         if  cont_diff > 1:
-            print("Orden")
             record.state = 'draft'
             record.pending_so_payment = True
         return record       

@@ -291,7 +291,7 @@
                     <field name="supervisor"/>
                     <field name="month"/>
                     <field name="year"/>
-                     <field name="total_region"/>
+                    <field name="total_region"/>
                     <field name="maximum_bonus"/>
                     <field name="bonus_x_boxes"/>
                     <field name="bonus_x_boxes_total"/>
@@ -321,7 +321,7 @@
                     <field name="supervisor"/>
                     <field name="month"/>
                     <field name="year"/>
-                     <field name="total_region"/>
+                    <field name="total_region"/>
                     <field name="maximum_bonus"/>
                     <field name="bonus_x_boxes"/>
                     <field name="bonus_x_boxes_total"/>

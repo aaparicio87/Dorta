@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <report 
+            id="sale.action_report_saleorder"
+            string="Quotation / Order"
+            model="sale.order" 
+            report_type="qweb-pdf"
+            file="report_saleorder_inherit" 
+            name="report_saleorder_inherit"
+            print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' %(object.name)"
+            menu="False"
+        />
+
         <report 
         id="sales_modification.action_report_saleorders"
         string="Quotation / Order"
         model="sale.order" 
         report_type="qweb-pdf"
-        file="sales_modification.report_saleorder_inherit" 
-        name="sales_modification.report_saleorder_inherit"
+        file="sales_modification.report_saleorder_mod" 
+        name="sales_modification.report_saleorder_mod"
+        print_report_name="(object.state in ('draft', 'sent') and 'Cotización - %s' % (object.name)) or 'Orden - %s' %(object.name)"
         menu="False"
-        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' %(object.name)"
-/>
+        />
+        
     </data>
 </odoo>
