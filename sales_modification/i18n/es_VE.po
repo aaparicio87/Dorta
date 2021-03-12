@@ -229,7 +229,7 @@ msgstr "Total Bono por Cualitativo"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_brand_boxes
 msgid "Bonus for Box Brands"
-msgstr "Bonospor marcas"
+msgstr "Bonos por marcas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__bonus_x_boxes
@@ -1201,5 +1201,6 @@ msgstr ""
 
 #. module: sale
 #: model:ir.ui.menu,name:sale.menu_sale_quotations
+#: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 msgid "Quotations"
 msgstr "Cotizaciones"

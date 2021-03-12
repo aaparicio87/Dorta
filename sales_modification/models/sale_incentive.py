@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime, timedelta
 from odoo import models, fields, api
 from odoo import exceptions
 
@@ -32,6 +33,7 @@ class SaleIncentive(models.Model):
         [('incentive_reg', 'Incentive Registration'),
          ('incentive_sent', 'Incentive Sent'),
          ('incentive_approved', 'Incentive Approved'),
+         ('incentive_cancel', 'Incentive Cancelled'),
          ], string='State', default='incentive_reg')
 
     month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
@@ -58,7 +60,8 @@ class SaleIncentive(models.Model):
     incentive_bs = fields.Float(string="Incentive in BS")
     incentive_x_box = fields.Float(string="Incentive by Box")
     total_incentive = fields.Float(string="Total Incentive")
-
+    approved_date = fields.Datetime(string='Approved Date', readonly=True, index=True, help="Date on which the incentive is confirmed.", copy=False)
+    
     @api.onchange('supervisor')
     def _is_supervisor(self):
         if self.supervisor:
@@ -159,19 +162,43 @@ class SaleIncentive(models.Model):
 
     @api.multi
     def action_cancel(self):
-        return self.write({'state': 'cancel'})
-    
-    @api.multi
-    def action_confirm(self):
-        return self.write({'state': 'cancel'})
+        return self.write({'state': 'incentive_sent'})
 
     @api.multi
+    def action_confirm(self):
+        if self._get_forbidden_state_confirm() & set(self.mapped('state')):
+            raise UserError(_(
+                'It is not allowed to confirm an incentive in the following states: %s'
+            ) % (', '.join(self._get_forbidden_state_confirm())))
+
+        self.write({
+            'state': 'incentive_approved',
+            'approved_date': fields.Datetime.now()
+        })
+
+        # Context key 'default_name' is sometimes propagated up to here.
+        # We don't need it and it creates issues in the creation of linked records.
+        context = self._context.copy()
+        context.pop('default_name', None)
+
+        self.with_context(context)._action_confirm()
+        if self.env['ir.config_parameter'].sudo().get_param('sale.auto_done_setting'):
+            self.action_done()
+        return True
+
+    def _get_forbidden_state_confirm(self):
+        return {'incentive_cancel'}
+    
+    @api.multi
     def print_incentive(self):
-        return self.write({'state': 'cancel'})
+        self.filtered(lambda s: s.state == 'incentive_reg').write({'state': 'incentive_sent'})
+        return self.env.ref('action_report_incentive')\
+            .with_context(discard_logo_check=True).report_action(self)
 
     @api.multi
     def action_incentive_send(self):
-        return self.write({'state': 'cancel'})
+        return self.write({'state': 'incentive_sent'})
+
             
 class BrandObjectives(models.Model):
     _name = "brand.objectives"

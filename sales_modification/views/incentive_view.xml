@@ -8,13 +8,21 @@
                   sequence="1"/>
 
 
-
         <record id="sale_incentive_action" model="ir.actions.act_window">
             <field name="name">Incentivos</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">sale.incentive</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,kanban,graph,pivot</field>
+        </record>
+
+        <record id="action_incentives_report_all" model="ir.actions.act_window">
+        <field name="name">Reporte Incentivos</field>
+        <field name="res_model">sale.incentive</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph,pivot,tree,kanban</field>
+        <field name="view_id"></field>  <!-- force empty -->
+        <field name="search_view_id" ref="sale_view_incentive_search"/>
         </record>
 
         <record id="sale_view_incentive_form" model="ir.ui.view">
@@ -25,9 +33,9 @@
                     <header>
                         <button name="action_incentive_send" string="Send by Email" type="object" states="incentive_reg" class="btn-primary"/>
                         <button name="print_incentive" string="Print" type="object" states="incentive_reg" class="btn-primary o_sale_print"/>
-                        <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['incentive_sent'])]}"/>
-                        <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['incentive_reg'])]}"/>
-                        <button name="action_cancel" states="incentive_reg,incentive_sent,sale" type="object" string="Cancel"/>
+                        <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['incentive_sent'])]}" groups="sales_modification.grp_supervisor"/>
+                        <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['incentive_reg'])]}" groups="sales_modification.grp_supervisor"/>
+                        <button name="action_cancel" states="incentive_reg,incentive_sent" type="object" string="Cancel"/>
                         <field name="state" widget="statusbar" statusbar_visible="incentive_reg,incentive_sent,incentive_approved"/>
                     </header>
                     <sheet>
@@ -342,15 +350,15 @@
                 <graph string="Incentive System" type="line">
                     <field name="seller"/>
                     <field name="supervisor"/>
-                    <field name="month" type="row" interval="month"/>
-                    <field name="year"/>
+                    <field name="incentive_x_box" type="measure"/>
+                    <field name="maximum_bonus" type="measure" />
                 </graph>
             </field>
         </record>
 
         <menuitem id="menu_report_incentive"
             name="Incentivos"
-            action="sale_incentive_action"
+            action="action_incentives_report_all"
             parent="sale.menu_sale_report"
             />
         <menuitem id="sale_incentive_submenu" name="Incentivos"
