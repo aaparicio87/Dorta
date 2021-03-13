@@ -8,3 +8,4 @@ access_region_incentive,sale_incentive.region_incentive,model_region_incentive,,
 access_res_partner_channel,security_res_partner_channel,model_res_partner_channel,,1,1,1,1
 access_res_partner_subchannel,security_res_partner_subchannel,model_res_partner_subchannel,,1,1,1,1
 access_crm_team_hierarchical,security_crm_team_hierarchical,model_crm_team_hierarchical,,1,1,1,1
+access_incentive_line,security_incentive_line,model_incentive_line,,1,1,1,1

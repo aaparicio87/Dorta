@@ -193,11 +193,13 @@ msgstr "Analista"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "April"
 msgstr "Abril"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "August"
 msgstr "Agosto"
 
@@ -371,6 +373,7 @@ msgstr "Crear"
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__create_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__create_uid
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
@@ -386,6 +389,7 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__create_date
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__create_date
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__create_date
 msgid "Created on"
 msgstr "Creando en"
 
@@ -417,6 +421,7 @@ msgstr "Fecha"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "December"
 msgstr "Diciembre"
 
@@ -447,6 +452,7 @@ msgstr "Despachado"
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__display_name
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__display_name
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__display_name
 msgid "Display Name"
 msgstr "Nombre para mostrar"
 
@@ -474,6 +480,7 @@ msgstr "RIF caducado"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "February"
 msgstr "Febrero"
 
@@ -543,6 +550,7 @@ msgstr "Sistema incentivador"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__incentive_x_box
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__incentive_by_box
 msgid "Incentive by Box"
 msgstr "Incentivo por caja"
 
@@ -588,16 +596,19 @@ msgstr "Es supervisor"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "January"
 msgstr "Enero"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "July"
 msgstr "Julio"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "June"
 msgstr "Junio"
 
@@ -613,6 +624,7 @@ msgstr "Junio"
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive____last_update
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup____last_update
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
 
@@ -628,6 +640,7 @@ msgstr "Última modificación el"
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__write_uid
 #: model:ir.model.fields,field_description:sales_modification.field_sale_order_popup__write_uid
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__write_uid
 msgid "Last Updated by"
 msgstr "Actualizado por última vez por"
 
@@ -700,6 +713,7 @@ msgstr "Tasa manual"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "March"
 msgstr "Marzo"
 
@@ -715,6 +729,7 @@ msgstr "Bono máximo"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "May"
 msgstr "mayo"
 
@@ -726,6 +741,8 @@ msgstr "Móvil"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__month
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__month
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search_report
 msgid "Month"
 msgstr "Mes"
 
@@ -756,6 +773,7 @@ msgstr "Ninguno"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "November"
 msgstr "Noviembre"
 
@@ -766,6 +784,7 @@ msgstr "N ° Marcas con Objetivos"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "October"
 msgstr "octubre"
 
@@ -910,6 +929,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_kanban
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
 #: model_terms:ir.ui.view,arch_db:sales_modification.view_incentive_pivot
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__region
 msgid "Region"
 msgstr "Región"
 
@@ -937,6 +957,7 @@ msgstr "Bonos de venta"
 #. module: sales_modification
 #: model:ir.model,name:sales_modification.model_sale_incentive
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__sale_incentive_id
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__sale_incentive_id
 msgid "Sale Incentive"
 msgstr "Incentivo de venta"
 
@@ -992,6 +1013,8 @@ msgstr "Equipos de ventas"
 #: model:ir.model.fields,field_description:sales_modification.field_res_users__user_id
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__seller
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__seller
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search_report
 msgid "Seller"
 msgstr "Vendedor"
 
@@ -1013,6 +1036,7 @@ msgstr "Enviar por correo electrónico"
 
 #. module: sales_modification
 #: selection:sale.incentive,month:0
+#: selection:incentive.line,month:0
 msgid "September"
 msgstr "Septiembre"
 
@@ -1049,6 +1073,8 @@ msgstr "Subcanal"
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__supervisor
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__supervisor
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search_report
 msgid "Supervisor"
 msgstr "Supervisor"
 
@@ -1146,6 +1172,8 @@ msgstr ""
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__year
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__year
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search_report
 msgid "Year"
 msgstr "Año"
 
@@ -1204,3 +1232,33 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 msgid "Quotations"
 msgstr "Cotizaciones"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__incentive_by_seller
+msgid "By seller"
+msgstr "Por vendedor"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__incentive_by_supervisor
+msgid "By supervisor"
+msgstr "Por supervisor"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__maximum_bonus
+msgid "Cap assigned by sales team"
+msgstr "Tope asignado por equipo de venta"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__cupor_for_boxes
+msgid "Goal assigned per month" 
+msgstr "Meta asignada por mes"
+
+#. module: sales_modification
+#: model:ir.model,name:sales_modification.model_incentive_line
+msgid "Report for incentive"
+msgstr "Reporte por incentivo"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__space_in_bs
+msgid "Target by product price list"
+msgstr "Meta por lista de precios de productos"

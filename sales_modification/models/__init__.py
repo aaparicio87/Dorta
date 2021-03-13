@@ -6,3 +6,4 @@ from . import sale_incentive
 from . import crm
 from . import sale_bonuses
 from . import res_partner_modify
+from . import incentive_line

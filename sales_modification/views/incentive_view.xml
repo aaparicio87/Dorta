@@ -17,12 +17,12 @@
         </record>
 
         <record id="action_incentives_report_all" model="ir.actions.act_window">
-        <field name="name">Reporte Incentivos</field>
-        <field name="res_model">sale.incentive</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">graph,pivot,tree,kanban</field>
-        <field name="view_id"></field>  <!-- force empty -->
-        <field name="search_view_id" ref="sale_view_incentive_search"/>
+            <field name="name">Reporte Incentivos</field>
+            <field name="res_model">incentive.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,pivot,tree,kanban</field>
+            <field name="view_id"></field>  <!-- force empty -->
+            <field name="search_view_id" ref="sale_view_incentive_search_report"/>
         </record>
 
         <record id="sale_view_incentive_form" model="ir.ui.view">
@@ -319,6 +319,28 @@
             </field>
         </record>
 
+        <record id="sale_view_incentive_search_report" model="ir.ui.view">
+            <field name="name">incentive.line.incentive.search</field>
+            <field name="model">incentive.line</field>
+            <field name="arch" type="xml">
+                <search string="Sale Incentive System">
+                    <field name="sale_incentive_id"/>
+                    <field name="region"/>
+                    <field name="seller"/>
+                    <field name="supervisor"/>
+                    <field name="month"/>
+                    <field name="year"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Region" name="region" context="{'group_by':'region'}"/>
+                        <filter string="Seller" name="seller" context="{'group_by':'seller'}"/>
+                        <filter string="Supervisor" name="Supervisor" context="{'group_by':'supervisor'}"/>
+                        <filter string="Month" name="month" context="{'group_by':'month'}"/>
+                        <filter string="Year" name="year" context="{'group_by':'year'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="view_incentive_pivot">
             <field name="name">sale.incentive.pivot</field>
             <field name="model">sale.incentive</field>
@@ -344,14 +366,12 @@
         </record>
 
         <record model="ir.ui.view" id="view_incentive_graph">
-            <field name="name">sale.incentive.graph</field>
-            <field name="model">sale.incentive</field>
+            <field name="name">incentive.line.graph</field>
+            <field name="model">incentive.line</field>
             <field name="arch" type="xml">
                 <graph string="Incentive System" type="line">
-                    <field name="seller"/>
-                    <field name="supervisor"/>
-                    <field name="incentive_x_box" type="measure"/>
-                    <field name="maximum_bonus" type="measure" />
+                    <field name="sale_incentive_id"/>
+                    <field name="incentive_by_box"/>
                 </graph>
             </field>
         </record>
