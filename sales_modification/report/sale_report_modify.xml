@@ -7,12 +7,11 @@
             string="Quotation / Order"
             model="sale.order" 
             report_type="qweb-pdf"
-            file="report_saleorder_inherit" 
-            name="report_saleorder_inherit"
+            file="sales_modification.report_saleorder_inherit" 
+            name="sales_modification.report_saleorder_inherit"
             print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' %(object.name)"
             menu="False"
         />
-
         <report 
         id="sales_modification.action_report_saleorders"
         string="Quotation / Order"
@@ -23,6 +22,33 @@
         print_report_name="(object.state in ('draft', 'sent') and 'Cotización - %s' % (object.name)) or 'Orden - %s' %(object.name)"
         menu="False"
         />
-        
+
+        <record id="paperformat_modelo3" model="report.paperformat">
+        <field name="name">Modelo 3</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">12</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">9</field>
+        <field name="dpi">110</field>
+       </record>
+
+        <report 
+        id="sales_modification.incentive_report"
+        string="Incentive"
+        model="sale.incentive" 
+        report_type="qweb-pdf"
+        file="sales_modification.report_incentive_document" 
+        name="sales_modification.report_incentive_document"
+        paperformat="paperformat_modelo3"
+        print_report_name="'Incentivo - %s' %(object.name)"
+        menu="False"
+        />
     </data>
 </odoo>

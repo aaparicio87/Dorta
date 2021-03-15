@@ -14,11 +14,17 @@ def get_years():
 class SaleIncentive(models.Model):
     _name = 'sale.incentive'
     _description = "Sale Incentive"
-    _rec_name = "region"
 
+    name = fields.Char(string="Incentive Name", readonly=True, required=True, copy=False, default='New')
     region = fields.Many2one('region.incentive', string="Region")
     seller = fields.Many2one('res.partner', string="Seller")
     supervisor = fields.Many2one('res.partner', string="Supervisor")
+    partner_id = fields.Many2one('res.partner', string='Customer', readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]}, required=True, change_default=True, index=True, track_visibility='always', track_sequence=1, help="You can find a customer by its Name, TIN, Email or Internal Reference.")
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('sale.incentive'))
+    user_id = fields.Many2one('res.users', string='Salesperson', index=True, track_visibility='onchange', track_sequence=2, default=lambda self: self.env.user)
+    sequence_id = fields.Many2one('ir.sequence',
+        required=True,
+    )
     is_supervisor = fields.Boolean()
     is_seller = fields.Boolean()
     total_region = fields.Many2many('res.country', string="Total region")
@@ -36,7 +42,7 @@ class SaleIncentive(models.Model):
          ('incentive_cancel', 'Incentive Cancelled'),
          ], string='State', default='incentive_reg')
 
-    month_year = fields.Char(string='Month/Year', compute='_compute_month_year')
+    month_year = fields.Char(string='Month/Year', compute='_compute_month_year', stored=True)
 
     brands_objective = fields.Integer(string="N° Brands with Objectives")
     bonus_x_boxes = fields.Many2one('sale.bonuses', string='Bonus for Boxes')
@@ -66,11 +72,13 @@ class SaleIncentive(models.Model):
     def _is_supervisor(self):
         if self.supervisor:
             self.is_supervisor = True
-
+            self.partner_id = self.supervisor
+            
     @api.onchange('seller')
     def _is_seller(self):
         if self.seller:
             self.is_seller = True
+            self.partner_id = self.seller
 
     @api.onchange('brand_line_objectives_ids')
     def count(self):
@@ -191,36 +199,88 @@ class SaleIncentive(models.Model):
     
     @api.multi
     def print_incentive(self):
-        self.filtered(lambda s: s.state == 'incentive_reg').write({'state': 'incentive_sent'})
-        return self.env.ref('action_report_incentive')\
+        return self.env.ref('sales_modification.incentive_report')\
             .with_context(discard_logo_check=True).report_action(self)
 
     @api.multi
     def action_incentive_send(self):
-        return self.write({'state': 'incentive_sent'})
+        self.ensure_one()
+        ir_model_data = self.env['ir.model.data']
+        try:
+            template_id = ir_model_data.get_object_reference('sales_modification', 'sale_incentive_email_template')[1]
+        except ValueError:
+            template_id = False
+        try:
+            compose_form_id = ir_model_data.get_object_reference('mail', 'email_compose_message_wizard_form')[1]
+        except ValueError:
+            compose_form_id = False
+        lang = self.env.context.get('lang')
+        template = template_id and self.env['mail.template'].browse(template_id)
+        if template and template.lang:
+            lang = template._render_template(template.lang, 'sale.incentive', self.ids[0])
+        ctx = {
+            'default_model': 'sale.incentive',
+            'default_res_id': self.ids[0],
+            'default_use_template': bool(template_id),
+            'default_template_id': template_id,
+            'default_composition_mode': 'comment',
+            'mark_so_as_sent': True,
+            'model_description': self.with_context(lang=lang)._description,
+            'custom_layout': "mail.mail_notification_paynow",
+            'proforma': self.env.context.get('proforma', False),
+            'force_email': True
+        }
+        return {
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form_id, 'form')],
+            'view_id': compose_form_id,
+            'target': 'new',
+            'context': ctx,
+        }
 
-            
+    @api.multi
+    @api.returns('mail.message', lambda value: value.id)
+    def message_post(self, **kwargs):
+        if self.env.context.get('mark_so_as_sent'):
+            self.filtered(lambda o: o.state == 'draft').with_context(tracking_disable=True).write({'state': 'incentive_sent'})
+            self.env.user.company_id.set_onboarding_step_done('sale_onboarding_sample_quotation_state')
+        return super(SaleIncentive, self.with_context(mail_post_autofollow=True)).message_post(**kwargs)
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code(
+           'sale.incentive') or 'New'
+        result = super(SaleIncentive, self).create(vals)
+        return result
+
 class BrandObjectives(models.Model):
     _name = "brand.objectives"
     _description = "Brand Objectives"
 
     sale_incentive_id = fields.Many2one('sale.incentive', string='Sale Incentive')
+    no_brand_objetive = fields.Char(string="N° Brands with Objectives")
     brand = fields.Many2one('brand.code', string="Brand")  # Marca
-    code = fields.Char(string="code")  # Codigo
+    code = fields.Char(string="Code")  # Codigo
     description = fields.Char(string="Description")
-    cupor_for_boxes = fields.Float(string="Cupor for boxes")  # Cupor por cajas
-    space_in_bs = fields.Float(string="Space in Bs")  # Cupo en Bs
+    cupor_for_boxes = fields.Float(string="Cupo in boxes")  # Cupor por cajas
+    space_in_bs = fields.Float(string="Cupo in Bs")  # Cupo en Bs
     sale_by_box = fields.Float(string="Sale by Boxes")  # Venta por Cajas
-    sale_in_bs = fields.Float(string="Sale in Bs.")  # Venta en Bs
-    achievement_in_box = fields.Float(string="Achievement in Boxes", compute='_compute_achievement_in_box')  # logro en Cajas
+    sale_in_bs = fields.Float(string="Sale in Bs")  # Venta en Bs
+    achievement_in_box = fields.Float(string="% Achievement in Boxes", compute='_compute_achievement_in_box')  # logro en Cajas
     tobe_charged_for_box = fields.Float(string="To be charged for boxes", compute='_compute_tobe_charged_for_box')  # A cobrar por cajas
     charged_for_box = fields.Float(string="Charge for boxes", compute='_compute_charged_for_box')  # Cobra por cajas
+
 
     @api.onchange('brand')
     def onchange_brand(self):
         for rec in self:
             if rec.brand:
                 rec.code = rec.brand.code
+                rec.no_brand_objetive = str(rec.sale_incentive_id.brands_objective)
 
     @api.depends('sale_by_box','cupor_for_boxes')
     def _compute_achievement_in_box(self):
@@ -242,6 +302,11 @@ class BrandObjectives(models.Model):
 class BrandCode(models.Model):
     _name = "brand.code"
     _rec_name = 'brand'
+    _sql_constraints = [
+        ('name_uniq',
+        'UNIQUE (brand)',
+        'Brand name must be unique.')
+        ]
 
     code = fields.Char(string="Code")
     brand = fields.Char(string="Brand")  # Marca

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="report_incentive_document">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <div class="col-12 mt-5">
+                                <div class="row align-items-start">
+                                    <div class="col-5 ml-4">
+                                        <t t-set="date_incentive" t-value="dict(o._fields['month'].selection).get(o.month)+'-'+str(o.year)"/>
+                                        <p><strong>Región: </strong><t t-esc="o.region.name"/></p>
+                                        <p><strong>Bono Maximo: </strong><t t-esc="o.maximum_bonus.amount"/></p> 
+                                    </div>
+                                    <div class="col-7">
+                                        <p>
+                                            <t t-if="o.is_supervisor">
+                                                <strong>Supervisor:</strong> <t t-esc="o.supervisor.name"/>
+                                            </t>
+                                            <t t-else="">
+                                                <strong>Vendedor:</strong> <t t-esc="o.seller.name"/>
+                                            </t>
+                                        </p>
+                                        <p>EMISION: <span t-esc="datetime.datetime.now().strftime('%d-%m-%Y')"/> DEL REP: <t t-esc="date_incentive"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-5">
+                                <div class="row align-items-start text-center">
+                                    <div class="col-2">
+                                        <strong>Bono x Cajas</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>Bono x Bs</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>Bono x Cualitativo</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>N° Marcas con Objetivos</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>Bono x Marcas Cajas</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>Maximo % A Cobrar</strong>
+                                    </div>
+                                </div>
+                                <div class="row align-items-start text-center">
+                                    <div class="col-2">
+                                        <t t-esc="o.bonus_x_boxes.amount"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.bonus_x_bs.amount"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.bonus_x_qualitative.amount"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.brands_objective"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.bonus_brand_boxes"/>
+                                    </div>
+                                    <div class="col-2">
+                                       <t t-esc="o.maximum_charge"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="row align-items-start text-center">
+                                    <div class="col-2">
+                                        <strong>Cupos en Bs.</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>Ventas en Bs.</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>% del logro</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>% del logro a cobrar</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>Incentivo x Bolivares</strong>
+                                    </div>
+                                    <div class="col-2">
+                                        <strong>Incentivos x Cajas</strong>
+                                    </div>
+                                </div>
+                                <div class="row align-items-start text-center">
+                                    <div class="col-2">
+                                        <t t-esc="o.total_space_in_bs"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.total_sale_in_bs"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.achievement_percent"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.achievement_percent"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.incentive_bs"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <t t-esc="o.incentive_x_box"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="row justify-content-end">
+                                    <div class="col-6 ml-auto">
+                                        <p><strong>TOTAL A COBRAR POR VENDEDOR: </strong>10000.000.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-sm table-reports mt-3">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">N° Marcas con Objetivos</th>
+                                    <th class="text-center pb-4">Codigo</th>
+                                    <th class="text-center pb-4">Marca</th>
+                                    <th class="text-center">Descripción de la Marca</th>
+                                    <th class="text-center">Cupo en Cajas</th>
+                                    <th class="text-center">Cupo en Bolivares</th>
+                                    <th class="text-center">Venta en Cajas</th>
+                                    <th class="text-center">Venta en Bolivares</th>
+                                    <th class="text-center">% Logrado en Cajas</th>
+                                    <th class="text-center">% A Cobrar en Cajas</th>
+                                    <th class="text-center">Cobra x Cajas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.brand_line_objectives_ids" t-as="line">
+                                  <tr>  
+                                    <td class="text-center">line.no_brand_objetive</td>
+                                    <td class="text-center">line.code</td>
+                                    <td class="text-center pb-4">line.brand</td>
+                                    <td class="text-center">line.description</td>
+                                    <td class="text-center">line.cupor_for_boxes</td>
+                                    <td class="text-center">line.space_in_bs</td>
+                                    <td class="text-center">line.sale_by_box</td>
+                                    <td class="text-center">line.sale_in_bs</td>
+                                    <td class="text-center">line.achievement_in_box</td>
+                                    <td class="text-center pb-4">line.tobe_charged_for_box</td>
+                                    <td class="text-center">line.charged_for_box</td>
+                                  </tr>
+                                </t>
+                            </tbody>
+                        </table>  
+                    </t>
+                </t>
+            </t>
+        </template>
+</odoo>

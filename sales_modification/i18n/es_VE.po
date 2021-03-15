@@ -28,7 +28,17 @@ msgid "\n"
 "                    <p>Thank you very much</p>\n"
 "                \n"
 "            "
-msgstr ""
+msgstr "\n"
+"                \n"
+"                    <p> Estimado vendedor ${ctx['name']},<br/>\n"
+"                        <br/>\n"
+"                            En este correo electrónico, puede averiguar el estado del informe de saldo del socio envejecido. por favor asegúrese \ n "
+"                               que han sido revisados ​​lo antes posible. \ n"
+"                            Por favor encuentra el adjunto.\n"
+"                    </p>\n"
+"                    <p>Muchísimas gracias</p>\n"
+"                \n"
+"            "
 
 #. module: sales_modification
 #: model:ir.model.fields,help:sales_modification.field_account_invoice__state
@@ -37,7 +47,11 @@ msgid " * The 'Draft' status is used when a user is encoding a new and unconfirm
 " * The 'In Payment' status is used when payments have been registered for the entirety of the invoice in a journal configured to post entries at bank reconciliation only, and some of them haven't been reconciled with a bank statement line yet.\n"
 " * The 'Paid' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled.\n"
 " * The 'Cancelled' status is used when user cancel invoice."
-msgstr ""
+msgstr " * El estado 'Borrador' se usa cuando un usuario está codificando una factura nueva y sin confirmar. \ N "
+"* El estado 'Abierto' se usa cuando el usuario crea una factura, se genera un número de factura. Permanece en el estado abierto hasta que el usuario paga la factura. \ N"
+"* El estado 'En pago' se usa cuando los pagos se han registrado para la totalidad de la factura en un diario configurado para contabilizar entradas solo en la conciliación bancaria, y algunos de ellos aún no se han conciliado con una línea de extracto bancario. \ norte"
+"* El estado 'Pagado' se establece automáticamente cuando se paga la factura. Los asientos de diario relacionados pueden conciliarse o no. \ N"
+"* El estado 'Cancelado' se usa cuando el usuario cancela la factura."
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__achievement_percent
@@ -166,8 +180,8 @@ msgstr "<b>Año:</b>"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__achievement_in_box
-msgid "Achievement in Boxes"
-msgstr "Logro en cajas"
+msgid "% Achievement in Boxes"
+msgstr "% Logro en cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_sale_bonuses__active
@@ -405,8 +419,8 @@ msgstr ""
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__cupor_for_boxes
-msgid "Cupor for boxes"
-msgstr "Cupor para cajas"
+msgid "Coupon for boxes"
+msgstr "Cupo por cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__currency_id
@@ -980,8 +994,8 @@ msgstr "Venta por cajas"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__sale_in_bs
-msgid "Sale in Bs."
-msgstr "Venta en Bs."
+msgid "Sale in Bs"
+msgstr "Venta en Bs"
 
 #. module: sales_modification
 #: selection:sale.bonuses,percentage_scope:0
@@ -1042,8 +1056,8 @@ msgstr "Septiembre"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__space_in_bs
-msgid "Space in Bs"
-msgstr "Espacio en Bs"
+msgid "Cupo in Bs"
+msgstr "Cupo en Bs"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_payment_activities__state
@@ -1185,7 +1199,7 @@ msgstr ""
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_brand_objectives__code
 msgid "code"
-msgstr "código"
+msgstr "Código"
 
 #. module: sales_modification
 #: model_terms:ir.ui.view,arch_db:sales_modification.crm_team_hierarchical_view_form
@@ -1262,3 +1276,31 @@ msgstr "Reporte por incentivo"
 #: model:ir.model.fields,field_description:sales_modification.field_incentive_line__space_in_bs
 msgid "Target by product price list"
 msgstr "Meta por lista de precios de productos"
+
+#. module: sales_modification
+#: model:mail.template,subject:sales_modification.sale_incentive_email_template
+msgid "Sale Incentive (Ref ${object.name or 'n/a' })"
+msgstr "Incentivo de Venta (Ref ${object.name or 'n/a' })"
+
+#. module: sales_modification
+#: model:mail.template,body_html:sales_modification.sale_incentive_email_template
+msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Dear ${object.partner_id.name}\n"
+"                    <br/><br/>\n"
+"                    Here is the incentive from ${object.company_id.name}. \n"
+"                    <br/><br/>\n"
+"                    Do not hesitate to contact us if you have any question.\n"
+"                </p>\n"
+"            </div>\n"
+"            "
+msgstr "<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Estimado ${object.partner_id.name}\n"
+"                    <br/><br/>\n"
+"                    este es el incentivo de ${object.company_id.name}. \n"
+"                    <br/><br/>\n"
+"                    No dude en contactar con nosotros si tienes alguna duda.\n"
+"                </p>\n"
+"            </div>\n"
+"            "

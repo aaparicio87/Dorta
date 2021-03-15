@@ -241,9 +241,6 @@ class SaleOrderModify(models.Model):
             diff_int = int(diff)
             term_days = order.payment_term_id.line_ids.days
 
-            print("Terminos de diassss"+str(term_days))
-            print("Diferenciaaaaa"+str(diff_int))    
-
             date_of_order = str(order.date_order.date())
 
             if date_of_order == current_date:

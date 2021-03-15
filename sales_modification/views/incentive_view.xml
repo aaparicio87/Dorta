@@ -104,6 +104,7 @@
                             <page string="Brand Lines with Objectives">
                                 <field name="brand_line_objectives_ids" required="1">
                                     <tree editable="bottom" string="Brand Lines with Objectives">
+                                        <field name="no_brand_objetive"/>
                                         <field name="brand"/>
                                         <field name="code"/>
                                         <field name="description"/>
