@@ -49,15 +49,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 
-                <!-- <header>
-
-                    <button name="action_to_refuse"
-                            type="object"
-                            string="To Refuse"
-                            groups="sales_modification.grp_supervisor"
-                            attrs="{'invisible': [('state','not in',['draft','sent'])]}"/>
-                </header> -->
-                
+             
                 <xpath expr="//form/*" position="replace">
 
                         <header>

@@ -148,7 +148,7 @@ class SaleOrderModify(models.Model):
                 # raise ValidationError('RIF Date is Expired')
         ir_model_data = self.env['ir.model.data']
         try:
-            template_id = ir_model_data.get_object_reference('sale', 'email_template_edi_sale')[1]
+            template_id = ir_model_data.get_object_reference('sales_modification', 'email_template_quote_sale')[1]
         except ValueError:
             template_id = False
         try:

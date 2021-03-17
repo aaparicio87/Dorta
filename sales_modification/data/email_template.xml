@@ -47,5 +47,44 @@
             <field name="user_signature" eval="False"/>
             <field name="auto_delete" eval="True"/>
         </record>
+
+         <record id="email_template_quote_sale" model="mail.template">
+            <field name="name">Cotización: Enviar por email</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">${object.company_id.name} ${object.state in ('draft', 'sent') and 'Cotización' or 'Orden'} (Ref ${object.name or 'n/a' })</field>
+            <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    % set doc_name = 'cotización' if object.state in ('draft', 'sent') else 'orden'
+                    Estimado ${object.partner_id.name}
+                    % if object.partner_id.parent_id:
+                        (${object.partner_id.parent_id.name})
+                    % endif
+                    <br /><br />
+                    Aquí 
+                    % if ctx.get('proforma')
+                        se adjunta su pro-forma de factura
+                    % else
+                        la ${doc_name} <strong>${object.name}</strong>
+                    % endif
+                    % if object.origin:
+                        (con referencia: ${object.origin} )
+                    % endif
+                    ascendiendo en <strong>${format_amount(object.amount_total, object.pricelist_id.currency_id)}</strong>
+                    de ${object.company_id.name}.
+                    <br /><br />
+                    No dude en contactar con nosotros si tienes alguna duda.
+                </p>
+            </div>
+            </field>
+            <field name="report_template" ref="sales_modification.action_report_saleorders"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
     </data>
 </odoo>
