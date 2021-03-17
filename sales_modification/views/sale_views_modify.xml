@@ -49,43 +49,62 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 
-                <header>
+                <!-- <header>
 
                     <button name="action_to_refuse"
                             type="object"
                             string="To Refuse"
                             groups="sales_modification.grp_supervisor"
                             attrs="{'invisible': [('state','not in',['draft','sent'])]}"/>
-                </header>
-                <xpath expr="//form/header/button[@name='action_confirm']" position="attributes">
-                       <attribute name="groups">sales_modification.grp_supervisor</attribute>
-                </xpath>
-                <xpath expr="//form/header/button[@name='print_quotation']" position="replace">
-                       <button name="print_quotations" string="Print" type="object" states="draft" class="btn-primary o_sale_print"/>
-                </xpath>
-                 <xpath expr="//form/header/button[@states='sent,sale']" position="replace">
-                       <button name="print_quotations" string="Print" type="object" states="sent,sale" class="o_sale_print"/>
-                </xpath>
-                <xpath expr="//header" position="after">
+                </header> -->
                 
-                    <div class=" o_notification_box mb-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('repeat','!=',True)]}">
+                <xpath expr="//form/*" position="replace">
+
+                        <header>
+                            <button name="action_quotation_send" string="Enviar por correo electrónico" type="object" states="draft" class="btn-primary"/>
+                            <button name="action_quotation_send" string="Enviar por correo electrónico" type="object" states="sent,sale"/>
+
+                            <button name="print_quotations" string="Print" type="object" states="draft" class="btn-primary o_sale_print"/>
+                            <button name="print_quotations" string="Print" type="object" states="sent,sale" class="o_sale_print"/>
+
+                            <button name="action_confirm" id="action_confirm"
+                            string="Confirmar" class="btn-primary" type="object"
+                            groups="sales_modification.grp_supervisor"
+                            attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
+
+                            <button name="action_confirm"
+                            string="Confirmar" type="object"
+                            groups="sales_modification.grp_supervisor"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+
+                            <button name="action_to_refuse"
+                            type="object"
+                            string="To Refuse"
+                            groups="sales_modification.grp_supervisor"
+                            attrs="{'invisible': [('state','not in',['draft','sent'])]}"/>
+
+                            <button name="preview_sale_order" type="object" string="Previsualizar"/>
+                            <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancelar"/>
+                            <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale"/>
+                        </header>
+                         <div class=" o_notification_box mb-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('repeat','!=',True)]}">
                             Pedido repetido.
-                    </div>
-                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('expired_rif','!=',True)]}">
-                            RIF expirado.
-                    </div>
-                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('limit_credit','!=',True)]}">
-                            Límite de crédito.
-                    </div>
-                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('unavailable_stock','!=',True)]}">
-                           Inventario no disponible.
-                    </div>
-                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('pending_invoice','!=',True)]}">
-                          Tiene facturas vencidas pendientes de pago.
-                    </div>
-                    <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('pending_so_payment','!=',True)]}">
-                           Tiene ordenes pendientes de pago.
-                    </div>
+                        </div>
+                        <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('expired_rif','!=',True)]}">
+                                RIF expirado.
+                        </div>
+                        <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('limit_credit','!=',True)]}">
+                                Límite de crédito.
+                        </div>
+                        <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('unavailable_stock','!=',True)]}">
+                            Inventario no disponible.
+                        </div>
+                        <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('pending_invoice','!=',True)]}">
+                            Tiene facturas vencidas pendientes de pago.
+                        </div>
+                        <div class=" o_notification_box mb-1 mt-1 alert alert-warning text-center" role="alertdialog" style="height: 40px; margin-bottom:0px;" attrs="{'invisible':[('pending_so_payment','!=',True)]}">
+                            Tiene ordenes pendientes de pago.
+                        </div>
                 </xpath>
                 
                 <field name="payment_term_id" position="after">
@@ -101,8 +120,21 @@
                            attrs="{'invisible':[('exchange_rate','!=','rate_of_day')]}"/>
                     <field name="manual_rate" string="Manual Rate" attrs="{'invisible':[('exchange_rate','!=','manual_rate')]}"/>
                 </field>
-                <button name="action_cancel" position="before">
-                </button>
+                 </field>
+        </record>
+         <!-- sale inherit tree view -->
+        <record id="sale_order_tree_view_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit.view.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="string">Número de Cotización</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='date_order']" position="attributes">
+                    <attribute name="string">Fecha de Cotización</attribute> 
+                </xpath>
+                
             </field>
         </record>
     </data>

@@ -2,6 +2,6 @@
 <odoo>
     <!-- Supervisor Group -->
     <record id="grp_supervisor" model="res.groups">
-        <field name="name">grp_supervisor</field>
+        <field name="name">Supervisor</field>
     </record>
 </odoo>

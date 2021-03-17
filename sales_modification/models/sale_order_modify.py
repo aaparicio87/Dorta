@@ -211,6 +211,24 @@ class SaleOrderModify(models.Model):
                 self.action_done()
         return True
 
+    @api.multi
+    def preview_sale_order(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'target': 'self',
+            'url': self.get_portal_url(),
+        }
+
+    @api.multi
+    def action_draft(self):
+        orders = self.filtered(lambda s: s.state in ['cancel', 'sent'])
+        return orders.write({
+            'state': 'draft',
+            'signature': False,
+            'signed_by': False,
+        })    
+
     def _get_duration(self, start, stop):
         """ Get the duration value between the 2 given dates. """
         if start and stop:
@@ -248,7 +266,6 @@ class SaleOrderModify(models.Model):
                 
             if diff_int > term_days:
                 cont_diff = cont_diff + 1
-
         if cont > 1:
             record.state = 'draft'
             record.repeat = True
@@ -258,9 +275,10 @@ class SaleOrderModify(models.Model):
         if partner.credit_limit < record.amount_total:
             record.state = 'draft'
             record.limit_credit = True
-        if record.order_line.product_id.qty_available < record.order_line.product_uom_qty or record.order_line.product_id.qty_available <= 0.0 : 
-            record.state = 'draft'
-            record.unavailable_stock = True
+        if record.order_line.product_uom_qty > 0.0:
+            if record.order_line.product_id.qty_available < record.order_line.product_uom_qty or record.order_line.product_id.qty_available <= 0.0 :
+                record.state = 'draft'
+                record.unavailable_stock = True
         if active_invoice:
             record.state = 'draft'
             record.pending_invoice = True
