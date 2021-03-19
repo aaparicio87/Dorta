@@ -11,3 +11,6 @@ access_shopping_program,security_shopping_program,purchase_extended.model_shoppi
 access_shopping_program_config,security_shopping_program_config,purchase_extended.model_shopping_program_config,,1,1,1,1
 access_payment_methods,security_payment_methods,purchase_extended.model_payment_methods,,1,1,1,1
 access_stock_extended_litrage,security_stock_extended_litrage,purchase_extended.model_stock_extended_litrage,,1,1,1,1
+
+access_res_partner_channel,security_res_partner_channel,sales_modification.model_res_partner_channel,,1,1,1,1
+access_res_partner_subchannel,security_res_partner_subchannel,sales_modification.model_res_partner_subchannel,,1,1,1,1

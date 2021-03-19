@@ -16,15 +16,6 @@
             <field name="view_mode">tree,form,kanban,graph,pivot</field>
         </record>
 
-        <record id="action_incentives_report_all" model="ir.actions.act_window">
-            <field name="name">Reporte Incentivos</field>
-            <field name="res_model">incentive.line</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">graph,pivot,tree,kanban</field>
-            <field name="view_id"></field>  <!-- force empty -->
-            <field name="search_view_id" ref="sale_view_incentive_search_report"/>
-        </record>
-
         <record id="sale_view_incentive_form" model="ir.ui.view">
             <field name="name">sale.view.incentive.form</field>
             <field name="model">sale.incentive</field>
@@ -340,6 +331,15 @@
                     </group>
                 </search>
             </field>
+        </record>
+
+        <record id="action_incentives_report_all" model="ir.actions.act_window">
+            <field name="name">Reporte Incentivos</field>
+            <field name="res_model">incentive.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,pivot,tree,kanban</field>
+            <field name="view_id"></field>  <!-- force empty -->
+            <field name="search_view_id" ref="sale_view_incentive_search_report"/>
         </record>
 
         <record model="ir.ui.view" id="view_incentive_pivot">

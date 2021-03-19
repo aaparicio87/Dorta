@@ -199,7 +199,7 @@ class SaleIncentive(models.Model):
     
     @api.multi
     def print_incentive(self):
-        return self.env.ref('sales_modification.incentive_report')\
+        return self.env.ref('sales_modification.action_incentive_report')\
             .with_context(discard_logo_check=True).report_action(self)
 
     @api.multi

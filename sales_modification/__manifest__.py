@@ -26,8 +26,6 @@
     'data': [
         'security/security_group.xml',
         'security/ir.model.access.csv',
-        'data/ir_cron_pending_invoice_email.xml',
-        'data/email_template.xml',
         'data/sale_incentive_sequence.xml',
         'report/sale_report_modify.xml',
         'report/sale_report_inherit.xml',
@@ -40,6 +38,8 @@
         'views/payment_activities_view.xml',
         'views/crm_view.xml',
         'views/sale_bonuses_view.xml',
-        'views/res_partner_view_modify.xml'
+        'views/res_partner_view_modify.xml',
+        'data/ir_cron_pending_invoice_email.xml',
+        'data/email_template.xml',
     ],
 }
