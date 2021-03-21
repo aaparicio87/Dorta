@@ -9,6 +9,9 @@
 			<xpath expr="//div[@id='informations']//div[3]//strong" position="replace">
 						<strong>Fecha de Cotización</strong>
 			</xpath>
+			<xpath expr="//div[@id='informations']//div[4]//strong" position="replace">
+						<strong>Seller</strong>
+			</xpath>
 		</template>   
 
 		<template id="report_saleorder_mod">

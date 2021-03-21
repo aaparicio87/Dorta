@@ -1092,7 +1092,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase_extended.field_res_partner__payment_methods
 #: model:ir.model.fields,field_description:purchase_extended.field_res_users__payment_methods
 msgid "Payment Methods"
-msgstr ""
+msgstr "Métodos de pago"
 
 #. module: purchase_extended
 #: model_terms:ir.ui.view,arch_db:purchase_extended.view_product_template_form_inherit

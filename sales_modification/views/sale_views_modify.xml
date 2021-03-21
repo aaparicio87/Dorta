@@ -39,6 +39,11 @@
                     <filter string="Sales Orders" name="sales" domain="[('state','in',('sale','done'))]"/>
                     <separator/>
                     <filter string="Order Date" name="filter_order_date" date="date_order"/>
+                    <separator/>
+                    <filter string="Vendedor" name="user_id"/>
+                </xpath>
+                <xpath expr="//filter[@name='salesperson']" position="attributes">
+                    <attribute name="string">Vendedor</attribute>
                 </xpath>
             </field>
         </record>
@@ -99,6 +104,10 @@
                         </div>
                 </xpath>
                 
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">Seller</attribute>
+                </xpath>
+
                 <field name="payment_term_id" position="after">
                     <field name="exchange_rate" string="Exchange Rate"/>
                     <field name="repeat" invisible="1"/>
@@ -126,7 +135,9 @@
                 <xpath expr="//field[@name='date_order']" position="attributes">
                     <attribute name="string">Fecha de Cotización</attribute> 
                 </xpath>
-                
+                 <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">Seller</attribute> 
+                </xpath>
             </field>
         </record>
     </data>

@@ -20,6 +20,9 @@
             <xpath expr="//field[@name='property_account_position_id']" position="after">
                 <field name="fiscal_address" string="Direccion Fiscal" required="1"/>
             </xpath>
+            <xpath expr="//notebook//page[3]//field[@name='property_product_pricelist']" position="after">
+                <field name="payment_methods" required="1"/>
+            </xpath>
         </field>
     </record>
 </odoo>

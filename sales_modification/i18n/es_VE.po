@@ -351,6 +351,7 @@ msgstr "Código"
 
 #. module: sales_modification
 #: model:ir.model.fields,field_description:sales_modification.field_crm_team_hierarchical__company_id
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__company_id
 msgid "Company"
 msgstr "Compañía"
 
@@ -1023,12 +1024,14 @@ msgid "Sales Teams"
 msgstr "Equipos de ventas"
 
 #. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__seller
 #: model:ir.model.fields,field_description:sales_modification.field_res_partner__user_id
 #: model:ir.model.fields,field_description:sales_modification.field_res_users__user_id
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__seller
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_order_tree_view_inherit
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search
-#: model:ir.model.fields,field_description:sales_modification.field_incentive_line__seller
 #: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_incentive_search_report
+#: model_terms:ir.ui.view,arch_db:sales_modification.sale_view_order_form_extend
 msgid "Seller"
 msgstr "Vendedor"
 
@@ -1366,3 +1369,13 @@ msgstr "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                </p>\n"
 "            </div>\n"
 "            "
+
+#. module: sales_modification
+#: model_terms:ir.ui.view,arch_db:sales_modification.inherit_report_saleorder_document
+msgid "<strong>Seller</strong>"
+msgstr "Vendedor"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__user_id
+msgid "Salesperson"
+msgstr "Vendedor"
