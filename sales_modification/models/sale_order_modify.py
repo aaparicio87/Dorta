@@ -103,6 +103,7 @@ class SaleOrderModify(models.Model):
     unavailable_stock = fields.Boolean(string="Unavailable Stock")
     pending_invoice = fields.Boolean(string="Pendign Invoice")
     pending_so_payment = fields.Boolean(string="Pending Sale Order Payment")
+    team_code = fields.Char(string="Sales Team Code")
 
     def print_quotations(self):
         #self.filtered(lambda s: s.state == 'draft').write({'state': 'sent'})
@@ -115,9 +116,13 @@ class SaleOrderModify(models.Model):
     def get_rate_of_day(self):
         company_id = self.pricelist_id
         if company_id:
-            # rate = company_id.currency_id._get_rates(company_id, fields.Date.today())
-            # self.rate_of_day = rate.get(company_id.currency_id.id)
             self.rate_of_day = company_id.currency_id.rate
+    
+    @api.onchange('team_id')
+    def get_team_code(self):
+        team = self.team_id
+        if team:
+            self.team_code = team.code_team
 
     @api.onchange('exchange_rate')
     def set_manual_rate(self):

@@ -50,6 +50,9 @@
             <xpath expr="//field[@name='user_id']" position="attributes">
                 <attribute name="string">Vendedor</attribute>
             </xpath>
+            <field name="team_type" position="before">
+                <field name="code_team" readonly="1" />
+            </field>
             <field name="user_id" position="after">
 <!--                <div><b>Hierarchical Level</b>-->
 <!--                <label string="Hierarchical Level"/>-->

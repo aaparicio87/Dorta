@@ -1379,3 +1379,13 @@ msgstr "Vendedor"
 #: model:ir.model.fields,field_description:sales_modification.field_sale_incentive__user_id
 msgid "Salesperson"
 msgstr "Vendedor"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_sale_order__team_code
+msgid "Sales Team Code"
+msgstr "Código equipo de ventas"
+
+#. module: sales_modification
+#: model:ir.model.fields,field_description:sales_modification.field_crm_team__code_team
+msgid "Code sales team"
+msgstr "Código equipo de ventas"

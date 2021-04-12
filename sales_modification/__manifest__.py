@@ -40,6 +40,7 @@
         'views/sale_bonuses_view.xml',
         'views/res_partner_view_modify.xml',
         'data/ir_cron_pending_invoice_email.xml',
+        'data/crm_team_sequence.xml',
         'data/email_template.xml',
     ],
 }

@@ -121,8 +121,12 @@
                            attrs="{'invisible':[('exchange_rate','!=','rate_of_day')]}"/>
                     <field name="manual_rate" string="Manual Rate" attrs="{'invisible':[('exchange_rate','!=','manual_rate')]}"/>
                 </field>
+                <field name="team_id" position="after">
+                    <field name="team_code" readonly="1"/>
+                </field>
                  </field>
-        </record>
+        </record>  
+
          <!-- sale inherit tree view -->
         <record id="sale_order_tree_view_inherit" model="ir.ui.view">
             <field name="name">sale.order.inherit.view.tree</field>
